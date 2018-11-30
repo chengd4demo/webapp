@@ -1,54 +1,51 @@
 <template>
   <f7-page>
-    <f7-navbar>
-      <f7-nav-left>
-        <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="left"></f7-link>
-      </f7-nav-left>
-      <f7-nav-title>My App</f7-nav-title>
-      <f7-nav-right>
-        <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="right"></f7-link>
-      </f7-nav-right>
-    </f7-navbar>
-    <f7-toolbar>
-      <f7-link>Left Link</f7-link>
-      <f7-link>Right Link</f7-link>
-    </f7-toolbar>
-    <f7-block strong>
-      <p>Here is your blank Framework7 app. Let's see what we have here.</p>
-    </f7-block>
-    <f7-block-title>Navigation</f7-block-title>
-    <f7-list>
-      <f7-list-item link="/about/" title="About"></f7-list-item>
-      <f7-list-item link="/form/" title="Form"></f7-list-item>
-    </f7-list>
-    <f7-block-title>Modals</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col width="50">
-          <f7-button fill raised popup-open="#popup">Popup</f7-button>
-        </f7-col>
-        <f7-col width="50">
-          <f7-button fill raised login-screen-open="#login-screen">Login Screen</f7-button>
-        </f7-col>
-      </f7-row>
-    </f7-block>
-    <f7-block-title>Panels</f7-block-title>
-    <f7-block strong>
-      <f7-row>
-        <f7-col width="50">
-          <f7-button fill raised panel-open="left">Left Panel</f7-button>
-        </f7-col>
-        <f7-col width="50">
-          <f7-button fill raised panel-open="right">Right Panel</f7-button>
-        </f7-col>
-      </f7-row>
-    </f7-block>
-    <f7-list>
-      <f7-list-item link="/dynamic-route/blog/45/post/125/?foo=bar#about" title="Dynamic Route"></f7-list-item>
-      <f7-list-item link="/load-something-that-doesnt-exist/" title="Default Route (404)"></f7-list-item>
-    </f7-list>
-  </f7-page>
+        <f7-list media-list>
+          <div style="background-color: red;margin-top: -35px;text-align: center;font-size:24px;color: aliceblue">个人中心</div>
+            <ul class="no-border-v" >
+                <li>
+                    <a href="/form/" class="item-link">
+                        <div class="item-content" style="background-color: red;margin-top: 1px" >
+                            <div class="item-media">
+                                <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg' style="min-height:100px;max-width:80px;max-height:800px;border-radius:50%">
+                                <i class="icon fa fa-opencart bg-red color-white align-center" style="border-radius: 50%;"></i>
+                            </div>
+                            <div class="item-inner" style="margin-top: 20px;">
+                                <div class="item-title" style="color: aliceblue">苍老师</div>
+                                <div class="item-title-row">
+                                    <div class="item-subtitle" style="color: aliceblue">￥ 1000</div>
+                                </div>
+                               
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </f7-list>
+    <div class="row no-gutter" style="padding-left:50px;background-color: aliceblue">
+      <!-- Each "cell" has col-[widht in percents] class -->
+      <div class="col-33" icon="icon">收入记录</div>
+      <div class="col-33">提现记录</div>
+      <div class="col-33">申请提现</div>
+    </div>
+        <f7-list>
+            <f7-list-item link="/form/" title="商家管理"></f7-list-item>
+            <f7-list-item link="/form/" title="设备管理"></f7-list-item>
+            <f7-list-item link="/form/" title="促销员管理"></f7-list-item>
+            <f7-list-item link="/form/" title="安全"></f7-list-item>
+            <f7-list-item link="/form/" title="信息" badge="5" badge-color="red"></f7-list-item>
+        </f7-list>
+            <f7-button class="button button-round" big fill raised  color="red">退出</f7-button>
+        <com-toolbar :active="active"></com-toolbar>
+    </f7-page>
 </template>
+
+<style>
+  .page-content {
+    padding-top: 0px !important;
+  }
+</style>
 <script>
+
 export default {}
 </script>
