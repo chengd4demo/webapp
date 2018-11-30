@@ -1,7 +1,7 @@
 <template>
   <f7-page>
         <f7-list media-list>
-          <div style="background-color: red;margin-top: -35px;text-align: center;font-size:24px;color: aliceblue">个人中心</div>
+          <div style="height: 36px;background-color: red;margin-top: -35px;text-align: center;font-size:24px;color: aliceblue">个人中心</div>
             <ul class="no-border-v" >
                 <li>
                     <a href="/form/" class="item-link">
