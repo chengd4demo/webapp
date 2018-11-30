@@ -1,6 +1,7 @@
 import HomePage from './pages/home.vue';
 import AboutPage from './pages/homepage/center.vue';
 import FormPage from './pages/form.vue';
+import AddressPage from './pages/address.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
 
@@ -16,6 +17,10 @@ export default [
   {
     path: '/panel-left/',
     component: PanelLeftPage,
+  },
+  {
+    path: '/address/',
+    component: AddressPage,
   },
   {
     path:'/center/',
