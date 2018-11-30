@@ -23,27 +23,33 @@
                     </a>
                 </li>
             </ul>
-            <f7-list-item link="/order/" title="地址管理"></f7-list-item>
+
+        </f7-list >
+        <f7-row>
+              <div class="center-item">
+                <div class="center-item-image"></div>
+                <div class="center-item-title">消息</div>
+              </div>
+              <div class="center-item">
+                <div class="center-item-image"></div>
+                <div class="center-item-title">设备监控</div>
+              </div>
+              <div class="center-item">
+                <div class="center-item-image"></div>
+                <div class="center-item-title">使用记录</div>
+              </div>
+
+        </f7-row>
+        <f7-list media-list class="no-margin-v" style="margin-top:1px">
+
+          <f7-list-item link="/address/" title="地址管理"></f7-list-item>
         </f7-list>
-        <com-toolbar :active="active"></com-toolbar>
     </f7-page>
 </template>
 <script>
 
 </script>
 <style type="text/css">
-.box {
-	height: 50px;
-	width: 50px;
-	overflow: hidden;
-	background-repeat: no-repeat;
-	background-position: center center;
-	float: left;
-  border-radius:100%;
-  position:relative;
-  left:4%;
-  top:17%;
-}
 img {
   width:50px;
   height:50px;
@@ -57,5 +63,19 @@ img {
   font-family: 微软雅黑;
   background: #49D160;
   text-align: center;
+}
+.center-item{
+  height: 58px;
+  width: 58px;
+  margin:0 30px;
+  border: 1px solid rebeccapurple;
+}
+.center-item-image{
+  height: 35px;
+  background: whitesmoke;
+}
+.center-item-title{
+  text-align: center;
+  font-size: 1.0em;
 }
 </style>
