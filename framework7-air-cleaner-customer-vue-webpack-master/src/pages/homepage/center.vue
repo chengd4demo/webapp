@@ -2,7 +2,7 @@
 <template id="page-center">
    
     <f7-page>
-          <f7-navbar title="个人中心" back-link=""></f7-navbar>
+          <div class="center">个人中心</div>
         <f7-list media-list class="no-margin-v" style="margin-top:1px">  
             <ul class="no-border-v">            
                 <li>
@@ -17,7 +17,7 @@
                                 <div class="item-title-row">
                                     <div class="item-subtitle item-title" style="margin-left:-55px;color:white">冬天的萝卜</div>
                                 </div>
-                                <div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>
+                                <!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
                             </div>
                         </div>
                     </a>
@@ -48,5 +48,14 @@ img {
   width:50px;
   height:50px;
 }
-
+.center{
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  color: white;
+  font-family: 微软雅黑;
+  background: #49D160;
+  text-align: center;
+}
 </style>
