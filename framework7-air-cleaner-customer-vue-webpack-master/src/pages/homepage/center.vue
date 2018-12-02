@@ -25,21 +25,21 @@
             </ul>
 
         </f7-list >
-        <f7-row>
-              <div class="center-item">
+        <div class="row no-gutter">
+              <div class="center-item col-33">
                 <div class="center-item-image"></div>
                 <div class="center-item-title">消息</div>
               </div>
-              <div class="center-item">
+              <div class="center-item col-33">
                 <div class="center-item-image"></div>
                 <div class="center-item-title">设备监控</div>
               </div>
-              <div class="center-item">
+              <div class="center-item col-33">
                 <div class="center-item-image"></div>
                 <div class="center-item-title">使用记录</div>
               </div>
 
-        </f7-row>
+        </div>
         <f7-list media-list class="no-margin-v" style="margin-top:1px">
 
           <f7-list-item link="/address/" title="地址管理"></f7-list-item>
@@ -66,8 +66,8 @@ img {
 }
 .center-item{
   height: 58px;
-  width: 58px;
-  margin:0 30px;
+  width:10%;
+  margin:0 2px;
   border: 1px solid rebeccapurple;
 }
 .center-item-image{
