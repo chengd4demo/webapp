@@ -1,51 +1,163 @@
-<template>
+<!-- center Page Template -->
+<template id="page-center">
   <f7-page>
-        <f7-list media-list>
-          <div style="height: 36px;background-color: red;margin-top: -35px;text-align: center;font-size:24px;color: aliceblue">个人中心</div>
-            <ul class="no-border-v" >
-                <li>
-                    <a href="/form/" class="item-link">
-                        <div class="item-content" style="background-color: red;margin-top: 1px" >
-                            <div class="item-media">
-                                <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg' style="min-height:100px;max-width:80px;max-height:800px;border-radius:50%">
-                                <i class="icon fa fa-opencart bg-red color-white align-center" style="border-radius: 50%;"></i>
-                            </div>
-                            <div class="item-inner" style="margin-top: 20px;">
-                                <div class="item-title" style="color: aliceblue">苍老师</div>
-                                <div class="item-title-row">
-                                    <div class="item-subtitle" style="color: aliceblue">￥ 1000</div>
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </f7-list>
-    <div class="row no-gutter" style="padding-left:50px;background-color: aliceblue">
-      <!-- Each "cell" has col-[widht in percents] class -->
-      <div class="col-33" icon="icon">收入记录</div>
-      <div class="col-33">提现记录</div>
-      <div class="col-33">申请提现</div>
-    </div>
-        <f7-list>
-            <f7-list-item link="/form/" title="商家管理"></f7-list-item>
-            <f7-list-item link="/form/" title="设备管理"></f7-list-item>
-            <f7-list-item link="/form/" title="促销员管理"></f7-list-item>
-            <f7-list-item link="/form/" title="安全"></f7-list-item>
-            <f7-list-item link="/form/" title="信息" badge="5" badge-color="red"></f7-list-item>
-        </f7-list>
-            <f7-button class="button button-round" big fill raised  color="red">退出</f7-button>
-        <com-toolbar :active="active"></com-toolbar>
-    </f7-page>
-</template>
+    <div class="center">个人中心</div>
+    <f7-list media-list class="no-margin-v" style="margin-top:1px">
+      <ul class="no-border-v">
+        <li>
+          <a href="/form/" class="item-link">
+            <div class="item-content" style="background-color:#E94E24;">
+              <div class="item-media">
+                <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg'
+                     style="max-width:80px;max-height:800px;border-radius:50%">
+                <i class="icon fa fa-opencart bg-red color-white align-center"
+                   style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
+              </div>
+              <div class="item-inner" style="margin-top: -10px">
+                <div class="item-title">&nbsp;</div>
+                <div class="item-title-row">
+                  <div class="item-subtitle item-title" style="margin-left:-55px;color:white">圈兔网络</div>
+                </div>
+                <div class="item-subtitle item-title" style="margin-left:-55px;color:white">￥1000</div>
+                <!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
 
-<style>
-  .page-content {
-    padding-top: 0px !important;
+    </f7-list>
+    <f7-row>
+      <div class="center-1">
+        <div class="center-item">
+          <a style="color: #000" href="/inbound/">
+            <div class="center-item-image "><img src="../img/zb.png" style="max-height: 32px;max-width: 32px"></div>
+            <div class="center-item-title">收入记录</div>
+          </a>
+        </div>
+        <div class="center-item">
+          <a style="color: #000" href="/outbound/">
+            <div class="center-item-image"><img src="../img/txjl.png" style="max-height: 32px;max-width: 32px"></div>
+            <div class="center-item-title">提现记录</div>
+          </a>
+        </div>
+        <div class="center-item-last">
+          <a style="color: #000" href="/applyCash/">
+            <div class="center-item-image"><img src="../img/sqtx.png" style="max-height: 32px;max-width: 32px"></div>
+            <div class="center-item-title">申请提现</div>
+          </a>
+        </div>
+      </div>
+    </f7-row>
+    <f7-list media-list class="no-margin-v" style="margin-top:1px">
+
+      <ul>
+        <li class="media-item" icon="home"><a href="/form/" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../img/traders.png" style="max-width: 15px;max-height: 15px;vertical-align: middle"/>&nbsp;商家管理</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="/form/" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../img/device.png" style="max-width: 15px;max-height: 15px;vertical-align: middle"/>&nbsp;设备管理</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="/form/" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../img/saler.png" style="max-width: 15px;max-height: 15px;vertical-align: middle"/>&nbsp;促销员管理</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="/form/" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../img/anquan.png" style="max-width: 15px;max-height: 15px;vertical-align: middle"/>&nbsp;安全</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="/form/" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../img/message.png" style="max-width: 15px;max-height: 15px;vertical-align: middle"/>&nbsp;信息</div>
+                <div class="item-after"><span class="badge color-red">5</span></div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+      </ul>
+    </f7-list>
+    <!--<f7-button class="button button-round" big fill raised  color="red">退出</f7-button>-->
+  </f7-page>
+</template>
+<script>
+  export default {
+    name: "home"
+  }
+</script>
+<style type="text/css">
+  img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .center {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: white;
+    font-family: 微软雅黑;
+    background: #E94E24;
+    text-align: center;
+  }
+
+  .center-1 {
+    width: 100%;
+    height: 80px;
+    margin-top: -28px;
+    display: flex;
+    background: gray;
+  }
+
+  .center-item {
+    width: 34%;
+    height: 80px;
+    text-align: center;
+    background: white;
+    border-right: 1px solid #CDCDCD;
+  }
+
+  .center-item-last {
+    width: 34%;
+    height: 80px;
+    text-align: center;
+    background: white;
+    border: none
+  }
+
+  .center-item-image {
+    width: 40px;
+    height: 40px;
+    margin-left: 33%;
+    margin-top: 10%;
+
+  }
+
+  .center-item-title {
+    width: 100%;
   }
 </style>
-<script>
-
-export default {}
-</script>
