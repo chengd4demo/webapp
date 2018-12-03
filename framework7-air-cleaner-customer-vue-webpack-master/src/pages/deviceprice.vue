@@ -4,11 +4,13 @@
     <f7-page>
       <!--头部logo-->
          <div class="header">
+            <img class="header-img-1" src="../img/logo1.png">
+           <p>享.新.鲜</p>
          </div>
       <!--空气指数-->
         <div class="mt">
-          <img id="mt-1" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1543555548747&di=77f3ccddc74d680acce0f923c9945dc0&imgtype=0&src=http%3A%2F%2Fwww.vdarts.tw%2Fstatic%2Fimage%2Fproduct%2FHat-trick.gif"/>
-          <i class="mt-2">PM&nbsp;2.5</i>
+          <img id="mt-1" src="../img/pm2.5.png"/>
+          <i class="mt-2">150</i>
         </div>
       <!--消费时间 价格-->
       <div class="prices">
@@ -50,7 +52,20 @@
 .header{
   width: 100%;
   height: 200px;
-  background: green;
+  text-align: center;
+  background: url("../img/bg-1.png");
+}
+.header-img-1{
+  width: 160px;
+  height: 70px;
+  margin-top: 25px;
+}
+.header p{
+  color: white;
+  margin-top: 8px;
+  font-size: 16px;
+  margin-left: 32px;
+  letter-spacing:30px;
 }
 .mt{
   margin-top: -80px;
@@ -69,11 +84,9 @@
   .mt-2{
     width: 50px;
     height: 50px;
-    font-size: 30px;
-    font-weight: 300;
     color: #ffe7ce;
-    margin-left: -110px;
-    margin-top: 60px;
+    margin-left: -86px;
+    margin-top: 105px;
     position: absolute;
   }
 .price-item1{
