@@ -25,8 +25,8 @@
           </a>
         </li>
       </ul>
-
     </f7-list>
+
     <f7-row>
       <div class="center-1">
         <div class="center-item">
@@ -52,7 +52,7 @@
     <f7-list media-list class="no-margin-v" style="margin-top:1px">
 
       <ul>
-        <li class="media-item" icon="home"><a href="/form/" class="item-link">
+        <li class="media-item" icon="home"><a href="/trader-management/" class="item-link">
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title-row">
@@ -61,7 +61,7 @@
             </div>
           </div>
         </a></li>
-        <li class="media-item"><a href="/form/" class="item-link">
+        <li class="media-item"><a href="/device-management/" class="item-link">
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title-row">
@@ -152,8 +152,7 @@
   .center-item-image {
     width: 40px;
     height: 40px;
-    margin-left: 33%;
-    margin-top: 10%;
+    margin:5px auto;
 
   }
 

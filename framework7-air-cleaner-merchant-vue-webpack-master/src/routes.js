@@ -3,6 +3,8 @@ import AboutPage from './pages/about.vue';
 import FormPage from './pages/form.vue';
 import InboundPage from './pages/inbound.vue';
 import OutBoundPage from './pages/outbound.vue';
+import DeviceManagementPage from'./pages/device-management.vue';
+import TraderManagementPage from '/pages/trader-management.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
 
@@ -42,6 +44,14 @@ export default [
   {
     path:'/inbound/',
     component:InboundPage,
+  },
+  {
+    path:'/device-management/',
+    component: DeviceManagementPage,
+  },
+  {
+    path:'/trader-management/',
+    component:TraderManagementPage,
   },
   {
     path: '(.*)',
