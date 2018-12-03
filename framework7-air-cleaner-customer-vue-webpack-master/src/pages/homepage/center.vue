@@ -25,6 +25,7 @@
             </ul>
 
         </f7-list >
+<<<<<<< HEAD
         <f7-row>
           <div class="center-1">
               <div class="center-item">
@@ -48,6 +49,24 @@
           </div>
         </f7-row>
         <f7-list media-list class="no-margin-v" style="margin-top:1px ;;">
+=======
+        <div class="row no-gutter">
+              <div class="center-item col-33">
+                <div class="center-item-image"></div>
+                <div class="center-item-title">消息</div>
+              </div>
+              <div class="center-item col-33">
+                <div class="center-item-image"></div>
+                <div class="center-item-title">设备监控</div>
+              </div>
+              <div class="center-item col-33">
+                <div class="center-item-image"></div>
+                <div class="center-item-title">使用记录</div>
+              </div>
+
+        </div>
+        <f7-list media-list class="no-margin-v" style="margin-top:1px">
+>>>>>>> 8a022452535309c1a6952f0a32578ff35195384b
 
           <div class="jump-list"><img src="../../img/youhuijuan.png"><f7-list-item class="jump-list-title" link="/#/" title="优惠"></f7-list-item></div>
           <div class="jump-list"><img src="../../img/kehu.png"><f7-list-item class="jump-list-title" link="/#/" title="在线客服"></f7-list-item></div>
@@ -83,6 +102,7 @@ img {
   margin-bottom: -1px;
 }
 .center-item{
+<<<<<<< HEAD
   width: 34%;
   height: 80px;
   border-right: 1px solid #CDCDCD;
@@ -94,6 +114,12 @@ img {
   height: 80px;
   text-align: center;
 
+=======
+  height: 58px;
+  width:10%;
+  margin:0 2px;
+  border: 1px solid rebeccapurple;
+>>>>>>> 8a022452535309c1a6952f0a32578ff35195384b
 }
 .center-item-image{
   width: 40px;
