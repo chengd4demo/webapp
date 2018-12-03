@@ -21,7 +21,7 @@
     </f7-col>
   </f7-list-item>
   <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意《用户注册协议》"></f7-list-item>  
-  <p><a href="#" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">验证手机</a></p>
+  <p><a href="/center/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">验证手机</a></p>
  </f7-list>
 </f7-page>
 </template>
