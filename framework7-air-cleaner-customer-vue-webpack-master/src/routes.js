@@ -1,6 +1,5 @@
-import HomePage from './pages/home.vue';
+import HomePage from './pages/sign.vue';
 import DevicePrice from './pages/deviceprice.vue';
-import SignInOrUpPage from './pages/sign.vue';
 import AboutPage from './pages/homepage/center.vue';
 import FormPage from './pages/form.vue';
 import AddressPage from './pages/address.vue';
@@ -24,10 +23,6 @@ export default [
   {
     path: '/panel-left/',
     component: PanelLeftPage,
-  },
-  {
-    path: '/sign/',
-    component: SignInOrUpPage,
   },
   {
     path: '/address/',
