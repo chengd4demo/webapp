@@ -1,6 +1,6 @@
 <template>
   <f7-page>
-    <f7-navbar title="收入明细" back-link="后退"></f7-navbar>
+    <f7-navbar title="收入明细" back-link="" style="background:#e94e24;"></f7-navbar>
   <div class="mv-2">
     <div class="mv-3">
       <dl>
@@ -25,12 +25,6 @@
   </div>
   </f7-page>
 </template>
-
-<script>
-    export default {
-        name: "inbound"
-    }
-</script>
 
 <style type="text/css">
   dd{

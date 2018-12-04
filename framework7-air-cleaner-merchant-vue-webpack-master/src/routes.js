@@ -1,10 +1,17 @@
+import SignPage from './pages/sign.vue';
 import HomePage from './pages/home.vue';
 import AboutPage from './pages/about.vue';
 import FormPage from './pages/form.vue';
 import InboundPage from './pages/inbound.vue';
 import OutBoundPage from './pages/outbound.vue';
+import TraderMangementPage from'./pages/trader-management.vue';
 import DeviceManagementPage from'./pages/device-management.vue';
-import TraderManagementPage from '/pages/trader-management.vue';
+import SafetyPage from'./pages/safety.vue';
+import ModifyPhonePage from'./pages/modify-phone.vue';
+import AffirmPhonePage from'./pages/affirm-phone.vue';
+import SetPasswordPage from'./pages/set-password.vue';
+import CashPage from './pages/cash.vue';
+import PersonalInformationPage from './pages/personal-information.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
 
@@ -15,7 +22,11 @@ import PanelRightPage from './pages/panel-right.vue';
 export default [
   {
     path: '/',
-    component: HomePage,
+    component: SignPage,
+  },
+  {
+    path:'/home/',
+    component:HomePage,
   },
   {
     path: '/panel-left/',
@@ -51,7 +62,31 @@ export default [
   },
   {
     path:'/trader-management/',
-    component:TraderManagementPage,
+    component:TraderMangementPage,
+  },
+  {
+    path:'/safety/',
+    component:SafetyPage,
+  },
+  {
+    path:'/modify-phone/',
+    component:ModifyPhonePage,
+  },
+  {
+    path:'/affirm-phone/',
+    component:AffirmPhonePage,
+  },
+  {
+    path:'/set-password/',
+    component:SetPasswordPage,
+  },
+  {
+    path:'/cash/',
+    component:CashPage,
+  },
+  {
+    path:'/personal-information/',
+    component:PersonalInformationPage,
   },
   {
     path: '(.*)',

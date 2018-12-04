@@ -5,7 +5,7 @@
     <f7-list media-list class="no-margin-v" style="margin-top:1px">
       <ul class="no-border-v">
         <li>
-          <a href="/form/" class="item-link">
+          <a href="/personal-information/" class="item-link">
             <div class="item-content" style="background-color:#E94E24;">
               <div class="item-media">
                 <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg'
@@ -42,7 +42,7 @@
           </a>
         </div>
         <div class="center-item-last">
-          <a style="color: #000" href="/applyCash/">
+          <a style="color: #000" href="/cash/">
             <div class="center-item-image"><img src="../img/sqtx.png" style="max-height: 32px;max-width: 32px"></div>
             <div class="center-item-title">申请提现</div>
           </a>
@@ -70,7 +70,7 @@
             </div>
           </div>
         </a></li>
-        <li class="media-item"><a href="/form/" class="item-link">
+        <li class="media-item"><a href="#" class="item-link">
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title-row">
@@ -79,7 +79,7 @@
             </div>
           </div>
         </a></li>
-        <li class="media-item"><a href="/form/" class="item-link">
+        <li class="media-item"><a href="/safety/" class="item-link">
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title-row">
@@ -88,7 +88,7 @@
             </div>
           </div>
         </a></li>
-        <li class="media-item"><a href="/form/" class="item-link">
+        <li class="media-item"><a href="#" class="item-link">
           <div class="item-content">
             <div class="item-inner">
               <div class="item-title-row">

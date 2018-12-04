@@ -1,54 +1,72 @@
 <template>
   <f7-page>
-    <f7-navbar title="设备列表" back-link="后退"></f7-navbar>
-    <div class="dm-2">
-      <div class="dm-3">
-        <dl>
-          <dd>商家名称：<span>喜乐会</span><span style="color: #00d449;float: right">正在使用</span></dd>
-          <dd>设备标号：8765478364672722</dd>
-          <dd>使用时间：<span>2019-10-11 23:59:59</span></dd>
-          <dd>使用时长：<span>1.5小时</span></dd>
-          <dd>剩余时长：<span>0.5小时</span></dd>
-          <dd>计费金额：<span>2元</span></dd>
-        </dl>
-      </div>
-      <div class="dm-3">
-        <dl>
-          <dd>商家名称：<span>喜乐会</span><span style="color:#ff0000;">已停止</span></dd>
-          <dd>设备标号：6782673792663372</dd>
-          <dd>使用时间：<span>2019-10-10 21:11:11</span></dd>
-          <dd>使用时长：<span>4小时</span></dd>
-          <dd>剩余时长：<span>0小时</span></dd>
-          <dd>计费金额：<span>4元</span></dd>
-        </dl>
-      </div>
-    </div>
+    <f7-navbar title="商家管理" back-link="" style="background:#e94e24;"></f7-navbar>
+    <f7-list media-list class="no-margin-v" style="margin-top:1px">
+      <ul class="no-border-v">
+        <li>
+          <a href="/device-management/" class="item-link">
+            <div class="item-content" style="border-bottom: 1px solid #CDCDCD;">
+              <div class="item-media">
+                <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg'
+                     style="max-width:80px;max-height:800px;border-radius:50%">
+                <i class="icon fa fa-opencart  color-white align-center"
+                   style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
+              </div>
+              <div class="item-inner" style="margin-top: -10px">
+                <div class="item-title">&nbsp;</div>
+                <div class="item-title-row">
+                  <div class="item-subtitle item-title" style="margin-left:-55px">喜乐会</div>
+                </div>
+                <div class="item-subtitle" style="margin-left:-55px"><span>共10台</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>运行5台</span></div>
+                <div style="margin-top:10px"><img src="../img/map.png" style="margin-left:-120px;max-width: 15px;max-height: 15px;vertical-align: middle"/><span class="item-subtitle">商丘市步行街285号</span></div>
+
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="/device-management/" class="item-link">
+            <div class="item-content" style="border-bottom: 1px solid #CDCDCD;" >
+              <div class="item-media">
+                <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg'
+                     style="max-width:80px;max-height:800px;border-radius:50%">
+                <i class="icon fa fa-opencart align-center"
+                   style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
+              </div>
+              <div class="item-inner" style="margin-top: -10px">
+                <div class="item-title">&nbsp;</div>
+                <div class="item-title-row">
+                  <div class="item-subtitle item-title" style="margin-left:-55px">圈兔网络</div>
+                </div>
+                <div class="item-subtitle" style="margin-left:-55px"><span>共20台</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>运行1台</span></div>
+                <div style="margin-top:10px"><img src="../img/map.png" style="margin-left:-120px;max-width: 15px;max-height: 15px;vertical-align: middle"/><span class="item-subtitle">成都市高新区1号</span></div>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="/device-management/" class="item-link">
+            <div class="item-content"  >
+              <div class="item-media">
+                <img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg'
+                     style="max-width:80px;max-height:800px;border-radius:50%">
+                <i class="icon fa fa-opencart align-center"
+                   style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
+              </div>
+              <div class="item-inner" style="margin-top: -10px">
+                <div class="item-title">&nbsp;</div>
+                <div class="item-title-row">
+                  <div class="item-subtitle item-title" style="margin-left:-55px">圈兔网络</div>
+                </div>
+                <div class="item-subtitle" style="margin-left:-55px"><span>共20台</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>运行1台</span></div>
+                <div style="margin-top:10px"><img src="../img/map.png" style="margin-left:-120px;max-width: 15px;max-height: 15px;vertical-align: middle"/><span class="item-subtitle">成都市高新区1号</span></div>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </f7-list>
   </f7-page>
 </template>
-
-<script>
-  export default {
-    name: "trader-management"
-  }
-</script>
-
-<style type="text/css">
-  dd{
-    font-size: 12px;
-    line-height: 25px;
-  }
-  dl{
-    margin-left: -40px;
-  }
-  .dm-2{
-    width: 100%;
-    margin:10px auto;
-  }
-  .dm-3{
-    width: 90%;
-    margin: 0px auto;
-    text-indent: 10px;
-    background: #EEEDED
-  }
-
-</style>
