@@ -1,6 +1,6 @@
 <template>
   <f7-page>
-    <div style="width：100%;height:20%;margin-bottom:-35px;text-align:center;margin-top:20px">
+    <div style="width:100%;height:20%;margin-bottom:-35px;text-align:center;margin-top:20px">
       <div style="width:355px;">
         <img src="../img/img2039716589809cc0.png" style="width:auto;"/>
       </div>
