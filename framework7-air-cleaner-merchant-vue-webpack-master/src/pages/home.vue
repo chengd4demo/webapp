@@ -1,6 +1,6 @@
 <!-- center Page Template -->
 <template id="page-center">
-  <f7-page>
+  <f7-page class="no-navbar">
     <div class="center">个人中心</div>
     <f7-list media-list class="no-margin-v" style="margin-top:1px">
       <ul class="no-border-v">

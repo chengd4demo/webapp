@@ -24,26 +24,19 @@
         <f7-input type="text" placeholder="输入身份识别码"/>
       </f7-list-item>
       <f7-list-item  checkbox name="my-checkbox" value="2" title="我已阅读,并同意">
-        <div class="page-content">
-          <div class="content-block">
-            <p><a href="/about/" data-popup=".popup-about" class="open-popup"><div class="about-div">《用户注册协议》</div></a></p>
+          <div class="content-block about-div" >
+            <p><a href="/about/" data-popup=".popup-about" class="open-popup"><div >《用户注册协议》</div></a></p>
           </div>
-        </div>
       </f7-list-item>
       <p><a href="/home/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">验证手机</a></p>
     </f7-list>
   </f7-page>
 </template>
 <style>
-  .disabled{
-    background-color: #ddd;
-    border-color: #ddd;
-    color:#57a3f3;
-    cursor: not-allowed;
-  }
+
 
   .about-div{
-    margin-right: 25px;
+    margin:0 auto 0 0;
   }
 </style>
 
