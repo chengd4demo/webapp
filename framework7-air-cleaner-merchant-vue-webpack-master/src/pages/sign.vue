@@ -23,7 +23,11 @@
       <f7-list-item>
         <f7-input type="text" placeholder="输入身份识别码"/>
       </f7-list-item>
-      <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意《用户注册协议》"></f7-list-item>
+      <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意">
+          <div class="content-block">
+            <p><a href="/about/" data-popup=".popup-about" class="open-popup">《用户注册协议》</a></p>
+          </div>
+      </f7-list-item>
       <p><a href="/home/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">验证手机</a></p>
     </f7-list>
   </f7-page>
