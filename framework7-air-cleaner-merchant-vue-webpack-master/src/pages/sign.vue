@@ -1,7 +1,7 @@
 <template>
   <f7-page>
-    <div style="width:100%;height:20%;margin-bottom:-35px;text-align:center;margin-top:20px">
-      <div style="width:355px;">
+    <div style="width:100%;min-height:20%;margin-bottom:-35px;text-align:center;margin-top:20px">
+      <div style="width:355px">
         <img src="../img/img2039716589809cc0.png" style="width:auto;"/>
       </div>
       <div style="margin-top:10px;color:#e94e24;">
@@ -23,11 +23,7 @@
       <f7-list-item>
         <f7-input type="text" placeholder="输入身份识别码"/>
       </f7-list-item>
-      <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意">
-          <div class="content-block">
-            <p><a href="/about/" data-popup=".popup-about" class="open-popup">《用户注册协议》</a></p>
-          </div>
-      </f7-list-item>
+      <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意《用户注册协议》"></f7-list-item>
       <p><a href="/home/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">验证手机</a></p>
     </f7-list>
   </f7-page>
