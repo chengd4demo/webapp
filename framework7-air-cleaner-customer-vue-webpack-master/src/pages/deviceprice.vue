@@ -1,7 +1,7 @@
 <!-- center Page Template -->
 <template id="page-center">
    
-    <f7-page>
+    <f7-page class="no-navbar">
       <!--头部logo-->
          <div class="header">
             <img class="header-img-1" src="../img/logo1.png">
@@ -14,34 +14,34 @@
         </div>
       <!--消费时间 价格-->
       <div class="prices">
-        <div class="price-item1" >
-          <div class="price-time">6小时</div>
+        <a href="/confirm-payment/"><div class="price-item1" >
+          <div class="price-time">1小时</div>
+          <div class="price-value">
+            <div class="price"><em>¥</em>4</div>
+            <div class="del-price"><em>¥</em>6</div>
+          </div>
+        </div></a>
+        <a href="/confirm-payment/"><div class="price-item1" >
+          <div class="price-time">2小时</div>
           <div class="price-value">
             <div class="price"><em>¥</em>6</div>
-            <div class="del-price"><em>¥</em>12</div>
+            <div class="del-price"><em>¥</em>8</div>
           </div>
-        </div>
-        <div class="price-item1" >
-          <div class="price-time">6小时</div>
+        </div></a>
+          <a href="/confirm-payment/"><div class="price-item1" >
+          <div class="price-time">4小时</div>
           <div class="price-value">
-            <div class="price"><em>¥</em>6</div>
+            <div class="price"><em>¥</em>10</div>
             <div class="del-price"><em>¥</em>12</div>
           </div>
-        </div>
-        <div class="price-item1" >
-          <div class="price-time">6小时</div>
+        </div></a>
+            <a href="/confirm-payment/"><div class="price-item1" >
+          <div class="price-time">12小时</div>
           <div class="price-value">
-            <div class="price"><em>¥</em>6</div>
-            <div class="del-price"><em>¥</em>12</div>
+            <div class="price"><em>¥</em>20</div>
+            <div class="del-price"><em>¥</em>24</div>
           </div>
-        </div>
-        <div class="price-item1" >
-          <div class="price-time">6小时</div>
-          <div class="price-value">
-            <div class="price"><em>¥</em>6</div>
-            <div class="del-price"><em>¥</em>12</div>
-          </div>
-        </div>
+        </div></a>
       </div>
     </f7-page>
 </template>
