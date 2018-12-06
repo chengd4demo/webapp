@@ -32,11 +32,11 @@
               <div class="item-inner">
                 <div class="item-input">
                   <label class="label-switch" style="margin-left: 20px">
-                    <input type="radio" value="1" name="as">
+                    <input type="radio" value="1" name="idno">
                     <div class="checkbox">男</div>
                   </label>
                   <label class="label-switch" style="margin-left: 20px">
-                    <input type="radio" value="2" name="as">
+                    <input type="radio" value="2" name="idno">
                     <div class="radio">女</div>
                   </label>
                 </div>
