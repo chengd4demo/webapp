@@ -9,19 +9,19 @@
     </div>
 </div>
  <f7-list form>
-  <f7-list-item>
-   <f7-input type="number" placeholder="输入手机号码"/>
+		<f7-list-item >
+			<f7-input type="number" placeholder="输入手机号码" style="height: 44px;"/>
+		</f7-list-item>
+  <f7-list-item style="height: 44px;">
+			<f7-col style="height: 44px;">
+				<f7-input type="number" placeholder="验证码"/>
+			</f7-col>
+			<f7-col style="height: 44px;">
+					<a href="#" id="code" @click="countDown" class= "button button-fill" :class="{disabled: !this.canClick}" no-fast-click style="margin:0 auto;background:#e94e24;disable:disable;height: 44px; line-height:44px;">{{content}}</a>
+			</f7-col>
   </f7-list-item>
-  <f7-list-item>
-    <f7-col>
-   <f7-input type="number" placeholder="验证码"/>
-   </f7-col>
-    <f7-col>
-     <p><a href="#" id="code" @click="countDown" class= "button button-fill" :class="{disabled: !this.canClick}" no-fast-click style="margin:0 auto;background:#e94e24;disable:disable">{{content}}</a></p>
-    </f7-col>
-  </f7-list-item>
-  <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意《用户注册协议》"></f7-list-item>  
-  <p><a href="/center/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">验证手机</a></p>
+  <f7-list-item checkbox name="my-checkbox" value="2" title="我已阅读,并同意《用户注册协议》" style="height: 44px;font-size: 12px;"></f7-list-item>  
+  <p><a href="/center/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">验证手机</a></p>
  </f7-list>
 </f7-page>
 </template>
@@ -32,6 +32,18 @@
         color:#57a3f3;
         cursor: not-allowed;
     }
+		input::-webkit-input-placeholder {
+         /* placeholder颜色  */
+         color: #aab2bd;
+         /* placeholder字体大小  */
+         font-size: 12px;
+     }
+		 .ios .icon-checkbox, .ios .checkbox i {
+				width: 18px;
+				height: 18px;
+				/* border-radius: 50%; */
+				border: 1px solid #c7c7cc;
+		}
 </style>
 
 <script>
