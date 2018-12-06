@@ -1,12 +1,12 @@
 <!-- center Page Template -->
 <template id="page-center">
    
-    <f7-page>
+    <f7-page no-navbar>
           <div class="center">个人中心</div>
         <f7-list media-list class="no-margin-v" style="margin-top:1px">  
             <ul class="no-border-v">            
                 <li>
-                    <a href="/info/" class="item-link">
+                    <a href="/personal-information/" class="item-link">
                         <div class="item-content" style="background-color:#E94E24;">
                             <div class="item-media">
                                 <img src='http://img2.imgtn.bdimg.com/it/u=1932439000,2358402856&fm=26&gp=0.jpg' style="max-width:80px;max-height:800px;border-radius:50%">
@@ -49,11 +49,11 @@
         </f7-row>
         <f7-list media-list class="no-margin-v" style="margin-top:1px ;;">
 
-          <div class="jump-list"><img src="../../img/youhuijuan.png"><f7-list-item class="jump-list-title" link="/#/" title="优惠"></f7-list-item></div>
-          <div class="jump-list"><img src="../../img/kehu.png"><f7-list-item class="jump-list-title" link="/#/" title="在线客服"></f7-list-item></div>
-          <div class="jump-list"><img src="../../img/map.png"><f7-list-item class="jump-list-title" link="/#/" title="地图"></f7-list-item></div>
+          <div class="jump-list"><img src="../../img/youhuijuan.png"><f7-list-item class="jump-list-title" link="/center/" title="优惠"></f7-list-item></div>
+          <div class="jump-list"><img src="../../img/kehu.png"><f7-list-item class="jump-list-title" link="/center/" title="在线客服"></f7-list-item></div>
+          <div class="jump-list"><img src="../../img/map.png"><f7-list-item class="jump-list-title" link="/center/" title="地图"></f7-list-item></div>
           <div class="jump-list"><img src="../../img/dizhi.png"> <f7-list-item class="jump-list-title" link="/address/" title="地址管理"></f7-list-item></div>
-          <div class="jump-list"><img src="../../img/jiangping.png"><f7-list-item class="jump-list-title" link="/#/" title="我的奖品"></f7-list-item></div>
+          <div class="jump-list"><img src="../../img/jiangping.png"><f7-list-item class="jump-list-title" link="/center/" title="我的奖品"></f7-list-item></div>
         </f7-list>
     </f7-page>
 </template>
@@ -120,7 +120,7 @@ img {
   width: 15px;
   height: 15px;
   position: fixed;
-  margin-top: 14px;
+  margin-top: 18px;
   margin-left: 15px;
 }
 </style>

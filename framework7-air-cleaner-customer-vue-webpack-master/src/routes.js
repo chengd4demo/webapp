@@ -4,8 +4,11 @@ import AboutPage from './pages/homepage/center.vue';
 import FormPage from './pages/form.vue';
 import AddressPage from './pages/address.vue';
 import RecordPage from './pages/record.vue';
+import ReceivingAddressPage from './pages/receiving-address.vue';
+import PersonalInformationPage from './pages/personal-information.vue';
 import EquipmentListPage from './pages/equipment.vue';
 import MonitorPage from './pages/monitor.vue';
+import ConfirmPaymentPage from './pages/confirm-payment.vue';
 import StatePage from './pages/state.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
@@ -33,6 +36,14 @@ export default [
     component:CenterPage,
   },
   {
+    path:'/confirm-payment/',
+    component:ConfirmPaymentPage,
+  },
+  {
+    path:'/personal-information/',
+    component:PersonalInformationPage,
+  },
+  {
     path: '/record/',
     component: RecordPage,
   },
@@ -51,6 +62,10 @@ export default [
   {
     path:'/price/',
     component:DevicePrice,
+  },
+  {
+    path:'/receiving-address/',
+    component:ReceivingAddressPage,
   },
   {
     path: '/panel-right/',

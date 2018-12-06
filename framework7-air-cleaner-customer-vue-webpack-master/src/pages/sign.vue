@@ -1,8 +1,8 @@
 <template>
-<f7-page>
-<div style="width：100%;height:20%;margin-bottom:-35px;text-align:center;margin-top:20px">
-    <div style="width:355px;">
-        <img src="../img/img2039716589809cc0.png" style="width:auto;"/>
+  <f7-page>
+    <div class="header-logo">
+      <img src="../img/img2039716589809cc0.png">
+      <p>圈兔共享空气净化器</p>
     </div>
     <div style="margin-top:10px;color:#e94e24;">
           <span>圈兔共享空气净化器</span>
@@ -44,34 +44,56 @@
 				/* border-radius: 50%; */
 				border: 1px solid #c7c7cc;
 		}
+  .content-block{
+    margin:0 auto 0 0;
+    border: 0px solid white !important;
+    font-size: 17px;
+    color: #b9b9b9 !important;
+    padding: 0px;
+  }
+  .header-logo{
+    width: 100%;
+    height: 175px;
+    text-align: center;
+  }
+  .header-logo img{
+    width: 160px;
+    height: 70px;
+    margin-top: 25px;
+  }
+  .header-logo p{
+    color: #E94E24;
+    margin-top: 20px;
+    font-size: 16px;
+  }
 </style>
 
 <script>
-   export default{
-       data() {
-           return {
-               content: '发送验证码',
-               totalTime: 60,
-               canClick:true
-           }
-       },
-       methods: {
-           countDown() {
-               if (!this.canClick) return
-               this.canClick = false
-               this.content = this.totalTime + 's后重新发送'
-               let clock = window.setInterval(() => {
-                   this.totalTime --
-                   this.content = this.totalTime + 's后重新发送'
-                   if(this.totalTime <0) {
-                       window.clearInterval(clock);
-                       this.content = '重新发送验证码'
-                       this.totalTime = 60
-                       this.canClick = true
-                   }
-               },1000)
-           },
-       }
-   }
-              
+  export default{
+    data() {
+      return {
+        content: '发送验证码',
+        totalTime: 60,
+        canClick:true
+      }
+    },
+    methods: {
+      countDown() {
+        if (!this.canClick) return
+        this.canClick = false
+        this.content = this.totalTime + 's后重新发送'
+        let clock = window.setInterval(() => {
+          this.totalTime --
+          this.content = this.totalTime + 's后重新发送'
+          if(this.totalTime <0) {
+            window.clearInterval(clock);
+            this.content = '重新发送验证码'
+            this.totalTime = 60
+            this.canClick = true
+          }
+        },1000)
+      },
+    }
+  }
+
 </script>
