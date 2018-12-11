@@ -124,7 +124,6 @@
 <script>
 // Import Routes
 import routes from './routes.js'
-
 export default {
   data() {
     return {

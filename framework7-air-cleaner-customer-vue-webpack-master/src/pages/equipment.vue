@@ -1,33 +1,20 @@
 <!-- center Page Template -->
 <template id="page-center">
-   
     <f7-page>
       <f7-navbar class="header-title" title="设备列表" back-link="" style="background: #E94E24 !important;"></f7-navbar>
-      <f7-list media-list class="no-margin-v">
+      <f7-list media-list class="no-margin-v" style="margin:0 auto;">
         <ul class="no-border-v">
-          <li>
-            <a href="/info/" class="item-link">
-              <div class="item-content-c">
-
+          <li class="swipeout">
+            <div class="item-content-c"  v-for="(item, index) in deviceMonitorList" :key="index">
                 <a href="/monitor/"><div class="item-inner">
-                  <div class="item-number">设备编号:3434534513412342</div>
+                  <div class="item-number" >设备编号:{{item.machno}}</div>
                   <div class="item-title-row">
-                    <div class="item-remainingTime">剩余时长:3小时</div>
+                    <div class="item-remainingTime">剩余时长:{{item.lasttime}}小时</div>
                   </div>
-                   <div class="item-span"><span>正在使用</span></div>
+                   <div class="item-span" v-if="item.devicestate != '使用结束'"><span>{{item.devicestate}}</span></div>
+                   <div class="item-span-1" v-else><span>{{item.devicestate}}</span></div>
                 </div></a>
               </div>
-              <div class="item-content-c">
-
-                <a href="/monitor/"><div class="item-inner">
-                  <div class="item-number">设备编号:3434534513412342</div>
-                  <div class="item-title-row">
-                    <div class="item-remainingTime">剩余时长:3小时</div>
-                  </div>
-                  <div class="item-span-1"><span>未使用</span></div>
-                </div></a>
-              </div>
-            </a>
           </li>
         </ul>
 
@@ -35,7 +22,49 @@
     </f7-page>
 </template>
 <script>
+import api from '../network'
+  export default {
+     data() {
+      return {
+        pageNum:1,
+        loading:false,
+        deviceMonitorList:[]
+      }
+    },
+    created(){
+      const self = this;
+      self.getDeviceMonitors();
+    },
+    methods: {
+      getDeviceMonitors(num){
+        var self = this;
+        var pageNum = num||1;
+        var pageSize = 30;
 
+        api.queryDeviceMonitorPage({
+          data:{
+            customerId:'default'
+          },
+          page:{
+             page:pageNum,
+             limit:pageSize
+          }
+        }).then(function(res){
+        var data = res.data.data;
+        data.forEach(function(value, index, array){
+          self.deviceMonitorList.push(value)
+        })
+        if(res.list.length < 30){
+          self.loading = true
+          return;
+        }
+        self.loading = false
+      }).catch(function(err){
+        console.log(err+'sss')
+      })
+    }
+  }
+}
 </script>
 <style type="text/css">
 .item-number{
