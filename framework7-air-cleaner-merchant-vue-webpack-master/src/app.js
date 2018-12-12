@@ -19,7 +19,7 @@ import App from './app.vue';
 
 // Init F7 Vue Plugin
 Framework7.use(Framework7Vue)
-
+const myApp = Framework7;
 // Init App
 new Vue({
   el: '#app',
