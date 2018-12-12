@@ -14,7 +14,7 @@
       <p>设备运行时长:<span>{{costTime}}</span></p>
       <p>剩余运行时长:<span>{{lastTime}}</span></p>
     </div>
-    <p style="margin-top: 50px;"><a href="/price/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">加时</a></p>
+    <p style="margin-top: 50px;"><a :href="getPriceHref()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">加时</a></p>
     <!--右下角客服跳转按钮-->
 <!--    <div class="fab fab-right-bottom color-purple">
       &lt;!&ndash;1:定义悬浮按钮UI样式&ndash;&gt;
@@ -51,6 +51,9 @@
         }).catch(function(err){
          console.log(err+'sss')
         })
+      },
+      getPriceHref(){
+        return '/price/machno/' + this.machNo + '/';
       }
     }
   }
