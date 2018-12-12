@@ -52,7 +52,7 @@ export default [
     component: EquipmentListPage,
   },
   {
-    path:'/monitor/',
+    path:'/monitor/machno/:machno/',
     component:MonitorPage,
   },
   {

@@ -9,10 +9,10 @@
       <p class="health-advice">健康建议:极少数敏感人群应减少户外运动</p>
     </div>
     <div class="running-state">
-      <p style="margin-left: 50px">设备号:<span>3458934589456</span></p>
+      <p style="margin-left: 50px">设备号:<span>{{machNo}}</span></p>
       <p>设备运行状态:<span>正常</span></p>
-      <p>设备运行时长:<span>2小时22分</span></p>
-      <p>剩余运行时长:<span>1小时40分钟</span></p>
+      <p>设备运行时长:<span>{{costTime}}</span></p>
+      <p>剩余运行时长:<span>{{lastTime}}</span></p>
     </div>
     <p style="margin-top: 50px;"><a href="/price/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">加时</a></p>
     <!--右下角客服跳转按钮-->
@@ -26,6 +26,34 @@
   </f7-page>
 </template>
 <script>
+  import api from '../network'
+  export default {
+    data() {
+      return {
+        machNo:this.$f7route.params.machno,
+        costTime:'-',
+        lastTime:'-',
+        deviceState:'-'
+      }
+    },
+    created(){
+      const self = this;
+      self.queryDeviceMonitor(this.machNo);
+    },
+    methods:{
+      queryDeviceMonitor(param){
+        var self = this;
+        api.queryDeviceMonitor(param).then(function(res){
+          var data = res.data.data;
+          self.deviceState = data.deviceState;
+          self.costTime = data.costTime;
+          self.lastTime = data.lastTime;
+        }).catch(function(err){
+         console.log(err+'sss')
+        })
+      }
+    }
+  }
 
 </script>
 <style type="text/css">

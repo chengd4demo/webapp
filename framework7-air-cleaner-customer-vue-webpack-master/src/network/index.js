@@ -1,6 +1,8 @@
 import axios from 'axios'
+//const DEV_BASE_URL = 'http://192.168.1.101:8769'
 const DEV_BASE_URL = ''
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+//const PROD_BASE_URL = 'http://192.168.1.101:8769'
 const PROD_BASE_URL = ''
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? PROD_BASE_URL : DEV_BASE_URL
 // 返回状态判断  要根据后台给的判定字段
@@ -80,6 +82,12 @@ export default {
      */
     queryDeviceMonitorPage(params){
         return fetchPost('/customer-web-api/device-channel/queryDeviceMonitors',params)
+    },
+    /**
+     * 设备监控详细
+     */
+    queryDeviceMonitor(params){
+      return fetchPost('/customer-web-api/device-channel/queryDeviceMonitor/'+params)
     },
     /**
      * 个人信息设置
