@@ -63,7 +63,7 @@
 				<f7-list-item class="jump-list-title" link="/center/" title="地图"></f7-list-item>
 			</div>
 			<div class="jump-list"><img src="../../img/dizhi.png">
-				<f7-list-item class="jump-list-title" link="/address/" title="地址管理"></f7-list-item>
+				<f7-list-item class="jump-list-title" link="#" title="地址管理"></f7-list-item>
 			</div>
 			<div class="jump-list"><img src="../../img/jiangping.png">
 				<f7-list-item class="jump-list-title" link="/center/" title="我的奖品"></f7-list-item>

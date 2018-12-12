@@ -6,7 +6,7 @@
         <ul class="no-border-v">
           <li class="swipeout">
             <div class="item-content-c"  v-for="(item, index) in deviceMonitorList" :key="index">
-                <a :href="getDeviceHref(item.machno)"><div class="item-inner">
+                <a :href="getDeviceHref(item.machno,)"><div class="item-inner">
                   <div class="item-number" >设备编号:{{item.machno}}</div>
                   <div class="item-title-row">
                     <div class="item-remainingTime">剩余时长:{{item.lasttime}}小时</div>

@@ -60,7 +60,7 @@ export default [
     component:StatePage,
   },
   {
-    path:'/price/',
+    path:'/price/machno/:machno',
     component:DevicePrice,
   },
   {
