@@ -4,7 +4,7 @@
 		<f7-list media-list class="no-margin-v" style="margin-top:1px">
 			<ul class="no-border-v">
 				<li  v-for="(item, index) in deviceMonitorList" :key="index">
-					<a href="/device-management/" class="item-link">
+					<a :href='getManagementHref(item.traderid)' class="item-link">
 						<div class="item-content" style="border-bottom: 1px solid #CDCDCD;">
 							<div class="item-media">
 								<img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg' style="max-width:80px;max-height:800px;border-radius:50%">
@@ -16,8 +16,8 @@
 									<div class="item-subtitle item-title" style="margin-left:-55px">{{item.name}}</div>
 								</div>
 								<div class="item-subtitle" style="margin-left:-55px"><span>共{{item.count}}台</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>运行{{item.usecount}}台</span></div>
-								<div style="margin-top:10px"><img src="../img/map.png" style="margin-left:-120px;max-width: 15px;max-height: 15px;vertical-align: middle" />
-								<span class="item-subtitle">{{item.address}}</span></div>
+								<div class="item-subtitle" style="margin-top:10px;margin-left:-120px;max-width:150% !important;"><img src="../img/map.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />
+								<span >{{item.address}}</span></div>
 							</div>
 						</div>
 					</a>
@@ -67,6 +67,9 @@
 				}).catch(function(err) {
 					console.log(err + 'sss')
 				})
+			},
+			getManagementHref(val){
+				return '/device-management/traderId/'+ val +'/';
 			}
 		}
 	}

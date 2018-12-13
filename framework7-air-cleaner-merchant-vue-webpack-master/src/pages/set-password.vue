@@ -1,7 +1,7 @@
 <template>
   <f7-page>
     <f7-navbar title="设置提现密码" back-link="" style="background:#e94e24;"></f7-navbar>
-    <f7-list form>
+    <f7-list form style="margin-top:1px">
       <f7-list-item>
         <f7-input type="number" placeholder="输入手机号码"/>
       </f7-list-item>

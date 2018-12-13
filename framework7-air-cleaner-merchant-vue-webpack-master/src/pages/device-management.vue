@@ -10,9 +10,9 @@
 					</dd>
           <dd>设备标号：{{item.machno}}</dd>
           <dd>使用时间：<span>{{item.usedate}}</span></dd>
-          <dd>使用时长：<span>{{item.costtime}}</span></dd>
-          <dd>剩余时长：<span>{{item.lasttime}}</span></dd>
-          <dd>计费金额：<span>{{item.unitprice}}</span></dd>
+          <dd>使用时长：<span>{{item.costtime}}小时</span></dd>
+          <dd>剩余时长：<span>{{item.lasttime}}小时</span></dd>
+          <dd>计费金额：<span>{{item.unitprice}}元</span></dd>
         </dl>
       </div>
     </div>
@@ -26,6 +26,9 @@
         return {
           pageNum:1,
           loading:false,
+					type: 'TR',
+					traderId: this.$f7route.params.traderId,
+					beforRout:this.$f7route.query,
           deviceMonitorList:[]
         }
       },
@@ -38,28 +41,51 @@
           var self = this;
           var pageNum = num||1;
           var pageSize = 30;
-  
-          api.queryDeviceMonitorPage({
-            data:{
-              customerId:'default'
-            },
-            page:{
-               page:pageNum,
-               limit:pageSize
-            }
-          }).then(function(res){
-          var data = res.data.data;
-          data.forEach(function(value, index, array){
-            self.deviceMonitorList.push(value)
-          })
-          if(data.length < 30){
-            self.loading = true
-            return;
-          }
-          self.loading = false
-        }).catch(function(err){
-          console.log(err+'sss')
-        })
+					if(self.beforRout.foo != 'center'){	//判断路由跳转
+							api.queryDeviceMonitorPage({
+								data:{
+									traderId:self.traderId
+								},
+								page:{
+									 page:pageNum,
+									 limit:pageSize
+								}
+							}).then(function(res){
+							var data = res.data.data;
+							data.forEach(function(value, index, array){
+								self.deviceMonitorList.push(value)
+							})
+							if(data.length < 30){
+								self.loading = true
+								return;
+							}
+							self.loading = false
+						}).catch(function(err){
+							console.log(err+'sss')
+						})
+				} else {
+						api.queryDeviceMonitorPage({
+							data:{
+								investorId:'911D3482E72B4AC3B208AD627430689D'
+							},
+							page:{
+								page:pageNum,
+								limit:pageSize
+							}
+						}).then(function(res){
+						var data = res.data.data;
+						data.forEach(function(value, index, array){
+							self.deviceMonitorList.push(value)
+						})
+						if(data.length < 30){
+							self.loading = true
+							return;
+						}
+						self.loading = false
+					}).catch(function(err){
+						console.log(err+'sss')
+					})
+				}
       }
     }
   }

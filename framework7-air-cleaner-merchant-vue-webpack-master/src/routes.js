@@ -57,7 +57,7 @@ export default [
     component:InboundPage,
   },
   {
-    path:'/device-management/',
+    path:'/device-management/traderId/:traderId/',
     component: DeviceManagementPage,
   },
   {
