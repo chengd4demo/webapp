@@ -23,7 +23,7 @@ const wxConfig = {
 	appId: "wxc4bba222e1d9cbe3"
 }
 
-let confirmPayment = {
+const confirmPayment = {
 		realPrice:0,
 		machNo:'-',
 		available:false,
