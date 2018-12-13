@@ -1,23 +1,26 @@
 <!-- center Page Template -->
 <template id="page-center">
-    <f7-page>
+    <f7-page 
+      ptr
+      infinite
+      infinite :infinite-distance="50"
+      :infinite-preloader="showPreloader"
+      @ptr:refresh="onRefresh"
+      @infinite="onInfiniteScroll">
       <f7-navbar class="header-title" title="设备列表" back-link="" style="background: #E94E24 !important;"></f7-navbar>
       <f7-list media-list class="no-margin-v" style="margin:0 auto;">
-        <ul class="no-border-v">
-          <li class="swipeout">
-            <div class="item-content-c"  v-for="(item, index) in deviceMonitorList" :key="index">
-                <a :href="getDeviceHref(item.machno,)"><div class="item-inner">
-                  <div class="item-number" >设备编号:{{item.machno}}</div>
-                  <div class="item-title-row">
-                    <div class="item-remainingTime">剩余时长:{{item.lasttime}}小时</div>
-                  </div>
-                   <div class="item-span" v-if="item.devicestate != '使用结束'"><span>{{item.devicestate}}</span></div>
-                   <div class="item-span-1" v-else><span>{{item.devicestate}}</span></div>
-                </div></a>
-              </div>
-          </li>
-        </ul>
-
+        <div class="butom-border" style="background-color:white;" v-for="(item, index) in deviceMonitorList" :key="index">
+          <a :href="getDeviceHref(item.machno,)" class="item-link">
+            <div class="item-inner">
+                <div class="item-number">设备编号:{{item.machno}}</div>
+                <div class="item-title-row">
+                  <div class="item-remainingTime">剩余时长:{{item.lasttime}}小时</div>
+                </div>
+              <div class="item-span" v-if="item.devicestate != '使用结束'"><span>{{item.devicestate}}</span></div>
+              <div class="item-span-1" v-else><span>{{item.devicestate}}</span></div>
+            </div>
+          </a>
+        </div>
       </f7-list >
     </f7-page>
 </template>
@@ -28,6 +31,9 @@ import api from '../network'
       return {
         pageNum:1,
         loading:false,
+        loadingMore:false,
+        loadedEnd:false,
+        showPreloader:true,
         deviceMonitorList:[]
       }
     },
@@ -54,17 +60,39 @@ import api from '../network'
         data.forEach(function(value, index, array){
           self.deviceMonitorList.push(value)
         })
-        if(res.list.length < 30){
+        console.log(data.length)
+        if(data.length < 30){
           self.loading = true
+          self.loadingMore = true
+          self.loadedEnd = true
+          self.showPreloader = false
           return;
         }
         self.loading = false
+        self.loadingMore = false
       }).catch(function(err){
         console.log(err+'sss')
       })
     },
     getDeviceHref(val){
       return '/monitor/machno/' + val + '/';
+    },
+    onRefresh(event,done){
+      var self = this
+      setTimeout(() => {
+       self.deviceMonitorList = []
+       self.pageNum = 1
+       self.getDeviceMonitors(self.pageNum)
+       done();
+       this.loadedEnd = false
+       self.showPreloader = true
+      },1000)
+    },
+    onInfiniteScroll(){
+     if (this.loadingMore || this.loadedEnd) return
+     this.pageNum++
+     this.getDeviceMonitors(this.pageNum)
+     this.loadingMore = true
     }
   }
 }
@@ -74,17 +102,17 @@ import api from '../network'
   color: black;
   font-size: 12px;
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 .item-remainingTime{
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 15px;
   font-size: 10px;
   color: #BFBFBF;
 }
 .item-span{
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 .item-span span{
   color: white;
@@ -96,7 +124,7 @@ import api from '../network'
 }
 .item-span-1{
   margin-top: 5px;
-  margin-left: 5px;
+  margin-left: 15px;
 }
   .item-span-1 span{
     color: white;
@@ -105,5 +133,8 @@ import api from '../network'
     padding: 2px 3px;
     border-radius: 4px 4px 4px 4px;
     background: #FF8D1A;
+  }
+  .butom-border{
+    border-bottom: 1px solid #EFEFEF;
   }
 </style>
