@@ -59,7 +59,7 @@
 							</div>
 						</div>
 					</a></li>
-				<li class="media-item"><a href="/device-management/" class="item-link">
+				<li class="media-item"><a href="/device-management/traderId/unfidend/?foo=center#bar" class="item-link">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">
@@ -103,7 +103,7 @@
 </template>
 <script>
 	export default {
-    name: "home"
+    
   }
 </script>
 <style type="text/css">

@@ -16,7 +16,7 @@ import AppStyles from './css/app.css';
 
 // Import App Component
 import App from './app.vue';
-
+window.eventBus = new Vue();
 // Init F7 Vue Plugin
 Framework7.use(Framework7Vue)
 const myApp = Framework7;

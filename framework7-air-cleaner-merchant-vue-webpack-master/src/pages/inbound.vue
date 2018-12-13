@@ -2,34 +2,72 @@
   <f7-page>
     <f7-navbar title="收入明细" back-link="" style="background:#e94e24;"></f7-navbar>
   <div class="mv-2">
-    <div class="mv-3">
+    <div class="mv-3" v-for="(item, index) in inboundsList" :key="index">
       <dl>
-        <dd>付款时间：<span>2019-10-11 23:59:59</span></dd>
-        <dd>使用时长：<span>0.5小时</span></dd>
-        <dd>计费金额：<span>5元</span></dd>
-        <dd>分润金额：<span>2.5元</span></dd>
-        <dd>商户类型：<span>商家</span></dd>
-        <dd>商户地址：<span>郑州市</span></dd>
-      </dl>
-    </div>
-    <div class="mv-3">
-      <dl>
-        <dd>付款时间：<span>2019-10-11 10:00:00</span></dd>
-        <dd>使用时长：<span>1小时</span></dd>
-        <dd>计费金额：<span>6元</span></dd>
-        <dd>分润金额：<span>3元</span></dd>
-        <dd>商户类型：<span>投资商</span></dd>
-        <dd>商户地址：<span>成都市</span></dd>
+        <dd>付款时间：<span>{{item.createTimeStr}}</span></dd>
+        <dd>使用时长：<span>{{item.costTime}}小时</span></dd>
+        <dd>计费金额：<span>{{item.unitPrice}}元</span></dd>
+				<dd>分润金额：<span>{{item.amount}}元</span></dd>
+        <dd>商户类型：<span>{{item.type}}</span></dd>
+        <dd v-if="item.type !='商户'">商户地址：<span>{{item.address}}</span></dd>
       </dl>
     </div>
   </div>
   </f7-page>
 </template>
+<script>
+	import api from "../network";
+	export default {
+			data() {
+				return {
+					pageNum:1,
+					loading:false,
+					inboundsList:[]
+				}
+			},
+			created(){
+				const self = this;
+				self.getInbounds();
+			},
+			methods: {
+				getInbounds(num){
+					var self = this;
+					var pageNum = num||1;
+					var pageSize = 30;
+					api.queryAccountInbound({
+						data:{
+							weixin:'oPmTlsjbuV49eGGacBxGK0kJjmFA'
+						},
+						page:{
+							page:pageNum,
+							limit:pageSize
+						}
+					}).then(function(res){
+					var data = res.data.data;
+					data.forEach(function(value, index, array){
+						self.inboundsList.push(value)
+					})
+					if(data.length < 30){
+						self.loading = true
+						return;
+					}
+					self.loading = false
+				}).catch(function(err){
+					console.log(err+'sss')
+				})
+			}
+		}
+	}
+</script>
 
 <style type="text/css">
   dd{
     font-size: 12px;
     line-height: 25px;
+		word-break:keep-all;/* 不换行 */
+		white-space:nowrap;/* 不换行 */
+		overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+		text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
   }
   dl{
     margin-left: -40px;
