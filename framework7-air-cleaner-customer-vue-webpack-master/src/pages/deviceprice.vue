@@ -14,13 +14,13 @@
         </div>
       <!--消费时间 价格-->
       <div class="prices">
-      <div v-for="(item, index) in priceList" :key="index">
+      <div v-for="(item, index) in priceList" :key="index" @click="onSelectPrice(index)">
         <a href="/confirm-payment/">
           <div class="price-item1" >
             <div class="price-time">{{item.costTime/60}}小时</div>
             <div class="price-value">
-              <div class="price"><em>¥</em>{{item.unitPrice}}</div>
-              <div class="del-price"><em>¥</em>{{item.realPrice}}</div>
+              <div class="price"><em>¥</em>{{item.realPrice}}</div>
+              <div class="del-price"><em>¥</em>{{item.unitPrice}}</div>
             </div>
           </div>
         </a>
@@ -51,11 +51,13 @@
 </template>
 <script>
   import api from '../network'
+  import config from '@/util/config'
   export default {
     data(){
       return {
         machNo: this.$f7route.params.machno,
-        priceList:[]
+        priceList:[],
+        priceObj:{}
       }
     },
     created() {
@@ -67,12 +69,23 @@
         const self = this;
         api.queryDeviceStatus(params).then(function(res){
           let data = res.data.data.price;
+          self.priceObj = res.data.data;
           data.forEach(function(value, index, array){
             self.priceList.push(value);
           });
         }).catch(function(err){
           console.log(err+'sss')
         })
+      },
+      onSelectPrice(index){
+         if(this.priceList.length!=0) {
+             config.confirmPayment.realPrice = this.priceList[index].realPrice;
+             config.confirmPayment.costTime = this.priceList[index].costTime;
+             config.confirmPayment.machNo = this.machNo;
+             config.confirmPayment.available = this.priceObj.available;
+             config.confirmPayment.onLine = this.priceObj.onLine;
+             config.confirmPayment.pm25 = this.priceObj.pm25;
+         }
       }
     }
   }

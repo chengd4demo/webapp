@@ -9,18 +9,37 @@
       </div>
     </div>
     <div class="confirm-state">
-      <p style="margin-left: 25px">设备号:<span class="span-1">3458934589456</span></p>
-      <p>是否在线:<span class="span-2">在线</span></p>
-      <p>是否可用:<span class="span-2">可用</span></p>
-      <p style="margin-left: 25px">PM2.5:<span class="span-2">0</span></p>
-      <p>剩余时长:<span class="span-1">1小时</span></p>
-      <p>支付金额:<span class="span-1">20.00元</span></p>
-      <p style="margin-left: 25px">优惠卷:<span class="span-1">10元</span></p>
+      <p style="margin-left: 25px">设备号:<span class="span-1">{{machNo}}</span></p>
+      <p>是否在线:<span class="span-2"> {{onLine ? '在线':'不在线'}}</span></p>
+      <p>是否可用:<span class="span-2"> {{available ? '可用':'不可用'}}</span></p>
+      <p style="margin-left: 25px">PM2.5:<span class="span-2">{{pm25}}</span></p>
+      <p>使用时长:<span class="span-1">{{costTime/60}}小时</span></p>
+      <p>支付金额:<span class="span-1">{{realPrice}}元</span></p>
+      <p style="margin-left: 25px"  v-if='yhj'>优惠卷:<span class="span-1">10元</span></p>
     </div>
     <p style="margin-top: 50px;"><a href="/center/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">立即支付</a></p>
   </f7-page>
 </template>
 <script>
+  import config from '@/util/config'
+  export default {
+    data(){
+      return {
+        realPrice: config.confirmPayment.realPrice,
+        pm25: config.confirmPayment.pm25,
+        machNo: config.confirmPayment.machNo,
+        costTime: config.confirmPayment.costTime,
+        available: config.confirmPayment.available,
+        onLine:  config.confirmPayment.onLine,
+        yhj:false
+      }
+    },
+    methods:{
+      pay() {
+        
+      }
+    }
+  }
 
 </script>
 <style type="text/css">

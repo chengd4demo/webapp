@@ -23,8 +23,18 @@ const wxConfig = {
 	appId: "wxc4bba222e1d9cbe3"
 }
 
+let confirmPayment = {
+		realPrice:0,
+		machNo:'-',
+		available:false,
+		onLine:false,
+		costTime:0,
+		pm25:110
+}
+
 export default {
 	refresh,
 	loadmore,
-	wxConfig
+	wxConfig,
+	confirmPayment
 }
