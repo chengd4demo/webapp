@@ -16,31 +16,24 @@ axios.interceptors.response.use((res) => {
   })
 
 export function fetchGet (url, params) {
-  if($('.modal.modal-no-buttons.modal-preloader').length === 0) {
+  /*if($('.modal.modal-no-buttons.modal-preloader').length === 0) {
     myApp.showPreloader('正在加载');
   } else {
     myApp.hidePreloader();
     myApp.showPreloader('正在加载');
-  }
+  }*/
   return new Promise((resolve, reject) => {
-    $.ajax({
-      url:url,
-      type:'GET',
-      data:params,
-      success:function(resp){
-        if(resp.status !== '200'){
-          reject(resp.description)
-        }else{
-          resolve(resp.data)
-        }
-      },
-      error:function(err){
+    axios.get(url, params)
+      .then(response => {
+        resolve(response)
+      }, err => {
         reject(err)
-      },
-      complete:function(){
-        myApp.hidePreloader();
-      }
-    })
+      })
+      .catch((error) => {
+
+        console.log("cccccccc")
+        reject(error)
+      })
   })
 }
 export function fetchPost (url, params) {
@@ -69,7 +62,7 @@ export default {
     * 支付选择
     */
     queryDeviceStatus(params){
-        return fetchGet('/customer-web-api/device-channel/login/'+params)
+        return fetchGet('/customer-web-api/device-channel/query/'+params)
     },
     /**
      * 用户信息

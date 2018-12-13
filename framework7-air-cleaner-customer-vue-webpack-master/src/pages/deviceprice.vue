@@ -14,14 +14,18 @@
         </div>
       <!--消费时间 价格-->
       <div class="prices">
-        <a href="/confirm-payment/"><div class="price-item1" >
-          <div class="price-time">1小时</div>
-          <div class="price-value">
-            <div class="price"><em>¥</em>4</div>
-            <div class="del-price"><em>¥</em>6</div>
+      <div v-for="(item, index) in priceList" :key="index">
+        <a href="/confirm-payment/">
+          <div class="price-item1" >
+            <div class="price-time">{{item.costTime/60}}小时</div>
+            <div class="price-value">
+              <div class="price"><em>¥</em>{{item.unitPrice}}</div>
+              <div class="del-price"><em>¥</em>{{item.realPrice}}</div>
+            </div>
           </div>
-        </div></a>
-        <a href="/confirm-payment/"><div class="price-item1" >
+        </a>
+      </div>
+        <!--<a href="/confirm-payment/"><div class="price-item1" >
           <div class="price-time">2小时</div>
           <div class="price-value">
             <div class="price"><em>¥</em>6</div>
@@ -41,12 +45,37 @@
             <div class="price"><em>¥</em>20</div>
             <div class="del-price"><em>¥</em>24</div>
           </div>
-        </div></a>
+        </div></a>-->
       </div>
     </f7-page>
 </template>
 <script>
-
+  import api from '../network'
+  export default {
+    data(){
+      return {
+        machNo: this.$f7route.params.machno,
+        priceList:[]
+      }
+    },
+    created() {
+      const self = this;
+      self.queryPriceList(self.machNo);
+    },
+    methods:{
+      queryPriceList(params){
+        const self = this;
+        api.queryDeviceStatus(params).then(function(res){
+          let data = res.data.data.price;
+          data.forEach(function(value, index, array){
+            self.priceList.push(value);
+          });
+        }).catch(function(err){
+          console.log(err+'sss')
+        })
+      }
+    }
+  }
 </script>
 <style type="text/css">
 .header{
