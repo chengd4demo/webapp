@@ -8,11 +8,11 @@
 		<div>
 			<form>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-					<input type="number" placeholder="输入手机号码" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
+					<input type="number" v-model= "admin.phoneNumber" placeholder="输入手机号码" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
 					<span style="width:70%;float: left;">
-						<input type="number" placeholder="输入验证码" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
+						<input type="number" v-model="admin.verificationCode" placeholder="输入验证码" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
 					</span>
 					<span style="width: 30%; ">
 						<a href="#" id="code" @click="countDown" class="button button-fill" :class="{disabled: !this.canClick}"
@@ -28,7 +28,7 @@
 					</span>
 				</div>
 				<div style="width: 100%; margin-top: 20px;">
-					<a href="/center/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">验证手机</a>
+					<a class="button button-fill" @click="loginBtn()" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">验证手机</a>
 				</div>
 			</form>
 		</div>
@@ -85,12 +85,19 @@
 </style>
 
 <script>
+	import api from '../network'
 	export default {
 		data() {
 			return {
 				content: '发送验证码',
 				totalTime: 60,
-				canClick: true
+				canClick: true,
+				smsCode:'',
+				admin: {
+					weixin:'aerstdyui',
+					verificationCode:'',
+					phoneNumber:'',
+				}
 			}
 		},
 		methods: {
@@ -109,6 +116,25 @@
 					}
 				}, 1000)
 			},
+			loginBtn(){
+				if(this.admin.phoneNumber ==="" || this.admin.verificationCode=="") {
+					return
+				}
+				api.login({
+					phoneNumber: this.admin.phoneNumber,
+					verificationCode: this.admin.verificationCode,
+					weixin:this.admin.weixin
+				}).then(res => {
+					let data = res.data.data;
+					if(res.data.data){
+						//localStorage.setItem(JSON.stringify(data))
+						localStorage.setItem('USER_INFO',JSON.stringify(data))
+						this.$f7router.back('/center/')
+					}
+				}).catch(err =>{
+					alert('服务器繁忙')
+				})
+			}
 		}
 	}
 </script>

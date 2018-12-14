@@ -15,7 +15,7 @@
 							<div class="item-inner">
 								<div class="item-title">&nbsp;</div>
 								<div class="item-title-row">
-									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">冬天的萝卜</div>
+									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">{{nickName}}</div>
 								</div>
 								<!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
 							</div>
@@ -72,7 +72,22 @@
 	</f7-page>
 </template>
 <script>
-
+export default {
+	data(){
+		return {
+			headUrl:'',
+			nickName:'冬天的萝卜'
+		}
+	},
+	mounted() {
+		self = this;
+		let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+		if (USER_INFO){
+		 self.nickName = USER_INFO.name
+		}
+		
+	},
+}
 </script>
 <style type="text/css">
 	.ios .media-list .item-title,
