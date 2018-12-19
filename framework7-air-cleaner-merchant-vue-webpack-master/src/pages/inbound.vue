@@ -1,5 +1,10 @@
 <template>
-  <f7-page>
+  <f7-page ptr 
+  infinite 
+  infinite:infinite-distance="50" 
+  :infinite-preloader="showPreloader" 
+  @ptr:refresh="onRefresh" 
+  @infinite="onInfiniteScroll">
     <f7-navbar title="收入明细" back-link="" style="background:#e94e24;"></f7-navbar>
   <div class="mv-2">
     <div class="mv-3" v-for="(item, index) in inboundsList" :key="index">
@@ -22,6 +27,9 @@
 				return {
 					pageNum:1,
 					loading:false,
+					loadingMore: false,
+					loadedEnd: false,
+					showPreloader: true,
 					inboundsList:[]
 				}
 			},
@@ -49,12 +57,34 @@
 					})
 					if(data.length < 30){
 						self.loading = true
+						self.loadingMore = true
+						self.loadedEnd = true
+						self.showPreloader = false
 						return;
 					}
 					self.loading = false
+					self.loadingMore = false
 				}).catch(function(err){
 					console.log(err+'sss')
 				})
+			},
+			onRefresh(event, done) {
+				var self = this
+				setTimeout(() => {
+					self.deviceMonitorList = []
+					self.pageNum = 1
+					self.getInbounds(self.pageNum)
+					done();
+					this.loadedEnd = false
+					self.showPreloader = true
+				}, 1000)
+			},
+			onInfiniteScroll() {
+				self = this
+				if (self.loadingMore || self.loadedEnd) return
+				self.pageNum++
+				self.getInbounds(self.pageNum)
+				self.loadingMore = true
 			}
 		}
 	}
