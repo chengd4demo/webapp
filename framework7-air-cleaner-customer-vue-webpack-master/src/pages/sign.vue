@@ -130,6 +130,7 @@
 						//localStorage.setItem(JSON.stringify(data))
 						localStorage.setItem('USER_INFO',JSON.stringify(data))
 						this.$f7router.back('/center/')
+						this.$f7router.url = '/center/'
 					}
 				}).catch(err =>{
 					alert('服务器繁忙')
