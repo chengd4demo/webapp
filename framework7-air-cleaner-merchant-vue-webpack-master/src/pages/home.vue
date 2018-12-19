@@ -14,9 +14,9 @@
 							<div class="item-inner" style="margin-top: -10px">
 								<div class="item-title">&nbsp;</div>
 								<div class="item-title-row">
-									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">圈兔网络</div>
+									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">{{name}}</div>
 								</div>
-								<div class="item-subtitle item-title" style="margin-left:-55px;color:white">￥1000</div>
+								<div class="item-subtitle item-title" style="margin-left:-55px;color:white">￥{{amount}}</div>
 								<!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
 							</div>
 						</div>
@@ -50,7 +50,7 @@
 		<f7-list media-list class="no-margin-v" style="margin-top:1px">
 
 			<ul>
-				<li class="media-item" icon="home"><a href="/trader-management/" class="item-link">
+				<li class="media-item" icon="home"><a href="/trader-management/" class="item-link" v-if="type==='IR' || type==='CR'">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">
@@ -103,7 +103,27 @@
 </template>
 <script>
 	export default {
-    
+    data(){
+			return{
+				type:'',
+				name:'圈兔网络',
+				amount:0,//可用余额
+			}
+		},
+		created() {
+			self = this
+			self.init()
+		},
+		methods:{
+			init(){
+				self = this;
+				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+				if (USER_INFO) {
+					self.name = USER_INFO.name || USER_INFO.nickName
+					self.type = USER_INFO.userType
+				}
+			}
+		}
   }
 </script>
 <style type="text/css">

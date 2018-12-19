@@ -1,5 +1,10 @@
 <template>
-  <f7-page>
+  <f7-page ptr 
+  infinite 
+  infinite:infinite-distance="50" 
+  :infinite-preloader="showPreloader" 
+  @ptr:refresh="onRefresh" 
+  @infinite="onInfiniteScroll">
     <f7-navbar title="设备列表" back-link="" style="background:#e94e24;"></f7-navbar>
     <div class="dm-2">
       <div class="dm-3"  v-for="(item, index) in deviceMonitorList" :key="index">
@@ -26,22 +31,36 @@
         return {
           pageNum:1,
           loading:false,
-					type: 'TR',
+					type: 'CR',
 					traderId: this.$f7route.params.traderId,
+					id:'',
 					beforRout:this.$f7route.query,
+					loadingMore: false,
+					loadedEnd: false,
+					showPreloader: true,
           deviceMonitorList:[]
         }
       },
       created(){
         const self = this;
+				self.init();
         self.getDeviceMonitors();
       },
+			mounted() {
+				self = this;
+				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+				if (USER_INFO) {
+				   self.id = USER_INFO.id
+					 self.type = USER_INFO.userType
+				}
+			},
       methods: {
         getDeviceMonitors(num){
           var self = this;
           var pageNum = num||1;
           var pageSize = 30;
-					if(self.beforRout.foo != 'center'){	//判断路由跳转
+					if (self.beforRout.foo == 'trader') {	//判断路由跳转
+					
 							api.queryDeviceMonitorPage({
 								data:{
 									traderId:self.traderId
@@ -57,28 +76,59 @@
 							})
 							if(data.length < 30){
 								self.loading = true
+								self.loadingMore = true
+								self.loadedEnd = true
+								self.showPreloader = false
 								return;
 							}
 							self.loading = false
+							self.loadingMore = false
 						}).catch(function(err){
 							console.log(err+'sss')
 						})
 				} else {
-						api.queryDeviceMonitorPage({
-							data:{
-								investorId:'911D3482E72B4AC3B208AD627430689D'
-							},
-							page:{
-								page:pageNum,
-								limit:pageSize
+					  let data = {}
+						if (self.type == "TR") {
+							data = {
+								data:{
+									traderId:self.id
+								},
+								page:{
+									page:pageNum,
+									limit:pageSize
+								}
 							}
-						}).then(function(res){
+						} else if(self.type == "IR") {
+							data = {
+								data:{
+									investorId:self.id
+								},
+								page:{
+									page:pageNum,
+									limit:pageSize
+								}
+							}
+						} else if(self.type == "CY") {
+							data = {
+								data:{
+									companyId:self.id
+								},
+								page:{
+									page:pageNum,
+									limit:pageSize
+								}
+							}
+						}
+						api.queryDeviceMonitorPage(data).then(function(res){
 						var data = res.data.data;
 						data.forEach(function(value, index, array){
 							self.deviceMonitorList.push(value)
 						})
 						if(data.length < 30){
 							self.loading = true
+							self.loadingMore = true
+							self.loadedEnd = true
+							self.showPreloader = false
 							return;
 						}
 						self.loading = false
@@ -86,7 +136,32 @@
 						console.log(err+'sss')
 					})
 				}
-      }
+      },
+			onRefresh(event, done) {
+				var self = this
+				setTimeout(() => {
+					self.deviceMonitorList = []
+					self.pageNum = 1
+					self.getDeviceMonitors(self.pageNum)
+					done();
+					this.loadedEnd = false
+					self.showPreloader = true
+				}, 1000)
+			},
+			onInfiniteScroll() {
+				if (this.loadingMore || this.loadedEnd) return
+				this.pageNum++
+				this.getDeviceMonitors(this.pageNum)
+				this.loadingMore = true
+			},
+			init(){
+				self = this;
+				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+				if (USER_INFO) {
+					self.id = USER_INFO.id
+					self.type = USER_INFO.userType
+				}
+			}
     }
   }
 </script>
