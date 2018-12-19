@@ -9,7 +9,7 @@
 					<a href="/personal-information/" class="item-link">
 						<div class="item-content" style="background-color:#E94E24;">
 							<div class="item-media">
-								<img src='http://img2.imgtn.bdimg.com/it/u=1932439000,2358402856&fm=26&gp=0.jpg' style="max-width:80px;max-height:800px;border-radius:50%">
+								<img src='http://img2.imgtn.bdimg.com/it/u=1932439000,2358402856&fm=26&gp=0.jpg' style="max-width:80px;max-height:800px;border-radius:50%;">
 								<i class="icon fa fa-opencart bg-red color-white align-center" style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
 							</div>
 							<div class="item-inner">
@@ -100,71 +100,71 @@ export default {
 		height: 50px;
 	}
 
-	.center {
-		width: 100%;
-		height: 50px;
-		line-height: 50px;
-		font-size: 18px;
-		color: white;
-		font-family: 微软雅黑;
-		background: #E94E24;
-		text-align: center;
-	}
+  .center {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    color: white;
+    font-family: 微软雅黑;
+    background: #E94E24;
+    text-align: center;
+  }
 
-	.center-1 {
-		width: 100%;
-		height: 80px;
-		margin-top: -32px;
-		display: flex;
-		margin-bottom: -1px;
-	}
+  .center-1 {
+    width: 100%;
+    height: 80px;
+    margin-top: -18px;
+    display: flex;
+    margin-bottom: -1px;
+  }
 
-	.center-item {
-		width: 34%;
-		height: 80px;
-		border-right: 1px solid #CDCDCD;
-		text-align: center;
+  .center-item {
+    width: 34%;
+    height: 80px;
+    text-align: center;
 
-	}
+  }
 
-	.center-item-1 {
-		width: 34%;
-		height: 80px;
-		text-align: center;
+  .center-item-1 {
+    width: 34%;
+    height: 80px;
+    text-align: center;
 
-	}
+  }
 
-	.center-item-image {
-		width: 40px;
-		height: 40px;
-		margin: 5px auto;
-	}
+  .center-item-image {
+    width: 40px;
+    height: 40px;
+    margin: 5px auto;
+  }
 
-	.center-item-image img {
-		width: 32px;
-		height: 32px;
-	}
+  .center-item-image img {
+    width: 32px;
+    height: 32px;
+  }
 
-	.center-item-title {
-		width: 100%;
-		color: black;
-		margin-top: 5px;
-	}
+  .center-item-title {
+    width: 100%;
+    color: black;
+    font-size: smaller;
+    margin-top: -7px;
+  }
 
-	.jump-list {
-		list-style: none;
-		border: 1px solid #E9E9E9;
-	}
+  .jump-list {
+    list-style: none;
+    border: 1px solid #E9E9E9;
+  }
 
-	.jump-list-title {
-		margin-left: 30px;
-	}
+  .jump-list-title {
+    margin-left: 30px;
+  }
 
-	.jump-list img {
-		width: 15px;
-		height: 15px;
-		position: fixed;
-		margin-top: 14px;
-		margin-left: 15px;
-	}
+  .jump-list img {
+    width: 15px;
+    height: 15px;
+    position: fixed;
+    margin-top: 16px;
+    margin-left: 15px;
+  }
 </style>

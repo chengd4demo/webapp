@@ -1,12 +1,18 @@
 <template>
-  <f7-page>
+  <f7-page
+    ptr
+    infinite
+    infinite :infinite-distance="50"
+    :infinite-preloader="showPreloader"
+    @ptr:refresh="onRefresh"
+    @infinite="onInfiniteScroll">
     <f7-navbar class="header-title" title="使用记录" back-link="" style="background: #E94E24 !important;"></f7-navbar>
-    <div class="record-list" v-for="(item,index) in deviceMonitorList" :key="index">
+    <div class="record-list" v-for="(item,index) in recordList" :key="index">
       <p class="record-list-p">使用时间：{{item.usedate}}</p>
       <p class="record-list-p">使用时长：{{item.costtime}}小时</p>
       <p class="record-list-p">计费金额：{{item.unitprice}}元</p>
       <div class="record-list-map">
-        <img src="../img/map.png"><i>{{item.address}}</i>
+        <img src="../img/map.png" style="vertical-align: middle"><i>{{item.address}}</i>
       </div>
     </div>
 
@@ -30,8 +36,8 @@
     margin-left: 15px;
   }
   .record-list-map img{
-    width: 15px;
-    height: 15px;
+    width: 13px;
+    height: 13px;
   }
   .record-list-map i{
     margin-left: 5px;
@@ -47,7 +53,10 @@ import api from '../network'
       return {
         pageNum:1,
         loading:false,
-        deviceMonitorList:[]
+        loadingMore:false,
+        loadedEnd:false,
+        showPreloader:true,
+        recordList:[]
       }
     },
     created(){
@@ -71,19 +80,41 @@ import api from '../network'
         }).then(function(res){
           var data = res.data.data;
           data.forEach(function(value, index, array){
-            self.deviceMonitorList.push(value)
+            self.recordList.push(value)
           })
-          if(res.list.length < 30){
+          console.log(data.length)
+          if(data.length < 30){
             self.loading = true
+            self.loadingMore = true
+            self.loadedEnd = true
+            self.showPreloader = false
             return;
           }
           self.loading = false
+          self.loadingMore = false
         }).catch(function(err){
           console.log(err+'sss')
         })
       },
       getDeviceHref(val){
         return '/monitor/machno/' + val + '/';
+      },
+      onRefresh(event,done){
+        var self = this
+        setTimeout(() => {
+          self.recordList = []
+          self.pageNum = 1
+          self.getDeviceMonitors(self.pageNum)
+          done();
+          this.loadedEnd = false
+          self.showPreloader = true
+        },1000)
+      },
+      onInfiniteScroll(){
+        if (this.loadingMore || this.loadedEnd) return
+        this.pageNum++
+        this.getDeviceMonitors(this.pageNum)
+        this.loadingMore = true
       }
     }
   }

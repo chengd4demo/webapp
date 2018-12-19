@@ -92,6 +92,7 @@
 </script>
 <style type="text/css">
 .header{
+
   width: 100%;
   height: 200px;
   text-align: center;
