@@ -7,44 +7,56 @@
     @ptr:refresh="onRefresh"
     @infinite="onInfiniteScroll">
     <f7-navbar class="header-title" title="使用记录" back-link="" style="background: #E94E24 !important;"></f7-navbar>
-    <div class="record-list" v-for="(item,index) in recordList" :key="index">
-      <p class="record-list-p">使用时间：{{item.usedate}}</p>
-      <p class="record-list-p">使用时长：{{item.costtime}}小时</p>
-      <p class="record-list-p">计费金额：{{item.unitprice}}元</p>
-      <div class="record-list-map">
-        <img src="../img/map.png" style="vertical-align: middle"><i>{{item.address}}</i>
+    <div class="mv-2">
+      <div class="mv-3" v-for="(item,index) in recordList" :key="index">
+        <dl>
+          <dd>使用时间：{{item.usedate}}</dd>
+          <dd>使用时长：{{item.costtime}}小时</dd>
+          <dd>计费金额：{{item.unitprice}}元</dd>
+          <dd><img src="../img/map.png" style="vertical-align: middle"><i>{{item.address}}</i></dd>
+        </dl>
       </div>
     </div>
 
   </f7-page>
 </template>
 <style>
-  .header-title{
-    background: #F5422E;
+  dd{
+    font-size: 12px;
+    line-height: 25px;
+		word-break:keep-all;/* 不换行 */
+		white-space:nowrap;/* 不换行 */
+		overflow:hidden;/* 内容超出宽度时隐藏超出部分的内容 */
+		text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
   }
-  .record-list{
-    width: 95%;
-    height: 150px;
-    padding-top: 2px;
-    margin: 10px auto;
-    background: #EFE8E8;
+  dl{
+    margin-left: -40px;
   }
-  .record-list-p{
-    margin-left: 10px;
+  .mv-2{
+    width: 100%;
+    margin:10px auto;
   }
-  .record-list-map{
-    margin-left: 15px;
+  .mv-3{
+    width: 90%;
+    margin: 0px auto;
+    text-indent: 10px;
+    background: #EEEDED
   }
-  .record-list-map img{
+  .mv-3 dl dd img{
     width: 13px;
     height: 13px;
   }
-  .record-list-map i{
+  .mv-3 dl dd i{
     margin-left: 5px;
     font-size: 12px;
     font-style:normal;
     color: #8A8989;
   }
+
+  .header-title{
+    background: #F5422E;
+  }
+  
 </style>
 <script>
 import api from '../network'
@@ -82,7 +94,6 @@ import api from '../network'
           data.forEach(function(value, index, array){
             self.recordList.push(value)
           })
-          console.log(data.length)
           if(data.length < 30){
             self.loading = true
             self.loadingMore = true
