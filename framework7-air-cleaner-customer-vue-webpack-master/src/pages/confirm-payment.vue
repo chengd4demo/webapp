@@ -60,7 +60,7 @@
     },
     methods:{
       pay() {
-        
+        api.updateSelfInfo()
       }
     }
   }

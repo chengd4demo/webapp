@@ -8,27 +8,27 @@
 		<div>
 			<form>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-					<input type="number" v-model= "admin.phoneNumber" placeholder="输入手机号码" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
+					<input type="number" v-model= "admin.phoneNumber" placeholder="输入手机号码" @keyup = "keyDown()" oninput="if(value.length>11)value=value.slice(0,11)"   style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
 					<span style="width:70%;float: left;">
-						<input type="number" v-model="admin.verificationCode" placeholder="输入验证码" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
+						<input id="phone" type="number" v-model="admin.verificationCode" @keyup = "keyDown()" placeholder="输入验证码" oninput="if(value.length>6)value=value.slice(0,6)" style="height: 44px; line-height: 44px;  text-indent: 10px;"/>
 					</span>
 					<span style="width: 30%; ">
 						<a href="#" id="code" @click="countDown" class="button button-fill" :class="{disabled: !this.canClick}"
 						no-fast-click style="margin:0 auto;background:#e94e24;disable:disable;height: 44px; line-height:44px;">{{content}}</a>
 					</span>
 				</div>
-				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;">
-					<span style="width:7%;float: left;text-align: left;">
-						<input type="checkbox" name="my-checkbox" value="2"  style="height: 38px; line-height: 40px; "/>
-					</span>
+				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;" >
+					<label for="label" style="width:7%;float: left;text-align: left;"  @change="keyDown()">
+						<input type="checkbox" checked  v-model="checkBox"  style="height: 38px; line-height: 40px; "/>
+					</label>
 					<span style="width: 93%; ">
 						<a href="#">我已阅读,并同意《用户注册协议》</a>
 					</span>
 				</div>
 				<div style="width: 100%; margin-top: 20px;">
-					<a class="button button-fill" @click="loginBtn()" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">验证手机</a>
+					<a class="button button-fill " :class="{disabled: this.canInput}"  @click="loginBtn()" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">验证手机</a>
 				</div>
 			</form>
 		</div>
@@ -93,6 +93,8 @@
 				totalTime: 60,
 				canClick: true,
 				smsCode:'',
+				canInput:true,
+				checkBox:false,
 				admin: {
 					weixin:'aerstdyui',
 					verificationCode:'',
@@ -135,6 +137,14 @@
 				}).catch(err =>{
 					alert('服务器繁忙')
 				})
+			},
+			keyDown(){
+				console.log(this.checkBox)
+				if (this.admin.phoneNumber !=="" && this.admin.verificationCode!=="" && this.checkBox) {
+					this.canInput = false
+				} else {
+					this.canInput = true;
+				}
 			}
 		}
 	}
