@@ -4,7 +4,6 @@
 			<img src="../img/img2039716589809cc0.png">
 			<p>圈兔圈共享空气净化器</p>
 		</div>
-		</div>
 		<div>
 			<form>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
@@ -24,7 +23,7 @@
 						<input type="checkbox" checked  v-model="checkBox"  style="height: 38px; line-height: 40px; "/>
 					</label>
 					<span style="width: 93%; ">
-						<a href="#">我已阅读,并同意《用户注册协议》</a>
+						<f7-button style="height: 44px; line-height: 44px; text-align: left;" popup-open=" #popup" class="about-div">我已阅读,并同意《用户注册协议》</f7-button>
 					</span>
 				</div>
 				<div style="width: 100%; margin-top: 20px;">

@@ -1,7 +1,7 @@
 <!-- center Page Template -->
 <template id="page-state">
 
-  <f7-page>
+  <f7-page class="no-navbar">
     <div class="center">提示</div>
     <div class="cancel">
       <div class="img-1">

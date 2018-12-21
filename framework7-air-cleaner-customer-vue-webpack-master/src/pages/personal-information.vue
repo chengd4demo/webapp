@@ -5,21 +5,28 @@
     <f7-navbar class="header-title" title="个人信息设置" back-link="" style="background: #E94E24 !important;"></f7-navbar>
     <f7-list form id='personinfo'>
       <input type="hidden" v-model = "weixin" name = "weixin"/>
-      <div class="list inline-labels no-hairlines-md">
-        <li class="item-content  item-input">
-            <div class="item-title label person" style="width: 35px;">姓名</div>
-            <div class="item-input-wrap" style="width: 100%">
-              <input type="text" v-model = "name"  disabled ='true'>
+      <div class="list no-hairlines-md">
+        <ul>
+          <!--姓名-->
+          <li class="item-content item-input item-input-with-info">
+            <div class="item-inner">
+              <div class="item-title item-label">姓名</div>
+              <div class="item-input-wrap">
+                <input type="text" v-model = "name"  disabled ='true' placeholder="请输入姓名" required validate>
+              </div>
             </div>
-
-        </li>
-        <li class="item-content item-input">
-            <div class="item-title label person" style="width: 35px;">年龄</div>
-            <div class="item-input-wrap">
-              <input type="text" v-model = "age" placeholder="请输入年龄" disabled ='true' validate pattern="^([0-9]|[0-9]{2}|120)$" data-error-message="请输入正确的年龄范围">
+          </li>
+          <!--年龄-->
+          <li class="item-content item-input item-input-with-info">
+            <div class="item-inner">
+              <div class="item-title item-label">年龄</div>
+              <div class="item-input-wrap">
+                <input type="text" v-model = "age" placeholder="请输入年龄" disabled ='true' pattern="^([0-9]|[0-9]{2}|120)$" data-error-message="请输入正确的年龄范围" required validate>
+              </div>
             </div>
-        </li>
-        <li class="item-content item-input">
+          </li>
+          <!--性别-->
+          <li class="item-content item-input item-input-with-info">
             <div class="item-title label person" style="width: 35px;">性别</div>
             <div class="item-input-wrap" style="min-height:0px">
               <label class="label-switch" style="margin-left: 20px;">
@@ -31,27 +38,35 @@
                 <div class="radio">女</div>
               </label>
             </div>
-        </li>
-        <li class="item-content item-input">
-          <div class="item-title label person" style="width: 35px;" maxlength= "15" >昵称</div>
-          <div class="item-input-wrap" style="width: 100%">
-            <input type="text" v-model = "nickName" name="nickName" placeholder="请输入昵称">
-            <span class="input-clear-button"></span>
-          </div>
-        </li>
-        <li class="item-content item-input">
-          <div class="item-title label person" style="width: 35px;">生日</div>
-          <div class="item-input-wrap" style="width: 100%">
-            <input type="date" value="2014-04-30" placeholder="Please choose...">
-          </div>
-        </li>
-        <li class="item-content  item-input">
-          <div class="item-title label person" style="width: 78px;">身份证号码</div>
-          <div class="item-input-wrap" style="width: 100%">
-            <input type="text" v-model = "identificationNumber" name="identificationNumber" placeholder="请输入身份证号码" maxlength= "18" required validate  >
-            <span class="input-clear-button"></span>
-          </div>
-        </li>
+          </li>
+          <!--昵称-->
+          <li class="item-content item-input item-input-with-info">
+            <div class="item-inner">
+              <div class="item-title item-label">昵称</div>
+              <div class="item-input-wrap">
+                <input type="text" v-model = "nickName" name="nickName" placeholder="请输入昵称">
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </li>
+          <!--生日-->
+          <li class="item-content item-input item-input-with-info">
+            <div class="item-title label person" style="width: 35px;">生日</div>
+            <div class="item-input-wrap" style="width: 100%">
+              <input type="date" value="2014-04-30" placeholder="Please choose...">
+            </div>
+          </li>
+          <!--身份证-->
+          <li class="item-content item-input item-input-with-info">
+            <div class="item-inner">
+              <div class="item-title item-label">身份证号码</div>
+              <div class="item-input-wrap">
+                <input type="text" v-model = "identificationNumber" name="identificationNumber" placeholder="请输入身份证号码" maxlength= "18" required validate>
+                <span class="input-clear-button"></span>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
       <p><a @click="submitBtn()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">提交</a></p>
     </f7-list>
