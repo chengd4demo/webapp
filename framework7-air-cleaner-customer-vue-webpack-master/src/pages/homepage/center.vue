@@ -25,50 +25,76 @@
 			</ul>
 
 		</f7-list>
-		<f7-row>
-			<div class="center-1">
-				<div class="center-item">
-					<div class="center-item-image">
-						<img src="../../img/msg.png">
-					</div>
-					<div class="center-item-title">消息</div>
-				</div>
-				<div class="center-item">
-					<a href="/equipment-list/">
-						<div class="center-item-image">
-							<img src="../../img/shebei.png">
-						</div>
-						<div class="center-item-title">设备监控</div>
-					</a>
-				</div>
-				<div class="center-item-1">
-					<a href="/record/">
-						<div class="center-item-image">
-							<img src="../../img/zb.png">
-						</div>
-						<div class="center-item-title">使用记录</div>
-					</a>
-				</div>
-			</div>
-		</f7-row>
-		<f7-list media-list class="no-margin-v" style="margin-top:1px ;;">
+    <f7-row>
+      <div class="center-1">
+        <div class="center-item">
+            <div class="center-item-image "><img src="../../img/msg.png" style="max-height: 32px;max-width: 32px"></div>
+            <div class="center-item-title">消息</div>
+        </div>
+        <div class="center-item">
+          <a style="color: #000" href="/equipment-list/">
+            <div class="center-item-image"><img src="../../img/shebei.png" style="max-height: 32px;max-width: 32px"></div>
+            <div class="center-item-title">设备监控</div>
+          </a>
+        </div>
+        <div class="center-item-last">
+          <a style="color: #000" href="/record/">
+            <div class="center-item-image"><img src="../../img/zb.png" style="max-height: 32px;max-width: 32px"></div>
+            <div class="center-item-title">使用记录</div>
+          </a>
+        </div>
+      </div>
+    </f7-row>
+    <f7-list media-list class="no-margin-v" style="margin-top:1px">
 
-			<div class="jump-list"><img src="../../img/youhuijuan.png">
-				<f7-list-item class="jump-list-title" link="/center/" title="优惠"></f7-list-item>
-			</div>
-			<div class="jump-list"><img src="../../img/kehu.png">
-				<f7-list-item class="jump-list-title" link="/center/" title="在线客服"></f7-list-item>
-			</div>
-			<div class="jump-list"><img src="../../img/map.png">
-				<f7-list-item class="jump-list-title" link="/center/" title="地图"></f7-list-item>
-			</div>
-			<div class="jump-list"><img src="../../img/dizhi.png">
-				<f7-list-item class="jump-list-title" link="#" title="地址管理"></f7-list-item>
-			</div>
-			<div class="jump-list"><img src="../../img/jiangping.png">
-				<f7-list-item class="jump-list-title" link="/center/" title="我的奖品"></f7-list-item>
-			</div>
-		</f7-list>
+      <ul>
+        <li class="media-item"><a href="#" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../../img/youhuijuan.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;优惠</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="#" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../../img/kehu.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;在线客服</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="#" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../../img/map.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;地图</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="#" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../../img/dizhi.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;地址管理</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+        <li class="media-item"><a href="#" class="item-link">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../../img/jiangping.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;我的奖品</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
+      </ul>
+    </f7-list>
 	</f7-page>
 </template>
 <script>
@@ -85,20 +111,22 @@ export default {
 		if (USER_INFO){
 		 self.nickName = USER_INFO.name
 		}
-		
+
 	},
 }
 </script>
 <style type="text/css">
-	.ios .media-list .item-title,
-	.ios li.media-item .item-title {
-		font-weight: normal;
-	}
+  img {
+    width: 50px;
+    height: 50px;
+  }
 
-	img {
-		width: 50px;
-		height: 50px;
-	}
+  .ios .media-list .item-title,
+  .ios li.media-item .item-title {
+    font-weight: normal;
+    font-size: 14px;
+    color: #111;
+  }
 
   .center {
     width: 100%;
@@ -114,57 +142,35 @@ export default {
   .center-1 {
     width: 100%;
     height: 80px;
-    margin-top: -18px;
+    margin-top: -28px;
     display: flex;
-    margin-bottom: -1px;
+    background: gray;
   }
 
   .center-item {
     width: 34%;
     height: 80px;
     text-align: center;
-
+    background: white;
+    border-right: 1px solid #CDCDCD;
   }
 
-  .center-item-1 {
+  .center-item-last {
     width: 34%;
     height: 80px;
     text-align: center;
-
+    background: white;
+    border: none
   }
 
   .center-item-image {
     width: 40px;
     height: 40px;
     margin: 5px auto;
-  }
 
-  .center-item-image img {
-    width: 32px;
-    height: 32px;
   }
 
   .center-item-title {
     width: 100%;
-    color: black;
-    font-size: smaller;
-    margin-top: -7px;
-  }
-
-  .jump-list {
-    list-style: none;
-    border: 1px solid #E9E9E9;
-  }
-
-  .jump-list-title {
-    margin-left: 30px;
-  }
-
-  .jump-list img {
-    width: 15px;
-    height: 15px;
-    position: fixed;
-    margin-top: 16px;
-    margin-left: 15px;
   }
 </style>
