@@ -9,7 +9,7 @@ import PersonalInformationPage from './pages/personal-information.vue';
 import EquipmentListPage from './pages/equipment.vue';
 import MonitorPage from './pages/monitor.vue';
 import ConfirmPaymentPage from './pages/confirm-payment.vue';
-import StatePage from './pages/state.vue';
+import MsgPage from './pages/msg.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
 
@@ -56,8 +56,8 @@ export default [
     component:MonitorPage,
   },
   {
-    path:'/state/',
-    component:StatePage,
+    path:'/msg/',
+    component:MsgPage,
   },
   {
     path:'/price/machno/:machno',
