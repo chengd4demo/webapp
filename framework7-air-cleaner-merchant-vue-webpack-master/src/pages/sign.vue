@@ -1,5 +1,5 @@
 <template>
-	<f7-page>
+	<f7-page class="no-navbar">
 		<div style="width:100%;min-height:115px;margin-bottom:-35px;text-align:center;margin-top:20px;border-bottom: 1px solid #ececec;">
 			<div>
 				<img src="../img/img2039716589809cc0.png" style="width:auto;" />
@@ -10,11 +10,12 @@
 		</div>
 		<form style="margin-top:41px;">
 			<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-				<input type="number" v-model= "admin.phoneNumber" placeholder="输入手机号码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
+				<input type="number"  v-model="admin.phoneNumber" placeholder="输入手机号码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
 			</div>
 			<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
 				<span style="width:70%;float: left;">
-					<input type="number" v-model="admin.verificationCode" placeholder="输入验证码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
+					<!-- v-model="admin.verificationCode" -->
+					<input type="number" v-model="admin.verificationCode"  placeholder="输入验证码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
 				</span>
 				<span style="width: 30%; ">
 					<a href="#" id="code" @click="countDown" class="button button-fill" :class="{disabled: !this.canClick}"
@@ -33,7 +34,7 @@
 				</span>
 			</div>
 			<div style="width: 100%; margin-top: 20px;">
-				<a @click="loginBtn()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">验证手机</a>
+				<a  class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;" @click="loginBtn()">验证手机</a>
 			</div>
 		</form>
 	</f7-page>
@@ -58,10 +59,10 @@
 				canClick: true,
 				smsCode:'',
 				admin:{
-					identificationNumber:'',
+					identificationNumber:'51010319740426136X',
 					weixin:'oPmTlsjbuV49eGGacBxGK0kJjmFA',
-					verificationCode:'',
-					phoneNumber:'',
+					verificationCode:'666',
+					phoneNumber:'13926113495',
 				}
 			}
 		},
@@ -96,6 +97,7 @@
 						//localStorage.setItem(JSON.stringify(data))
 						localStorage.setItem('USER_INFO',JSON.stringify(data))
 						this.$f7router.back('/home/')
+						this.$f7router.url = '/home/'
 					}
 				}).catch(err =>{
 					alert('服务器繁忙')

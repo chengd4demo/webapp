@@ -1,73 +1,57 @@
 <template>
-  <f7-page ptr @ptr:refresh="loadMore">
-    <f7-navbar title="Pull To Refresh" back-link="Back"></f7-navbar>
-    <f7-list media-list>
-      <f7-list-item
-        v-for="(item, index) in items"
-        :key="index"
-        :title="item.title"
-        :subtitle="item.author">
-        <img slot="media" :src="item.cover" width="44" />
-      </f7-list-item>
+  <f7-page :page-content="false">
+    <f7-navbar title="提现记录" back-link=""></f7-navbar>
+    <f7-toolbar tabbar style="background:#FFF; box-shadow: -2px 0 3px -1px green">
+      <f7-link tab-link="#tab-1" tab-link-active text="已申请"></f7-link>
+      <f7-link tab-link="#tab-2" text="未领取"></f7-link>
+      <f7-link tab-link="#tab-3" text="已取消"></f7-link>
+			<f7-link tab-link="#tab-4" text="已完成"></f7-link>
+    </f7-toolbar>
 
-      <f7-block-footer>
-        <p>Just pull page down to let the magic happen.<br>Note that pull-to-refresh feature is optimised for touch and native scrolling so it may not work on desktop browser.</p>
-      </f7-block-footer>
-    </f7-list>
+    <f7-tabs>
+      <f7-tab id="tab-1" class="page-content" tab-active>
+        <f7-block>
+          <p>Tab 1 </p>
+        </f7-block>
+      </f7-tab>
+      <f7-tab id="tab-2" class="page-content">
+        <f7-block>
+          <p>Tab 2 </p>
+        </f7-block>
+      </f7-tab>
+      <f7-tab id="tab-3" class="page-content">
+        <f7-block>
+          <p>Tab 3 </p>
+        </f7-block>
+      </f7-tab>
+			<f7-tab id="tab-4" class="page-content">
+				<f7-block>
+					<p>Tab 4 </p>
+				</f7-block>
+			</f7-tab>
+    </f7-tabs>
   </f7-page>
 </template>
 <script>
-  import { f7Navbar, f7Page, f7List, f7ListItem, f7BlockFooter } from 'framework7-vue';
-
+  import { f7Navbar, f7Page, f7Block, f7Tabs, f7Tab, f7Link, f7Toolbar, f7NavRight } from 'framework7-vue';
   export default {
     components: {
-      f7Navbar,
-      f7Page,
-      f7List,
-      f7ListItem,
-      f7BlockFooter,
-    },
-    data() {
-      return {
-        items: [
-          {
-            title: 'Yellow Submarine',
-            author: 'Beatles',
-            cover: 'http://lorempixel.com/88/88/abstract/1',
-          },
-          {
-            title: 'Don\'t Stop Me Now',
-            author: 'Queen',
-            cover: 'http://lorempixel.com/88/88/abstract/2',
-          },
-          {
-            title: 'Billie Jean',
-            author: 'Michael Jackson',
-            cover: 'http://lorempixel.com/88/88/abstract/3',
-          },
-        ],
-        songs: ['Yellow Submarine', 'Don\'t Stop Me Now', 'Billie Jean', 'Californication'],
-        authors: ['Beatles', 'Queen', 'Michael Jackson', 'Red Hot Chili Peppers'],
-      };
+      f7Navbar, f7Page, f7Block, f7Tabs, f7Tab, f7Link, f7Toolbar, f7NavRight,
     },
     methods: {
-      loadMore(event, done) {
-        const self = this;
-
-        setTimeout(() => {
-          const picURL = `http://lorempixel.com/88/88/abstract/${Math.round(Math.random() * 10)}`;
-          const song = self.songs[Math.floor(Math.random() * self.songs.length)];
-          const author = self.authors[Math.floor(Math.random() * self.authors.length)];
-
-          self.items.push({
-            title: song,
-            author,
-            img: picURL,
-          });
-
-          done();
-        }, 1000);
-      },
+     /* toggleToolbarPosition() {
+        this.$$(this.$el).find('.toolbar, .tabbar').toggleClass('toolbar-bottom-md');
+      }, */
     },
   };
 </script>
+<style>
+	.ios .toolbar {
+    height: 44px;
+    font-size: 17px;
+    background: #f7f7f8;
+    top: 44px;
+}
+
+
+</style>

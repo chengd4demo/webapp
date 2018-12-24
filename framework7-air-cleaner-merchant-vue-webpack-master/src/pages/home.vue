@@ -1,7 +1,7 @@
 <!-- center Page Template -->
 <template id="page-center">
-	<f7-page class="no-navbar">
-		<div class="center">个人中心</div>
+	<f7-page >
+		<f7-navbar title="个人中心" style="background:#e94e24;"></f7-navbar>
 		<f7-list media-list class="no-margin-v" style="margin-top:1px">
 			<ul class="no-border-v">
 				<li>
@@ -14,7 +14,7 @@
 							<div class="item-inner" style="margin-top: -10px">
 								<div class="item-title">&nbsp;</div>
 								<div class="item-title-row">
-									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">{{name}}</div>
+									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">&nbsp;{{name}}</div>
 								</div>
 								<div class="item-subtitle item-title" style="margin-left:-55px;color:white">￥{{amount}}</div>
 								<!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
@@ -107,7 +107,7 @@
 			return{
 				type:'',
 				name:'圈兔网络',
-				amount:0,//可用余额
+				amount:8888,//可用余额
 			}
 		},
 		created() {
@@ -139,16 +139,7 @@
 		color: #111;
 	}
 
-	.center {
-		width: 100%;
-		height: 50px;
-		line-height: 50px;
-		font-size: 18px;
-		color: white;
-		font-family: 微软雅黑;
-		background: #E94E24;
-		text-align: center;
-	}
+	
 
 	.center-1 {
 		width: 100%;

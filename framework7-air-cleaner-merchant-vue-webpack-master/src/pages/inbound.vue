@@ -5,7 +5,7 @@
   :infinite-preloader="showPreloader" 
   @ptr:refresh="onRefresh" 
   @infinite="onInfiniteScroll">
-    <f7-navbar title="收入明细" back-link="" style="background:#e94e24;"></f7-navbar>
+    <f7-navbar title="收入明细" back-link=""></f7-navbar>
   <div class="mv-2">
     <div class="mv-3" v-for="(item, index) in inboundsList" :key="index">
       <dl>
@@ -14,7 +14,7 @@
         <dd>计费金额：<span>{{item.unitPrice}}元</span></dd>
 				<dd>分润金额：<span>{{item.amount}}元</span></dd>
         <dd>商户类型：<span>{{item.type}}</span></dd>
-        <dd v-if="item.type !='商户'">商户地址：<span>{{item.address}}</span></dd>
+        <dd v-if="item.type !='商户'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
       </dl>
     </div>
   </div>
@@ -112,5 +112,17 @@
     text-indent: 10px;
     background: #EEEDED
   }
+	.mv-3 dl dd img{
+    width: 13px;
+    height: 13px;
+		vertical-align: middle;
+  }
+  .mv-3 dl dd span{
+    margin-left: 5px;
+    font-size: 12px;
+    font-style:normal;
+    color: #8A8989;
+  }
+
 
 </style>
