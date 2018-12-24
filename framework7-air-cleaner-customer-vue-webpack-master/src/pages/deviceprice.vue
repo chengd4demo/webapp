@@ -25,27 +25,6 @@
           </div>
         </a>
       </div>
-        <!--<a href="/confirm-payment/"><div class="price-item1" >
-          <div class="price-time">2小时</div>
-          <div class="price-value">
-            <div class="price"><em>¥</em>6</div>
-            <div class="del-price"><em>¥</em>8</div>
-          </div>
-        </div></a>
-          <a href="/confirm-payment/"><div class="price-item1" >
-          <div class="price-time">4小时</div>
-          <div class="price-value">
-            <div class="price"><em>¥</em>10</div>
-            <div class="del-price"><em>¥</em>12</div>
-          </div>
-        </div></a>
-            <a href="/confirm-payment/"><div class="price-item1" >
-          <div class="price-time">12小时</div>
-          <div class="price-value">
-            <div class="price"><em>¥</em>20</div>
-            <div class="del-price"><em>¥</em>24</div>
-          </div>
-        </div></a>-->
       </div>
     </f7-page>
 </template>
