@@ -23,7 +23,7 @@
 						<input type="checkbox" checked  v-model="checkBox"  style="height: 38px; line-height: 40px; "/>
 					</label>
 					<span style="width: 93%; ">
-						<f7-button style="height: 44px; line-height: 44px; text-align: left;" popup-open=" #popup" class="about-div">我已阅读,并同意《用户注册协议》</f7-button>
+						<f7-button style="height: 44px; line-height: 44px; color:#b9b9b9; text-align: left;border:0px;" popup-open=" #popup" class="about-div">我已阅读,并同意《用户注册协议》</f7-button>
 					</span>
 				</div>
 				<div style="width: 100%; margin-top: 20px;">
@@ -138,9 +138,10 @@
 				})
 			},
 			keyDown(){
-				console.log(this.checkBox)
 				if (this.admin.phoneNumber !=="" && this.admin.verificationCode!=="" && this.checkBox) {
 					this.canInput = false
+					//滚动到顶部
+					window.scrollTo(0, 0);
 				} else {
 					this.canInput = true;
 				}
