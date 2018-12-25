@@ -22,7 +22,7 @@
     <f7-popup id="popup">
       <f7-view>
         <f7-page class="no-navbar">
-          <f7-navbar style="background: #e94e24"title="用户注册协议">
+          <f7-navbar style="background: #e94e24" title="用户注册协议">
             <f7-nav-right>
               <f7-link popup-close>关闭</f7-link>
             </f7-nav-right>
@@ -138,3 +138,9 @@ export default {
   }
 }
 </script>
+<style>
+	.ios .navbar{
+		background:#E94E24;
+		color: #FFFFFF;
+	}
+</style>

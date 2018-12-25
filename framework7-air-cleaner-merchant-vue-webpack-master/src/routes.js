@@ -41,10 +41,6 @@ export default [
     component: AboutPage,
   },
   {
-    path:'/outbound/',
-    component:OutBoundPage,
-  },
-  {
     path: '/form/',
     component: FormPage,
   },
@@ -56,6 +52,10 @@ export default [
     path:'/inbound/',
     component:InboundPage,
   },
+	{
+		path:'/outbound/',
+		component:OutBoundPage,
+	},
   {
     path:'/device-management/traderId/:traderId/',
     component: DeviceManagementPage,
@@ -81,7 +81,7 @@ export default [
     component:SetPasswordPage,
   },
   {
-    path:'/cash/',
+    path:'/cash/availableAmount/:availableAmount/totalAcmount/:totalAcmount',
     component:CashPage,
   },
   {
