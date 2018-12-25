@@ -1,6 +1,6 @@
 <template>
   <f7-page>
-    <f7-navbar title="个人信息设置" back-link=""></f7-navbar>
+    <f7-navbar title="个人信息设置" back-link="" style="background:#e94e24;"></f7-navbar>
     <f7-list form style="margin-top:1px">
       <f7-list-item>
         <f7-col>

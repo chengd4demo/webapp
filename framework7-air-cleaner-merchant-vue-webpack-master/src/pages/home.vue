@@ -40,7 +40,7 @@
 					</a>
 				</div>
 				<div class="center-item-last">
-					<a style="color: #000" href="/cash/">
+					<a style="color: #000" :href='getHref(amount,availableAmount)'>
 						<div class="center-item-image"><img src="../img/sqtx.png" style="max-height: 32px;max-width: 32px"></div>
 						<div class="center-item-title">申请提现</div>
 					</a>
@@ -102,12 +102,14 @@
 	</f7-page>
 </template>
 <script>
+	import api from "../network";
 	export default {
     data(){
 			return{
 				type:'',
 				name:'圈兔网络',
-				amount:8888,//可用余额
+				amount:0,//可用余额
+				availableAmount:0
 			}
 		},
 		created() {
@@ -116,13 +118,39 @@
 		},
 		methods:{
 			init(){
-				self = this;
+				const self = this;
 				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
 				if (USER_INFO) {
 					self.name = USER_INFO.name || USER_INFO.nickName
 					self.type = USER_INFO.userType
+					self.queryAccount(USER_INFO.weixin)
 				}
-			}
+				
+			},
+			queryAccount(params){
+				const self = this;
+				if(params)
+				api.queryAccount(params).then(res =>{
+					if(res.data.description === 'success') {
+						let data = res.data.data;
+						self.amount = data.totalAcmount
+						self.availableAmount = data.availableAmount
+					}
+				}).catch(err => {
+					
+				})				
+			},
+			alertMsg(msg){
+				let toastTop = this.$f7.toast.create({
+				  text: msg,
+				  position: 'top',
+				  closeTimeout: 1000,
+				})
+				toastTop.open();
+			},
+			getHref(amount,availableAmount) {
+				return '/cash/availableAmount/' + availableAmount + '/totalAcmount/' + amount+'/';
+			},
 		}
   }
 </script>

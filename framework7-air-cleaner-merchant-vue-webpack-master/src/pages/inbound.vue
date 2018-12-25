@@ -5,7 +5,7 @@
   :infinite-preloader="showPreloader" 
   @ptr:refresh="onRefresh" 
   @infinite="onInfiniteScroll">
-    <f7-navbar title="收入明细" back-link=""></f7-navbar>
+    <f7-navbar title="收入明细" back-link="" style="background:#e94e24;"></f7-navbar>
   <div class="mv-2">
     <div class="mv-3" v-for="(item, index) in inboundsList" :key="index">
       <dl>
