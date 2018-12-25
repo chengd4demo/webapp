@@ -12,7 +12,7 @@
             <div class="item-inner">
               <div class="item-title item-label" style="width: auto">姓名:</div>
               <div class="item-input-wrap">
-                <input type="text" v-model = "name"  disabled ='true' placeholder="请输入姓名" required validate>
+                <input type="text" v-model = "name"  placeholder="请输入姓名" maxlength="12" required validate>
               </div>
             </div>
           </li>
@@ -30,7 +30,7 @@
             <div class="item-inner">
               <div class="item-title item-label person" style="width: 37px;">性别:</div>
               <div class="item-input-wrap" style="min-height:0px">
-                <label class="label-switch" style="margin-left: 20px;">
+                <label class="label-switch">
                   <input type="radio" checked v-model = "sex" value="1" name="sex">
                   <div class="checkbox">男</div>
                 </label>
@@ -56,7 +56,7 @@
             <div class="item-inner">
               <div class="item-title item-label person" style="width:37px;;">生日:</div>
               <div class="item-input-wrap" style="width: 100%;">
-                <input class="input-data" type="date" value="2014-04-30" placeholder="请选择日期">
+                <input type="text" v-model = "birthday" disabled ='true'  placeholder="请选择日期">
               </div>
             </div>
           </li>
@@ -65,7 +65,7 @@
             <div class="item-inner">
               <div class="item-title item-label" style="width: auto">身份证号码:</div>
               <div class="item-input-wrap">
-                <input type="text" v-model = "identificationNumber" name="identificationNumber" placeholder="请输入身份证号码" pattern="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" data-error-message="请输入正确的身份证号码" required validate>
+                <input type="text" v-model = "identificationNumber"  @keyup ="keyDown()" name="identificationNumber" placeholder="请输入身份证号码" pattern="(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)" data-error-message="请输入正确的身份证号码" required validate>
                 <span class="input-clear-button"></span>
               </div>
             </div>
@@ -89,7 +89,8 @@
         nickName:'',
         age:0,
         sex:1,
-        weixin:''
+        weixin:'',
+        birthday:''
 			}
 		},
     created() {
@@ -105,6 +106,14 @@
           self.weixin=data.weixin
           self.sex = CommonUtils.getSex(self.identificationNumber)
           self.age = CommonUtils.getAge(self.identificationNumber)
+          self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
+          let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+          console.log(USER_INFO)
+          if (USER_INFO) {
+            self.weixin = USER_INFO.weixin
+          } else {
+            	self.alertMsg('验证失效，请重新认证')
+          }
       },
       submitBtn(){
          let toastTop = this.$f7.toast.create({})
@@ -126,6 +135,14 @@
           closeTimeout: 1000,
         })
         toastTop.open();
+      },
+      keyDown() {
+        const self = this;
+        if(self.identificationNumber.length == 15 || self.identificationNumber.length == 18) {
+           self.sex = CommonUtils.getSex(self.identificationNumber)
+           self.age = CommonUtils.getAge(self.identificationNumber)
+           self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
+        }
       }
     }
   }

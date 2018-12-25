@@ -30,7 +30,6 @@ const CommonUtils = {
     },
     getSex(identityCard) {
         var len = (identityCard + "").length;
-        console.log('123');
         if (len == 0) {
             return 1;
         } else {
@@ -41,6 +40,18 @@ const CommonUtils = {
         }
         var gender = identityCard.slice(14, 17) % 2 ? "1" : "2"; // 1代表男性，2代表女性
         return gender === "1" ? 1 : 2
+    },
+    getBirthDay(idCard) {
+        var birthday = "";  
+        if (idCard != null && idCard != ""){  
+            if(idCard.length == 15){  
+                birthday = "19"+idCard.substr(6,6);  
+            } else if(idCard.length == 18){  
+                birthday = idCard.substr(6,8);  
+            }  
+            birthday = birthday.replace(/(.{4})(.{2})/,"$1-$2-");  
+        }  
+        return birthday;
     }
 }
 
