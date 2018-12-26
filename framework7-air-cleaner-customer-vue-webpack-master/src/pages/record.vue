@@ -2,7 +2,7 @@
   <f7-page
     ptr
     infinite
-    infinite :infinite-distance="50"
+    infinite:infinite-distance="50"
     :infinite-preloader="showPreloader"
     @ptr:refresh="onRefresh"
     @infinite="onInfiniteScroll">

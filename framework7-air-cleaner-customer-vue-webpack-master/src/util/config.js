@@ -25,7 +25,7 @@ const wxConfig = {
 
 const confirmPayment = {
 		realPrice:0,
-		machNo:'-',
+		deviceSequence:'-',
 		available:false,
 		onLine:false,
 		costTime:0,

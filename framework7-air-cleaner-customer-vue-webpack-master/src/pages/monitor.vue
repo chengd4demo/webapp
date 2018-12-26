@@ -11,8 +11,8 @@
     <div class="running-state">
       <table>
         <tr>
-          <td>设备号:</td>
-          <td><span class="span">{{machNo}}</span></td>
+          <td>设备序列号:</td>
+          <td><span class="span">{{deviceSequence}}</span></td>
         </tr>
         <tr>
           <td>设备运行状态:</td>
@@ -37,6 +37,7 @@
     data() {
       return {
         machNo:this.$f7route.params.machno,
+        deviceSequence:this.$f7route.params.devicesequence,
         costTime:'-',
         lastTime:'-',
         deviceState:'-'
@@ -59,7 +60,7 @@
         })
       },
       getPriceHref(){
-        return '/price/machno/' + this.machNo + '/';
+        return '/price/machno/' + this.machNo + '/devicesequence/' + this.deviceSequence + '/';
       }
     }
   }

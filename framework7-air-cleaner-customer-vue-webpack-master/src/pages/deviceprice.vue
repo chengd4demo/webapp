@@ -35,13 +35,14 @@
     data(){
       return {
         machNo: this.$f7route.params.machno,
+        deviceSequence:this.$f7route.params.devicesequence,
         priceList:[],
         priceObj:{}
       }
     },
     created() {
       const self = this;
-      self.queryPriceList(self.machNo);
+      self.queryPriceList(self.deviceSequence);
     },
     methods:{
       queryPriceList(params){
@@ -60,7 +61,7 @@
          if(this.priceList.length!=0) {
              config.confirmPayment.realPrice = this.priceList[index].realPrice;
              config.confirmPayment.costTime = this.priceList[index].costTime;
-             config.confirmPayment.machNo = this.machNo;
+             config.confirmPayment.deviceSequence = this.deviceSequence;
              config.confirmPayment.available = this.priceObj.available;
              config.confirmPayment.onLine = this.priceObj.onLine;
              config.confirmPayment.pm25 = this.priceObj.pm25;

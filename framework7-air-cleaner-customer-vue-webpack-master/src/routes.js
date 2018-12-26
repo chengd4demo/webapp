@@ -52,7 +52,7 @@ export default [
     component: EquipmentListPage,
   },
   {
-    path:'/monitor/machno/:machno/',
+    path:'/monitor/machno/:machno/devicesequence/:devicesequence',
     component:MonitorPage,
   },
   {
@@ -60,7 +60,7 @@ export default [
     component:MsgPage,
   },
   {
-    path:'/price/machno/:machno',
+    path:'/price/machno/:machno/devicesequence/:devicesequence/',
     component:DevicePrice,
   },
   {

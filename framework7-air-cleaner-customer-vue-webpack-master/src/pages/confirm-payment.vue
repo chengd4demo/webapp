@@ -11,8 +11,8 @@
     <div class="confirm-state">
       <table>
         <tr>
-          <td>设备号:</td>
-          <td><span class="span-1">{{machNo}}</span></td>
+          <td>设备序列号:</td>
+          <td><span class="span-1">{{deviceSequence}}</span></td>
         </tr>
         <tr>
           <td>是否在线:</td>
@@ -51,7 +51,7 @@
       return {
         realPrice: config.confirmPayment.realPrice,
         pm25: config.confirmPayment.pm25,
-        machNo: config.confirmPayment.machNo,
+        deviceSequence: config.confirmPayment.deviceSequence,
         costTime: config.confirmPayment.costTime,
         available: config.confirmPayment.available,
         onLine:  config.confirmPayment.onLine,

@@ -3,16 +3,16 @@
     <f7-page 
       ptr
       infinite
-      infinite :infinite-distance="50"
+      infinite:infinite-distance="50"
       :infinite-preloader="showPreloader"
       @ptr:refresh="onRefresh"
       @infinite="onInfiniteScroll">
       <f7-navbar class="header-title" title="设备列表" back-link="" style="background: #E94E24 !important;"></f7-navbar>
       <f7-list media-list class="no-margin-v" style="margin:0 auto;">
         <div class="butom-border" style="background-color:white;" v-for="(item, index) in deviceMonitorList" :key="index">
-          <a :href="getDeviceHref(item.machno,)" class="item-link">
+          <a :href="getDeviceHref(item.machno,item.devicesequence)" class="item-link">
             <div class="item-inner">
-                <div class="item-number">设备编号:{{item.machno}}</div>
+                <div class="item-number">设备序列号:{{item.devicesequence}}</div>
                 <div class="item-title-row">
                   <div class="item-remainingTime">剩余时长:{{item.lasttime}}小时</div>
                 </div>
@@ -74,8 +74,8 @@ import api from '../network'
         console.log(err+'sss')
       })
     },
-    getDeviceHref(val){
-      return '/monitor/machno/' + val + '/';
+    getDeviceHref(machNo,deviceSequence){
+      return '/monitor/machno/' + machNo + '/deviceSequence/' + deviceSequence + '/';
     },
     onRefresh(event,done){
       var self = this
