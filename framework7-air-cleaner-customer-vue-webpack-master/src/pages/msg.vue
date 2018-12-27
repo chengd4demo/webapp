@@ -11,8 +11,8 @@
         <div class="message-success">恭喜，支付成功</div>
         <table>
           <tr>
-            <td>设备号:</td>
-            <td><span class="span">{{machNo}}</span></td>
+            <td>设备序列号:</td>
+            <td><span class="span">{{deviceSequence}}</span></td>
           </tr>
           <tr>
             <td>时长:</td>
@@ -39,7 +39,7 @@
     data(){
       return {
         realPrice: config.confirmPayment.realPrice,
-        machNo: config.confirmPayment.machNo,
+        deviceSequence: config.confirmPayment.deviceSequence,
         costTime: config.confirmPayment.costTime,
         yhj:false
       }
