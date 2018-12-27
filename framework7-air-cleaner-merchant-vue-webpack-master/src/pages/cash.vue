@@ -3,11 +3,11 @@
 		<f7-navbar title="提现申请" back-link="" style="background:#e94e24;"></f7-navbar>
 		<div style="min-height:15%; margin-top:20px;margin-bottom:20px;margin-left:auto;margin-right:auto;border-bottom:1px solid #e0e0e0">
 			<div class="row" style="margin-left:50px">
-				<div class="col-auto" style="text-indent: 15px;">当前账户余额：￥1000.00</div>
+				<div class="col-auto" style="text-indent: 15px;">当前账户余额：¥{{totalAcmount}}</div>
 				<div class="col-auto"></div>
 			</div>
 			<div class="row" style="margin-left:50px;margin-top:15px">
-				<div class="col-auto" style="text-indent: 29px;">可提现余额：￥1000.00</div>
+				<div class="col-auto" style="text-indent: 29px;">可提现余额：¥{{availableAmount}}</div>
 				<div class="col-auto"></div>
 			</div>
 		</div>
@@ -26,7 +26,14 @@
 	</f7-page>
 </template>
 <script>
-	export default {}
+	export default {
+		data(){
+			return {
+				availableAmount:this.$f7route.params.availableAmount | 0,
+				totalAcmount:this.$f7route.params.totalAcmount | 0,
+			}
+		}
+	}
 </script>
 <style>
 	.demok3_lable {

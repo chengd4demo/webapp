@@ -13,7 +13,7 @@
 					<span v-if="item.devicestate == '正在使用'" style="color: #00d449;float: right;margin-right: 10px;">{{item.devicestate}}</span>
 					<span v-else style="color: #D2190B;float: right;margin-right: 10px;">{{item.devicestate}}</span>
 					</dd>
-          <dd>设备标号：{{item.machno}}</dd>
+          <dd>设备编号：{{item.machno}}</dd>
           <dd>使用时间：<span>{{item.usedate}}</span></dd>
           <dd>使用时长：<span>{{item.costtime}}小时</span></dd>
           <dd>剩余时长：<span>{{item.lasttime}}小时</span></dd>
@@ -58,7 +58,7 @@
         getDeviceMonitors(num){
           var self = this;
           var pageNum = num||1;
-          var pageSize = 30;
+          var pageSize = 2;
 					if (self.beforRout.foo == 'trader') {	//判断路由跳转
 					
 							api.queryDeviceMonitorPage({
