@@ -16,7 +16,7 @@
 								<div class="item-title-row">
 									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">&nbsp;{{name}}</div>
 								</div>
-								<div class="item-subtitle item-title" style="margin-left:-55px;color:white">￥{{amount}}</div>
+								<div id = 'amountId' class="item-subtitle item-title" style="margin-left:-55px;color:white">¥{{amount}}</div>
 								<!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
 							</div>
 						</div>
@@ -135,6 +135,14 @@
 						let data = res.data.data;
 						self.amount = data.totalAcmount
 						self.availableAmount = data.availableAmount
+						let num = 0;
+						var t = setInterval(function(){
+						   num++;
+							self.amount = num
+						   if(num==self.availableAmount){
+								clearInterval(t);
+						   }       
+						},1);
 					}
 				}).catch(err => {
 					
@@ -203,4 +211,11 @@
 	.center-item-title {
 		width: 100%;
 	}
+	
+	.ios .icon-back,
+  .ios .icon-prev {
+    width: 12px;
+    height: 20px;
+    background: url("data:image/svg+xml;charset=utf-8,%3Csvg%20width%3D'12'%20height%3D'20'%20viewBox%3D'0%200%2012%2020'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M.18261596%209.4221638c.0352203-.05148305.07573462-.10050698.1215468-.14631917L9.1425872.4374202c.5830904-.58309038%201.52656832-.5849888%202.11643872.00488163.5857864.58578644.591222%201.53009836.0048816%202.11643873L3.82594417%209.9967039l7.43188553%207.4318855c.5830904.5830904.5849888%201.5265683-.0048817%202.1164387-.5857864.5857865-1.5300983.591222-2.11643868.0048816L.2980849%2010.7114853c-.3526746-.3526746-.3939974-.89699-.11546894-1.2893215z'%20fill%3D'%23ffffff'%20fill-rule%3D'evenodd'%2F%3E%3C%2Fsvg%3E");
+  }
 </style>
