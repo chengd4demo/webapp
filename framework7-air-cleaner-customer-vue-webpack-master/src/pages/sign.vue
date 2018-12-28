@@ -127,11 +127,9 @@
 					weixin:this.admin.weixin
 				}).then(res => {
 					let data = res.data.data;
-					if(res.data.data){
-						//localStorage.setItem(JSON.stringify(data))
-						localStorage.setItem('USER_INFO',JSON.stringify(data))
-						this.$f7router.back('/center/')
-						this.$f7router.url = '/center/'
+					if (res.data.data){
+						localStorage.setItem('weixin',res.data.data.weixin)
+						this.$f7router.navigate('/center/')
 					}
 				}).catch(err =>{
 					alert('服务器繁忙')

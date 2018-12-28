@@ -2,7 +2,7 @@
 <template id="page-center">
 
   <f7-page>
-    <f7-navbar class="header-title" title="个人信息设置" back-link="" style="background: #E94E24 !important;"></f7-navbar>
+    <f7-navbar class="header-title" title="个人信息设置" back-link="" @click="$f7router.navigate('/center/')" style="background: #E94E24 !important;"></f7-navbar>
     <f7-list form id='personinfo' style="margin: auto">
       <input type="hidden" v-model = "weixin" name = "weixin"/>
       <div class="list inline-labels no-hairlines-md" style="margin: auto;">
@@ -12,7 +12,7 @@
             <div class="item-inner">
               <div class="item-title item-label" style="width: auto">姓名:</div>
               <div class="item-input-wrap">
-                <input type="text" v-model = "name"  placeholder="请输入姓名" maxlength="12" required validate>
+                <input type="text" v-model = "name" name="name" placeholder="请输入姓名" maxlength="12" required validate>
               </div>
             </div>
           </li>
@@ -104,7 +104,7 @@
           self.name = data.name
           self.identificationNumber = data.identificationNumber
           self.weixin=data.weixin
-          self.sex = CommonUtils.getSex(self.identificationNumber)
+          self.sex = data.sex||CommonUtils.getSex(self.identificationNumber)
           self.age = CommonUtils.getAge(self.identificationNumber)
           self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
           let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
@@ -121,6 +121,9 @@
            let data = res.data
            if (data.status=="200") {
              this.alertMsg('设置成功')
+             window.setTimeout(()=>{
+							this.$f7router.navigate('/center/')
+						},1000)
            } else {
              this.alertMsg('设置失败')
            }

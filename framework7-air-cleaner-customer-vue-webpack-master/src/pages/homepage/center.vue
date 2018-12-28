@@ -98,6 +98,7 @@
 	</f7-page>
 </template>
 <script>
+import api from '../../network'
 export default {
 	data(){
 		return {
@@ -106,13 +107,29 @@ export default {
 		}
 	},
 	mounted() {
-		self = this;
-		let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-		if (USER_INFO){
-		 self.nickName = USER_INFO.name
-		}
+    self = this
+    let weixin = localStorage.getItem('weixin') || ''
+    if (weixin) {
+      self.resarchUserInfo(weixin)
+    } else{
+       alert('网络连接超时')
+       return
+    }
+  },
+  methods :{
+    resarchUserInfo(weixin) {
+        api.queryUserInfo(weixin).then(res=>{
+          let data = res.data.data;
+          if(data){
+            this.nickName = data.name || data.nickName
+            localStorage.setItem('USER_INFO',JSON.stringify(data))
+          }
+        }).catch(err => {
+          alert('系统繁忙')
+        })
+    }
+  }
 
-	},
 }
 </script>
 <style type="text/css">
