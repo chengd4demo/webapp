@@ -73,7 +73,7 @@ export default [
     component:ModifyPhonePage,
   },
   {
-    path:'/affirm-phone/',
+    path:'/affirm-phone/verificationCode/:verificationCode/phoneNumber/:phoneNumber/',
     component:AffirmPhonePage,
   },
   {
