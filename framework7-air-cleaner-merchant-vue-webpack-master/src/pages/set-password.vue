@@ -13,20 +13,20 @@
 						 style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;" required validate />
 					</span>
 					<span style="width: 30%; ">
-						<a href="#" id="code" @click="countDown" class="button button-fill" :class="{disabled: !this.canClick}"
+						<a href="#" id="code" @click="countDown" class="button button-fill" :class="{disabled: !this.canClick}" oninput="if(value.length>6)value=value.slice(0,6)"
 						 no-fast-click style="margin:0 auto;background:#e94e24;disable:disable;height: 44px; line-height:44px;">{{content}}</a>
 					</span>
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;" v-if="isAlipay">
-					<input type="text" v-model="oldTradePwd" name="oldTradePwd" @keyup="keyDown()" placeholder="输入旧提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
+					<input type="text" v-model="oldTradePwd" name="oldTradePwd" @keyup="keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" placeholder="输入旧提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
 					 required validate />
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-					<input type="text" v-model="firstTraderPwd" @keyup="keyDown()" placeholder="输入新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
+					<input type="text" v-model="firstTraderPwd" @keyup="keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" placeholder="输入新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
 					 required validate />
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-					<input type="text" v-model="tradePwd" name="tradePwd" @keyup="keyDown()" placeholder="确认新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
+					<input type="text" v-model="tradePwd" name="tradePwd" @keyup="keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" placeholder="确认新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
 					 required validate />
 				</div>
 			<p class="submit-p"><a @click="submitPwdBtn()" :class="{disabled: this.canInput}" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">提交</a></p>
