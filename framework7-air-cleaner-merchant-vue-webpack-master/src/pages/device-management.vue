@@ -31,7 +31,7 @@
         return {
           pageNum:1,
           loading:false,
-					type: 'CR',
+					type: '',
 					traderId: this.$f7route.params.traderId,
 					id:'',
 					beforRout:this.$f7route.query,
@@ -58,7 +58,7 @@
         getDeviceMonitors(num){
           var self = this;
           var pageNum = num||1;
-          var pageSize = 2;
+          var pageSize = 30;
 					if (self.beforRout.foo == 'trader') {	//判断路由跳转
 					
 							api.queryDeviceMonitorPage({

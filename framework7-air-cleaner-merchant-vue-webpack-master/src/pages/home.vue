@@ -1,6 +1,6 @@
 <!-- center Page Template -->
 <template id="page-center">
-	<f7-page >
+	<f7-page>
 		<f7-navbar title="个人中心" style="background:#e94e24;"></f7-navbar>
 		<f7-list media-list class="no-margin-v" style="margin-top:1px">
 			<ul class="no-border-v">
@@ -107,25 +107,26 @@
     data(){
 			return{
 				type:'',
-				name:'圈兔网络',
+				name:'',
 				amount:0,//可用余额
 				availableAmount:0
 			}
 		},
-		created() {
-			self = this
-			self.init()
+		mounted() {
+			const self = this
+			let weixin = localStorage.getItem('weixin') || ''
+			if (weixin) {
+				self.weixin = weixin
+				self.init()
+			} else{
+				alert('网络连接超时')
+				return
+			}
 		},
 		methods:{
 			init(){
 				const self = this;
-				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-				if (USER_INFO) {
-					self.name = USER_INFO.name || USER_INFO.nickName
-					self.type = USER_INFO.userType
-					self.queryAccount(USER_INFO.weixin)
-				}
-				
+				self.resarchUserInfo(self.weixin)
 			},
 			queryAccount(params){
 				const self = this;
@@ -147,6 +148,20 @@
 				}).catch(err => {
 					
 				})				
+			},
+			resarchUserInfo(weixin) {
+				const self = this;
+					api.queryUserInfo(weixin).then(res=>{
+						let data = res.data.data;
+						if(data){
+							self.name = data.name || data.nickName
+							self.type = data.userType
+							localStorage.setItem('USER_INFO',JSON.stringify(data))
+							self.queryAccount(self.weixin)
+						}
+					}).catch(err => {
+						alert('系统繁忙')
+					})
 			},
 			alertMsg(msg){
 				let toastTop = this.$f7.toast.create({

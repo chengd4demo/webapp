@@ -12,8 +12,8 @@
 			</div>
 		</div>
 
-		<div class="demok3_lable" style="text-indent: 10px;max-height:25px;">提现金额:</div>
-		<div class="demok3_input"><input type="number" style="border:1px solid #e0e0e0" placeholder="请输入提现金额,最大200元" /></div>
+		<div class="demok3_lable" style="text-indent: 10px;max-height:25px;font-size: 17px;">提现金额:</div>
+		<div class="demok3_input"><input type="number" style="border:1px solid #e0e0e0;height: 25px;margin-left: 10px;" placeholder="请输入提现金额,最大200元" /></div>
 		<div style="width:100%;margin:10px auto;float:left;">
 			<div style="width:95%;background: #EEEDED;margin: 0px auto;text-indent: 5px;">
 				<p>注:</p>
@@ -22,7 +22,7 @@
 				<p>3.红包发送24小时内务必领取，超过24小时后，红包会自动返回到商户，用户需要再次提交申请</p>
 			</div>
 		</div>
-		<p><a href="#" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;height: 40px;line-height: 40px;">提&nbsp;交</a></p>
+		<p><a href="#" @click="openPassword()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;height: 40px;line-height: 40px;">提&nbsp;交</a></p>
 	</f7-page>
 </template>
 <script>
@@ -32,6 +32,26 @@
 				availableAmount:this.$f7route.params.availableAmount | 0,
 				totalAcmount:this.$f7route.params.totalAcmount | 0,
 			}
+		},
+		methods:{
+			openPassword() {
+				const self = this;
+				const app = self.$f7;
+				const router = self.$f7router;
+				// console.log(123);
+				app.params.dialog.PreloaderTitle = '加载中...'
+				app.params.dialog.buttonCancel = '<span style="color:black">取消</span>'
+				app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
+				app.dialog.password('','请输入提现密码', (password) => {
+					if(password==='123'){
+						app.dialog.alert(',',`提交成功<br>Password:${password}`,()=>{
+							router.back();
+							});
+						}else{
+							app.dialog.alert(',',`密码错误<br>Password:${password}`);
+						}
+				});
+			},
 		}
 	}
 </script>
@@ -43,7 +63,8 @@
 
 	.demok3_input {
 		width: 200px;
+		height: 20px;
 		float: left;
-		margin-left: -10px;
+		margin-left: -25px;
 	}
 </style>
