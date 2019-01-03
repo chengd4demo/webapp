@@ -11,10 +11,9 @@
     <form style="margin-top:41px;">
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
         <input type="tel"  v-model="admin.phoneNumber" placeholder="输入手机号码"  @keyup = "keyDown()" oninput="if(value.length>11)value=value.slice(0,11)"  style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
-      </div>
+			</div>
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
 				<span style="width:70%;float: left;">
-					<!-- v-model="admin.verificationCode" -->
 					<input type="number" v-model="admin.verificationCode"  placeholder="输入验证码"  @keyup = "keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
 				</span>
         <span style="width: 30%; ">
@@ -23,7 +22,7 @@
 				</span>
       </div>
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-        <input type="text" v-model="admin.identificationNumber" placeholder="身份唯一识别码"  @keyup = "keyDown()" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
+        <input type="text" v-model="admin.identificationNumber" placeholder="身份唯一识别码"  @keyup = "keyDown()" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;" oninput="if(value.length>18)value=value.slice(0,18)"/>
       </div>
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;">
 				<span style="width:7%;float: left;text-align: left;" @change="keyDown()">
@@ -97,7 +96,6 @@
         }).then(res => {
           let data = res.data.data;
           if(res.data.data){
-            //localStorage.setItem(JSON.stringify(data))
             data.phoneNumber = this.admin.phoneNumber
             localStorage.setItem('USER_INFO',JSON.stringify(data))
             this.$f7router.back('/home/')
