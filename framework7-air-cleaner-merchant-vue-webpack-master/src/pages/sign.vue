@@ -97,9 +97,8 @@
           let data = res.data.data;
           if(res.data.data){
             data.phoneNumber = this.admin.phoneNumber
-            localStorage.setItem('USER_INFO',JSON.stringify(data))
-            this.$f7router.back('/home/')
-            this.$f7router.url = '/home/'
+            localStorage.setItem('weixin',res.data.data.weixin)
+						this.$f7router.navigate('/home/')
           }
         }).catch(err =>{
           alert('服务器繁忙')
