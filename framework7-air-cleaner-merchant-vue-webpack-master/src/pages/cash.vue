@@ -48,6 +48,7 @@
 				app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
 				app.dialog.password('','请输入提现密码', (password) => {
 					if (password!=='' && password.length!==0){
+					//调用接口根据接口返回的状态提示
 						
 					} else {
 						self.alertMsg('请输入提现密码')
