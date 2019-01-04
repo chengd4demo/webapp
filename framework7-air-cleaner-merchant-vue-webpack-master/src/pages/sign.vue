@@ -96,7 +96,6 @@
         }).then(res => {
           let data = res.data.data;
           if(res.data.data){
-            data.phoneNumber = this.admin.phoneNumber
             localStorage.setItem('weixin',res.data.data.weixin)
 						this.$f7router.navigate('/home/')
           }
