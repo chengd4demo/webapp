@@ -22,7 +22,7 @@
 								<dd>
 									<span style="color:#FFFFFF; padding: 1px 9px; background-color:#2094ff; border-radius: 4px 4px ;">{{item.state}}</span>
 									<span style="float: right;">
-										<input type="button" style="padding-left: 1px; background-color: #FFFFFF;padding: 0px 10px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
+										<input @click="cancelBtn({id:item.id})" type="button" style="padding-left: 1px; background-color: #FFFFFF;padding: 0px 10px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
 										 value="取消" />
 									</span>
 								</dd>
@@ -118,6 +118,14 @@
 			}
 		},
 		methods: {
+			cancelBtn(args) {
+				alert(JSON.stringify(args))
+				// api.cancel(cancel).then(res=>{
+
+				// }).catch(err=>{
+
+				// })
+			},
 			getAccountOutBoundPages(parames) {
 				var self = this;
 				console.log('methods ==> ' + parames)
