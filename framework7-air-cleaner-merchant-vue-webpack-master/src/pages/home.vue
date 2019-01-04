@@ -156,7 +156,6 @@
 						if(data){
 							self.name = data.name || data.nickName
 							self.type = data.userType
-							data.phoneNumber = self.phoneNumber
 							localStorage.setItem('USER_INFO',JSON.stringify(data))
 							self.queryAccount(self.weixin)
 						}
