@@ -45,10 +45,10 @@
         content: '获取验证码',
         totalTime: 60,
         canClick:true,
-        smsCode: '',
+        smsCode: '222222',
         oldPhoneNumber:this.$f7route.params.phoneNumber,
         phoneNumber:'',
-        verificationCode:'',
+        verificationCode:'222222',
         openId:'',
         userType:"MERCHANT",
         canInput:true
