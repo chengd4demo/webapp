@@ -67,6 +67,11 @@
         }
       }
     },
+    mounted(){
+      let weixin = localStorage.getItem('weixin')
+      let userInfo = localStorage.getItem('USER_INFO')
+      if(userInfo !='' && weixin!='') this.$f7router.navigate('/home/')
+    },
     methods: {
       countDown() {
         if (!this.canClick) return
