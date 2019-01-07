@@ -101,6 +101,15 @@
 				}
 			}
 		},
+    mounted(){
+      let weixin = localStorage.getItem('weixin')
+      let userInfo = localStorage.getItem('USER_INFO')
+      if(userInfo !=null && weixin!= null) {
+        this.$f7router.navigate('/center/')
+      } else {
+        //获取授权后用户信息
+      }
+    },
 		methods: {
 			countDown() {
 				if (!this.canClick) return

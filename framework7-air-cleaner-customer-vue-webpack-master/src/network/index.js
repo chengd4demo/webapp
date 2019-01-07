@@ -93,6 +93,13 @@ export default {
      */
     sendSms(params){
         return fetchGet('/customer-web-api/msg-channel/sendSms/'+params)
+    },
+    /**
+     *
+     * 获取用户信息（授权）
+     */
+    queryObtainUserInfo(params) {
+      return fetchPost('/customer-web-api/user-channel/wx/query/',params)
     }
 
 }
