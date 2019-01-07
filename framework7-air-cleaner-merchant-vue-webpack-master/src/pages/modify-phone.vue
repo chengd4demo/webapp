@@ -3,7 +3,7 @@
     <f7-navbar title="修改手机号码" back-link="" style="background:#e94e24;"></f7-navbar>
     <form style="margin-top:41px;">
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-        <input type="number" v-model="phoneNumber" placeholder="输入现在绑定的手机号码" @keyup="keyDown()"
+        <input type="tel" v-model="phoneNumber" placeholder="输入现在绑定的手机号码" @keyup="keyDown()"
                oninput="if(value.length>11)value=value.slice(0,11)"
                style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
       </div>
@@ -86,26 +86,22 @@
         toastTop.open();
       },
       keyDown() {
-        if (this.phoneNumber !== "" && this.verificationCode !== "") {
-          if (this.phoneNumber.length == 11) {
-            if (!this.checkedPhoneNumber(this.phoneNumber)) {
-              this.alertMsg('请输入绑定的手机号码')
-              return
-            }
+        if (this.phoneNumber !== "" && this.verificationCode !== "" && this.phoneNumber.length === 11 && this.verificationCode.length === 6) {
+          if (!this.checkedPhoneNumber(this.phoneNumber)) {
+            this.alertMsg('请输入绑定的手机号码')
+            return
           }
-          if ( this.verificationCode.length == 6) {
-            if (this.smsCode != this.verificationCode) {
-              this.alertMsg('输入验证码错误,请重新输入')
+          if (this.smsCode !== this.verificationCode) {
+            this.alertMsg('输入验证码错误,请重新输入')
+            return
+          } else {
+            let nowDate = new Date();
+            let min =  parseInt(nowDate - this.canClickDate) / 1000 / 60;
+            if(1< min) {
+              this.alertMsg('验证码超时,请重新获取')
               return
             } else {
-              let nowDate = new Date();
-              let min =  parseInt(nowDate - this.canClickDate) / 1000 / 60;
-              if(1< min) {
-                this.alertMsg('验证码超时,请重新获取')
-                return
-              } else {
-                this.canInput = false;
-              }
+              this.canInput = false;
             }
           }
           //滚动到顶部

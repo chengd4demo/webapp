@@ -4,7 +4,7 @@
     <form id='phoneInfo' style="margin-top:41px;">
       <input type="hidden" v-model = "openId" name = "openId"/>
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-        <input type="number" v-model="phoneNumber" name="phoneNumber" placeholder="输入新的手机号码" @keyup="keyDown()"
+        <input type="tel" v-model="phoneNumber" name="phoneNumber" placeholder="输入新的手机号码" @keyup="keyDown()"
                oninput="if(value.length>11)value=value.slice(0,11)"
                style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
       </div>
@@ -77,14 +77,14 @@
       init(data) {
         const self = this;
         self.verificationCode = data.verificationCode
-        self.phoneNumber = data.phoneNumber
+        self.phoneNumber = ''
         self.openId = data.weixin
       },
       submitBtn(){
         let toastTop = this.$f7.toast.create({})
         api.updatePhoneNumber(this.$f7.form.convertToData('#phoneInfo')).then(res => {
           let data = res.data
-          if (data.status==="200") {
+          if (data.status === "200") {
             this.alertMsg('修改成功')
             window.setTimeout(()=>{
               this.$f7router.navigate('/home/')
@@ -105,22 +105,20 @@
         toastTop.open();
       },
       keyDown() {
-        if (this.phoneNumber !== "" && this.verificationCode !== "") {
-          if (this.oldPhoneNumber == this.phoneNumber) {
+        if (this.phoneNumber !== "" && this.verificationCode !== "" && this.phoneNumber.length === 11 && this.verificationCode.length === 6) {
+          if (this.oldPhoneNumber === this.phoneNumber) {
             this.alertMsg('该号码已绑定，请重新输入手机号码')
             return
           }
-          if ( this.verificationCode.length == 6) {
-            if (this.smsCode != this.verificationCode) {
-              this.alertMsg('输入验证码错误,请重新输入')
+          if (this.smsCode !== this.verificationCode) {
+            this.alertMsg('输入验证码错误,请重新输入')
+            return
+          } else {
+            let nowDate = new Date();
+            let min =  parseInt(nowDate - this.canClickDate) / 1000 / 60;
+            if(1< min) {
+              this.alertMsg('验证码超时,请重新获取')
               return
-            } else {
-              let nowDate = new Date();
-              let min =  parseInt(nowDate - this.canClickDate) / 1000 / 60;
-              if(1< min) {
-                this.alertMsg('验证码超时,请重新获取')
-                return
-              }
             }
           }
           this.canInput = false
