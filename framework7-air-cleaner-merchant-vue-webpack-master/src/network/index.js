@@ -1,9 +1,9 @@
 import axios from 'axios'
-const DEV_BASE_URL = 'http://192.168.1.167:8769'
-// const DEV_BASE_URL = ''
+// const DEV_BASE_URL = 'http://192.168.1.167:8769'
+const DEV_BASE_URL = ''
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-const PROD_BASE_URL = 'http://192.168.1.167:8769'
-// const PROD_BASE_URL = ''
+// const PROD_BASE_URL = 'http://192.168.1.167:8769'
+const PROD_BASE_URL = ''
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? PROD_BASE_URL : DEV_BASE_URL
 // 返回状态判断  要根据后台给的判定字段
 axios.interceptors.response.use((res) => {
@@ -137,5 +137,13 @@ export default {
 			*/
 		 updateTradePwd(params){
 			 return fetchPost('/merchant-web-api/user-channel/updateTradePwd/',params)
-		 }
+     },
+     /**
+			* 
+			* 获取用户信息（授权）
+      */
+     queryObtainUserInfo(params) {
+      return fetchPost('/merchant-web-api/user-channel/wx/query/',params)
+     }
+      
 }
