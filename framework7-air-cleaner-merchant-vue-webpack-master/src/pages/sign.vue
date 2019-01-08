@@ -49,7 +49,9 @@
 </style>
 
 <script>
-  import api from '../network';
+  import api from '../network'
+  import CommonUtils from '@/util/common'
+  import config from '@/util/config'
   export default {
     data() {
       return {
@@ -61,7 +63,7 @@
         checkBox:false,
         admin:{
           identificationNumber:'51010319740426136X',
-          weixin:'oPmTlsjbuV49eGGacBxGK0kJjmFA',
+          weixin:localStorage.getItem('weixin') || '',
           verificationCode:'666666',
           phoneNumber:'13926113495',
         }
@@ -73,7 +75,31 @@
       if(userInfo !=null && weixin!= null) {
 				this.$f7router.navigate('/home/')
 			} else {
-				//获取授权后用户信息
+        let code = CommonUtils.getQueryString('code')
+        if (code ===null){ //用户授权
+          api.authorize().then(res=>{
+            let data = res.data.data
+            window.location.href = data;
+          }).catch(err=>{
+            alert('获取授权失败')
+          })
+        } else { //获取用户微信信息
+           api.queryObtainUserInfo({code:code}).then(res=>{
+              let data = res.data.data
+              if(res.data.status == '200') {
+                 config.wxUserInfo.openid = data.openid
+                 config.wxUserInfo.nickname = data.nickname
+                 config.wxUserInfo.sex = data.sex
+                 config.wxUserInfo.province = data.province
+                 config.wxUserInfo.city = data.city
+                 config.wxUserInfo.country = data.country
+                 config.wxUserInfo.headimgurl = data.headimgurl
+              }
+           }).catch(err=>{
+
+           })
+        }
+        
 			}
     },
     methods: {
@@ -93,6 +119,9 @@
         }, 1000)
       },
       loginBtn(){
+        if (config.wxUserInfo.openid) {
+          this.admin.weixin = config.wxUserInfo.openid
+        }
         if(this.admin.phoneNumber ==="" || this.admin.verificationCode==""||this.admin.weixin==""||this.admin.identificationNumber=="") {
           return
         }
@@ -109,18 +138,26 @@
 						this.$f7router.navigate('/home/')
           }
         }).catch(err =>{
-          alert('服务器繁忙')
+          this.alertMsg('服务器繁忙')
         })
       },
       keyDown(){
-        if (this.admin.phoneNumber !=="" && this.admin.verificationCode!=="" && this.admin.identificationNumber!=="" && this.checkBox) {
-          this.canInput = false
-          //滚动到顶部
-          window.scrollTo(0, 0);
-        } else {
-          this.canInput = true;
+          if (this.admin.phoneNumber !=="" && this.admin.verificationCode!=="" && this.admin.identificationNumber!=="" && this.checkBox) {
+            this.canInput = false
+            //滚动到顶部
+            window.scrollTo(0, 0);
+          } else {
+            this.canInput = true;
+          }
         }
+      },
+      alertMsg(msg) {
+        let toastTop = this.$f7.toast.create({
+          text: msg,
+          position: 'top',
+          closeTimeout: 1000,
+        })
+        toastTop.open();
       }
-    }
   }
 </script>

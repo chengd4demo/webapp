@@ -143,7 +143,13 @@ export default {
 			* 获取用户信息（授权）
       */
      queryObtainUserInfo(params) {
-      return fetchPost('/merchant-web-api/user-channel/wx/query/',params)
+      return fetchPost('/merchant-web-api/user-channel/wx/query',params)
+     },
+      /**
+			* 
+			* 用户授权
+      */
+     authorize() {
+      return fetchPost('/merchant-web-api/user-channel/wx/auth')
      }
-      
 }
