@@ -99,6 +99,7 @@
 </template>
 <script>
 import api from '../../network'
+import config from '@/util/config'
 export default {
 	data(){
 		return {
@@ -121,7 +122,10 @@ export default {
         api.queryUserInfo(weixin).then(res=>{
           let data = res.data.data;
           if(data){
+            let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
             this.nickName = data.name || data.nickName
+            if(config.wxUserInfo.headimgurl) data.headerUrl = config.wxUserInfo.headimgurl
+            this.headUrl = config.wxUserInfo.headimgurl || USER_INFO.headerUrl
             localStorage.setItem('USER_INFO',JSON.stringify(data))
           }
         }).catch(err => {

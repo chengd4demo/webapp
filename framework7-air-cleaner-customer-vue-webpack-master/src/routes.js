@@ -12,6 +12,7 @@ import ConfirmPaymentPage from './pages/confirm-payment.vue';
 import MsgPage from './pages/msg.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
+import SignPage from './pages/sign.vue';
 
 import PanelLeftPage from './pages/panel-left.vue';
 import PanelRightPage from './pages/panel-right.vue';
@@ -22,6 +23,21 @@ export default [
   {
     path: '/',
     component: HomePage,
+    redirect: function (route, resolve, reject) {
+      let weixin = localStorage.getItem('weixin')
+      let userInfo = localStorage.getItem('USER_INFO')
+      console.log()
+      if(userInfo !=null && weixin!= null) {
+        resolve('/center/')
+      } else {
+        resolve('/sign/')
+      }
+     
+    }
+  },
+  {
+    path: '/sign/',
+    component:SignPage,
   },
   {
     path: '/panel-left/',

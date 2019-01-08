@@ -23,6 +23,16 @@ const wxConfig = {
 	appId: "wxc4bba222e1d9cbe3"
 }
 
+const wxUserInfo = {
+	openid:'',
+	nickname:'',
+	sex:'',
+	province:'',
+	city:'',
+	country:'',
+	headimgurl:''
+}
+
 const confirmPayment = {
 		realPrice:0,
 		deviceSequence:'-',
@@ -36,5 +46,6 @@ export default {
 	refresh,
 	loadmore,
 	wxConfig,
-	confirmPayment
+	confirmPayment,
+	wxUserInfo
 }

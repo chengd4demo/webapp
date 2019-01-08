@@ -85,6 +85,8 @@
 
 <script>
 	import api from '../network'
+	import CommonUtils from '@/util/common'
+    import config from '@/util/config'
 	export default {
 		data() {
 			return {
@@ -102,13 +104,32 @@
 			}
 		},
     mounted(){
-      let weixin = localStorage.getItem('weixin')
-      let userInfo = localStorage.getItem('USER_INFO')
-      if(userInfo !=null && weixin!= null) {
-        this.$f7router.navigate('/center/')
-      } else {
-        //获取授权后用户信息
-      }
+	 //1.用户授权
+	 //2.获取授权后的用户信息
+	 let code = CommonUtils.getQueryString('code')
+        if (code ===null || code === ''){ //用户授权
+          api.authorize().then(res=>{
+            let data = res.data.data
+            window.location.href = data;
+          }).catch(err=>{
+            alert('获取授权失败')
+          })
+        } else { //获取用户微信信息
+           api.queryObtainUserInfo({code:code}).then(res=>{
+              let data = res.data.data
+              if(res.data.status == '200') {
+                 config.wxUserInfo.openid = data.openid
+                 config.wxUserInfo.nickname = data.nickname
+                 config.wxUserInfo.sex = data.sex
+                 config.wxUserInfo.province = data.province
+                 config.wxUserInfo.city = data.city
+                 config.wxUserInfo.country = data.country
+                 config.wxUserInfo.headimgurl = data.headimgurl
+              }
+           }).catch(err=>{
+
+           })
+        }
     },
 		methods: {
 			countDown() {
