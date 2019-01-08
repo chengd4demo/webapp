@@ -22,7 +22,7 @@
 								<dd>
 									<span style="color:#FFFFFF; padding: 1px 9px; background-color:#2094ff; border-radius: 4px 4px ;">{{item.state}}</span>
 									<span style="float: right;">
-										<input @click="cancelBtn({id:item.id})" type="button" style="padding-left: 1px; background-color: #FFFFFF;padding: 0px 10px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
+										<input @click="cancelBtn({id:item.id}) " class="open-confirm" type="button" style="padding-left: 1px; background-color: #FFFFFF;padding: 0px 10px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
 										 value="取消" />
 									</span>
 								</dd>
@@ -118,14 +118,32 @@
 			}
 		},
 		methods: {
-			cancelBtn(args) {
-				alert(JSON.stringify(args))
-				// api.cancel(cancel).then(res=>{
+				cancelBtn(args){
+					const self = this;
+					const app = self.$f7;
+					const router = self.$f7router;
+					console.log(123);
+					app.params.dialog.PreloaderTitle = '加载中...'
+					app.params.dialog.buttonCancel = '<span style="color:black">取消</span>'
+					app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
+					app.dialog.confirm('','确定取消？', (confirm) =>{
+								api.cleanAccountOutbound(args.id).then(function(res){
+									self.onRefresh();
+									self.alertMsg('取消成功！');
+								}).catch(err=>{
+								})
+							});
+					},
+					
+					alertMsg( msg ) {
+					  let toastTop = this.$f7.toast.create({
+					    text: msg,
+					    position: 'top',
+					    closeTimeout: 1000,
+					  })
+					  toastTop.open();
+					},
 
-				// }).catch(err=>{
-
-				// })
-			},
 			getAccountOutBoundPages(parames) {
 				var self = this;
 				console.log('methods ==> ' + parames)
