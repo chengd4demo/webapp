@@ -97,7 +97,7 @@
 				canInput:true,
 				checkBox:false,
 				admin: {
-					weixin:'aerstdyui',
+					weixin:localStorage.getItem('weixin') || config.wxUserInfo.openid,
 					verificationCode:'',
 					phoneNumber:'',
 				}

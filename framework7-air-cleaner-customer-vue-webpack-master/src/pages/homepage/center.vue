@@ -9,7 +9,7 @@
 					<a href="/personal-information/" class="item-link">
 						<div class="item-content" style="background-color:#E94E24;">
 							<div class="item-media">
-								<img src='http://img2.imgtn.bdimg.com/it/u=1932439000,2358402856&fm=26&gp=0.jpg' style="max-width:80px;max-height:800px;border-radius:50%;">
+								<img :src='headUrl' style="max-width:80px;max-height:800px;border-radius:50%;">
 								<i class="icon fa fa-opencart bg-red color-white align-center" style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
 							</div>
 							<div class="item-inner">
@@ -103,13 +103,13 @@ import config from '@/util/config'
 export default {
 	data(){
 		return {
-			headUrl:'',
+			headUrl:'http://img2.imgtn.bdimg.com/it/u=1932439000,2358402856&fm=26&gp=0.jpg',
 			nickName:'冬天的萝卜'
 		}
 	},
 	mounted() {
     self = this
-    let weixin = localStorage.getItem('weixin') || ''
+    let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
     if (weixin) {
       self.resarchUserInfo(weixin)
     } else{
