@@ -126,6 +126,7 @@ export default {
             this.nickName = data.name || data.nickName
             if(config.wxUserInfo.headimgurl) data.headerUrl = config.wxUserInfo.headimgurl
             this.headUrl = config.wxUserInfo.headimgurl || USER_INFO.headerUrl
+            data.headerUrl =  config.wxUserInfo.headimgurl || USER_INFO.headerUrl
             localStorage.setItem('USER_INFO',JSON.stringify(data))
           }
         }).catch(err => {
