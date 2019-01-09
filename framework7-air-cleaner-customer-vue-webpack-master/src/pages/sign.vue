@@ -97,7 +97,7 @@
 				canInput:true,
 				checkBox:false,
 				admin: {
-					weixin:localStorage.getItem('weixin') || config.wxUserInfo.openid,
+					weixin:localStorage.getItem('weixin'),
 					verificationCode:'',
 					phoneNumber:'',
 				}
@@ -154,15 +154,25 @@
 				api.login({
 					phoneNumber: this.admin.phoneNumber,
 					verificationCode: this.admin.verificationCode,
-					weixin:this.admin.weixin
+					weixin:this.admin.weixin || config.wxUserInfo.openid,
+					headerUrl:config.wxUserInfo.headimgurl,
+					sex:config.wxUserInfo.sex,
+					address:config.wxUserInfo.country + ' ' + config.wxUserInfo.province + ' ' + config.wxUserInfo.city,
+					nickName: config.wxUserInfo.nickname
 				}).then(res => {
 					let data = res.data.data;
-					if (res.data.data){
+					if (res.data.status == '200' && res.data.data){
 						localStorage.setItem('weixin',res.data.data.weixin)
 						this.$f7router.navigate('/center/')
+					} else {
+						if (res.data.status == 'EP500') {
+							this.alertMsg('服务器繁忙')
+						} else {
+							this.alertMsg(res.data.description)
+						}
 					}
 				}).catch(err =>{
-					alert('服务器繁忙')
+					this.alertMsg('服务器繁忙')
 				})
 			},
 			keyDown(){
@@ -173,7 +183,15 @@
 				} else {
 					this.canInput = true;
 				}
+			},
+			alertMsg(msg){
+				let toastTop = this.$f7.toast.create({
+					text: msg,
+					position: 'top',
+					closeTimeout: 1000,
+					})
+					toastTop.open();
+				},
 			}
-		}
 	}
 </script>
