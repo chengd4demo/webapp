@@ -12,7 +12,8 @@
             <div class="item-inner">
               <div class="item-title item-label" style="width: auto">姓名:</div>
               <div class="item-input-wrap">
-                <input type="text" v-model = "name" name="name" placeholder="请输入姓名" maxlength="12" required validate>
+                <input type="text" v-model = "name" name="name" @keyup = "keyDown()" placeholder="请输入姓名" maxlength="12" required validate>
+                <span class="input-clear-button"></span>
               </div>
             </div>
           </li>
@@ -29,7 +30,7 @@
           <li class="item-content item-input">
             <div class="item-inner">
               <div class="item-title item-label person" style="width: 37px;">性别:</div>
-              <div class="item-input-wrap" style="min-height:0px">
+              <div class="item-input-wrap" style="min-height:0px;pointer-events: none;">
                 <label class="label-switch">
                   <input type="radio" checked v-model = "sex" value="1" name="sex">
                   <div class="checkbox">男</div>
@@ -46,7 +47,7 @@
             <div class="item-inner">
               <div class="item-title item-label" style="width: auto">昵称:</div>
               <div class="item-input-wrap">
-                <input type="text" v-model = "nickName" name="nickName" placeholder="请输入昵称">
+                <input type="text" v-model = "nickName" name="nickName" @keyup = "keyDown()" maxlength="12" validate placeholder="请输入昵称">
                 <span class="input-clear-button"></span>
               </div>
             </div>
@@ -72,7 +73,7 @@
           </li>
         </ul>
       </div>
-      <p class="submit-p"><a @click="submitBtn()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">提交</a></p>
+      <p class="submit-p"><a @click="submitBtn()" :class="{disabled: this.canInput}" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">提交</a></p>
     </f7-list>
   </f7-page>
 </template>
@@ -90,7 +91,8 @@
         age:0,
         sex:1,
         weixin:'',
-        birthday:''
+        birthday:'',
+        canInput:true
 			}
 		},
     created() {
@@ -116,6 +118,9 @@
           }
       },
       submitBtn(){
+        if(this.name ==="" || this.identificationNumber==="") {
+          return
+        }
          let toastTop = this.$f7.toast.create({})
          api.updateSelfInfo(this.$f7.form.convertToData('#personinfo')).then(res => {
            let data = res.data
@@ -141,13 +146,20 @@
       },
       keyDown() {
         const self = this;
-        if(self.identificationNumber.length == 15 || self.identificationNumber.length == 18) {
-           self.sex = CommonUtils.getSex(self.identificationNumber)
-           self.age = CommonUtils.getAge(self.identificationNumber)
-           self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
-        }
+          if(self.identificationNumber.length == 15 || self.identificationNumber.length == 18) {
+             self.sex = CommonUtils.getSex(self.identificationNumber)
+             self.age = CommonUtils.getAge(self.identificationNumber)
+             self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
+           }
+          if (self.name !== '' && self.identificationNumber !== ''){
+            this.canInput = false
+            //滚动到顶部
+            window.scrollTo(0, 0);
+          }else {
+            this.canInput = true;
+          }
+         }
       }
-    }
   }
 
 </script>

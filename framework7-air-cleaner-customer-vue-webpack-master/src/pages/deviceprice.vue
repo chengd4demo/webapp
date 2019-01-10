@@ -10,7 +10,7 @@
       <!--空气指数-->
         <div class="mt">
           <img id="mt-1" src="../img/pm2.5.png"/>
-          <i class="mt-2">150</i>
+          <i class="mt-2">{{pm25}}</i>
         </div>
       <!--消费时间 价格-->
       <div class="prices">
@@ -37,6 +37,7 @@
         machNo: this.$f7route.params.machno,
         deviceSequence:this.$f7route.params.devicesequence,
         priceList:[],
+        pm25:0,
         priceObj:{}
       }
     },
@@ -50,6 +51,7 @@
         api.queryDeviceStatus(params).then(function(res){
           let data = res.data.data.price;
           self.priceObj = res.data.data;
+          self.pm25 = self.priceObj.pm25;
           data.forEach(function(value, index, array){
             self.priceList.push(value);
           });
