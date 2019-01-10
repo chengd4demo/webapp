@@ -124,7 +124,7 @@
          let toastTop = this.$f7.toast.create({})
          api.updateSelfInfo(this.$f7.form.convertToData('#personinfo')).then(res => {
            let data = res.data
-           if (data.status=="200") {
+           if (data.status==="200") {
              this.alertMsg('设置成功')
              window.setTimeout(()=>{
 							this.$f7router.navigate('/center/')
@@ -146,12 +146,12 @@
       },
       keyDown() {
         const self = this;
-          if(self.identificationNumber.length == 15 || self.identificationNumber.length == 18) {
+          if(self.identificationNumber.length === 15 || self.identificationNumber.length === 18) {
              self.sex = CommonUtils.getSex(self.identificationNumber)
              self.age = CommonUtils.getAge(self.identificationNumber)
              self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
            }
-          if (self.name !== '' && self.identificationNumber !== ''){
+          if (self.name !== '' && self.identificationNumber !== '' && self.identificationNumber.length >14){
             this.canInput = false
             //滚动到顶部
             window.scrollTo(0, 0);
