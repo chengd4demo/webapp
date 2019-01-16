@@ -18,9 +18,12 @@
         <a href="/confirm-payment/">
           <div class="price-item1" >
             <div class="price-time">{{item.costTime/60}}小时</div>
-            <div class="price-value">
+            <div class="price-value" v-if="item.discount <100 || item.realPrice == unitPrice">
               <div class="price"><em>¥</em>{{item.realPrice}}</div>
               <div class="del-price"><em>¥</em>{{item.unitPrice}}</div>
+            </div>
+            <div class="price-value" v-else>
+              <div class="price"><em>¥</em>{{item.realPrice}}</div>
             </div>
           </div>
         </a>
