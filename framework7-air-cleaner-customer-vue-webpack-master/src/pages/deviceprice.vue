@@ -66,6 +66,7 @@
          if(this.priceList.length!=0) {
              config.confirmPayment.realPrice = this.priceList[index].realPrice;
              config.confirmPayment.costTime = this.priceList[index].costTime;
+             config.confirmPayment.priceId = this.priceList[index].priceId;
              config.confirmPayment.deviceSequence = this.deviceSequence;
              config.confirmPayment.available = this.priceObj.available;
              config.confirmPayment.onLine = this.priceObj.onLine;

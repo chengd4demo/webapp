@@ -41,7 +41,7 @@
       </table>
 
     </div>
-    <p style="margin-top: 50px;"><a href="/msg/" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">立即支付</a></p>
+    <p style="margin-top: 50px;"><a href="#" @click="pay()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">立即支付</a></p>
   </f7-page>
 </template>
 <script>
@@ -55,12 +55,14 @@
         costTime: config.confirmPayment.costTime,
         available: config.confirmPayment.available,
         onLine:  config.confirmPayment.onLine,
+        priceId:  config.confirmPayment.priceId,
         yhj:false
       }
     },
     methods:{
       pay() {
-        api.updateSelfInfo()
+        alert(this.priceId)
+        alert(this.deviceSequence)
       }
     }
   }

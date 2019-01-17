@@ -39,7 +39,8 @@ const confirmPayment = {
 		available:false,
 		onLine:false,
 		costTime:0,
-		pm25:110
+		pm25:110,
+		priceId:-1
 }
 
 export default {
