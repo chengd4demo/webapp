@@ -8,13 +8,13 @@
 					<a href="/personal-information/" class="item-link">
 						<div class="item-content" style="background-color:#E94E24;">
 							<div class="item-media">
-								<img src='http://img.mp.itc.cn/upload/20170727/50ff47cacfb148fb95939512df6cb5d4_th.jpg' style="max-width:80px;max-height:800px;border-radius:50%">
+								<img :src='headUrl' style="max-width:80px;max-height:800px;border-radius:50%">
 								<i class="icon fa fa-opencart bg-red color-white align-center" style="font-size: 36px;width: 60px;height: 60px;line-height: 60px;border-radius: 50%;"></i>
 							</div>
 							<div class="item-inner" style="margin-top: -10px">
 								<div class="item-title">&nbsp;</div>
 								<div class="item-title-row">
-									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">&nbsp;{{name}}</div>
+									<div class="item-subtitle item-title" style="margin-left:-55px;color:white">&nbsp;{{nickName}}</div>
 								</div>
 								<div id = 'amountId' class="item-subtitle item-title" style="margin-left:-55px;color:white">¥{{amount}}</div>
 								<!--<div class="item-text" style="margin-left:-55px;color:	white">￥ 1000</div>-->
@@ -103,18 +103,20 @@
 </template>
 <script>
 	import api from "../network";
+	import config from '@/util/config'
 	export default {
     data(){
 			return{
 				type:'',
-				name:'',
+				nickName:'',
+				headUrl:'',
 				amount:0,//可用余额
 				availableAmount:0
 			}
 		},
 		mounted() {
 			const self = this
-			let weixin = localStorage.getItem('weixin') || ''
+			let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
 			if (weixin) {
 				self.weixin = weixin
 				self.init()
@@ -128,10 +130,10 @@
 				const self = this;
 				self.resarchUserInfo(self.weixin)
 			},
-			queryAccount(params){
+			queryAccount(weixin){
 				const self = this;
-				if(params)
-				api.queryAccount(params).then(res =>{
+				if(weixin)
+				api.queryAccount(weixin).then(res =>{
 					if(res.data.description === 'success') {
 						let data = res.data.data;
 						self.amount = data.totalAcmount
@@ -154,9 +156,13 @@
 					api.queryUserInfo(weixin).then(res=>{
 						let data = res.data.data;
 						if(data){
-							self.name = data.name || data.nickName
+							let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+							data.name = config.wxUserInfo.nickname
+							self.nickName = data.nickName || data.name
 							self.type = data.userType
-							localStorage.setItem('USER_INFO',JSON.stringify(data))
+							if(config.wxUserInfo.headimgurl) data.headerUrl = config.wxUserInfo.headimgurl
+							self.headUrl = config.wxUserInfo.headimgurl || M_USER_INFO.headerUrl
+							localStorage.setItem('M_USER_INFO',JSON.stringify(data))
 							self.queryAccount(self.weixin)
 						}
 					}).catch(err => {

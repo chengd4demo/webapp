@@ -14,6 +14,7 @@ import CashPage from './pages/cash.vue';
 import PersonalInformationPage from './pages/personal-information.vue';
 import DynamicRoutePage from './pages/dynamic-route.vue';
 import NotFoundPage from './pages/not-found.vue';
+import AutoSignPage from './pages/sign.vue';
 
 
 import PanelLeftPage from './pages/panel-left.vue';
@@ -22,8 +23,23 @@ import PanelRightPage from './pages/panel-right.vue';
 export default [
   {
     path: '/',
-    component: SignPage,
+    component: AutoSignPage,
+    redirect: function (route, resolve, reject) {
+      let weixin = localStorage.getItem('weixin')
+      let userInfo = localStorage.getItem('M_USER_INFO')
+      console.log()
+      if(userInfo !=null && weixin!= null) {
+        resolve('/home/')
+      } else {
+        resolve('/sign/')
+      }
+     
+    }
   },
+	{
+		path:'/sign/',
+		component:SignPage,
+	},
   {
     path:'/home/',
     component:HomePage,

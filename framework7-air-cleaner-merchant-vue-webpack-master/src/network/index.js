@@ -151,5 +151,12 @@ export default {
       */
      authorize() {
       return fetchPost('/merchant-web-api/user-channel/wx/auth')
-     }
+     },
+		 /**
+			* 
+			* 取消提现
+			*/
+		 cleanAccountOutbound(params){
+			 return fetchPost('/merchant-web-api/account-channel/cleanAccountOutbound/'+params)
+		 }
 }

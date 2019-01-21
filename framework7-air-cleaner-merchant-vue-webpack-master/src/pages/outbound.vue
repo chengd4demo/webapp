@@ -78,9 +78,6 @@
 			return {
 				pageNum: 1,
 				loading: false,
-				// type: 'CR',
-				// state:0,
-				// traderId: this.$f7route.params.traderId,
 				weixin:this.$f7route.params.weixin,
 				amount:'',
 				createdate:'',
@@ -95,7 +92,7 @@
 				completedList:[],
 				params:{
 					data: {
-						weixin: 'oPmTlsiEtKhwo1fN9DiIdl8bq4nw',
+						weixin:'',
 						state:0,
 					},
 					page: {
@@ -112,17 +109,18 @@
 		},
 		mounted() {
 			self = this;
-			let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-			if (USER_INFO) {
-				self.id = USER_INFO.id
+			let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+			if (M_USER_INFO) {
+				self.id = M_USER_INFO.id
+				self.params.data.weixin = M_USER_INFO.weixin
 			}
 		},
 		methods: {
 				cancelBtn(args){
+					alert(args.id);
 					const self = this;
 					const app = self.$f7;
 					const router = self.$f7router;
-					console.log(123);
 					app.params.dialog.PreloaderTitle = '加载中...'
 					app.params.dialog.buttonCancel = '<span style="color:black">取消</span>'
 					app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
@@ -205,9 +203,9 @@
 			},
 			init() {
 				self = this;
-				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-				if (USER_INFO) {
-					self.id = USER_INFO.id
+				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+				if (M_USER_INFO) {
+					self.id = M_USER_INFO.id
 				}
 			},
 			clickState(e) {
