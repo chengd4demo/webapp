@@ -34,6 +34,7 @@
 </template>
 <script>
 	import api from "../network";
+	import CommonUtils from '@/util/common';
 	export default {
 		data() {
 			return {
@@ -42,7 +43,8 @@
 				loadingMore: false,
 				loadedEnd: false,
 				showPreloader: true,
-				deviceMonitorList: []
+				deviceMonitorList: [],
+				id:''
 			}
 		},
 		created() {
@@ -54,10 +56,13 @@
 				var self = this;
 				var pageNum = num || 1;
 				var pageSize = 30;
-
+				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {};
+				if(M_USER_INFO){
+					self.id = M_USER_INFO.id
+				}
 				api.queryInvestorForTrader({
 					data: {
-						investorId: '911D3482E72B4AC3B208AD627430689D'
+						investorId: self.id
 					},
 					page: {
 						page: pageNum,

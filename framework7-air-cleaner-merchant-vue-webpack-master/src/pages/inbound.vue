@@ -22,6 +22,7 @@
 </template>
 <script>
 	import api from "../network";
+	import CommonUtils from '@/util/common';
 	export default {
 			data() {
 				return {
@@ -42,9 +43,14 @@
 					var self = this;
 					var pageNum = num||1;
 					var pageSize = 30;
+					let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {};
+					console.log(M_USER_INFO);
+					if(M_USER_INFO){
+						self.weixin = M_USER_INFO.weixin
+					}
 					api.queryAccountInbound({
 						data:{
-							weixin:'oPmTlsjbuV49eGGacBxGK0kJjmFA'
+							weixin:self.weixin
 						},
 						page:{
 							page:pageNum,
@@ -71,7 +77,7 @@
 			onRefresh(event, done) {
 				var self = this
 				setTimeout(() => {
-					self.deviceMonitorList = []
+					self.inboundsList = []
 					self.pageNum = 1
 					self.getInbounds(self.pageNum)
 					done();
