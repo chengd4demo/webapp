@@ -17,6 +17,7 @@ import SignPage from './pages/sign.vue';
 import PanelLeftPage from './pages/panel-left.vue';
 import PanelRightPage from './pages/panel-right.vue';
 import CenterPage from './pages/homepage/center.vue';
+import CommonUtils from '@/util/common'
 
 
 export default [
@@ -26,13 +27,16 @@ export default [
     redirect: function (route, resolve, reject) {
       let weixin = localStorage.getItem('weixin')
       let userInfo = localStorage.getItem('USER_INFO')
-      console.log()
-      if(userInfo !=null && weixin!= null) {
-        resolve('/center/')
+      let sceneStr = CommonUtils.getQueryString('scene_str');
+      if(sceneStr) {
+        resolve('/price/machno/'+sceneStr+'/devicesequence/'+sceneStr+'/')
       } else {
-        resolve('/sign/')
+        if(userInfo !=null && weixin!= null) {
+          resolve('/center/')
+        } else {
+          resolve('/sign/')
+        }
       }
-     
     }
   },
   {

@@ -46,6 +46,7 @@
 </template>
 <script>
   import config from '@/util/config'
+  import api from '../network'
   export default {
     data(){
       return {
@@ -60,9 +61,23 @@
       }
     },
     methods:{
+    
       pay() {
-        alert(this.priceId)
-        alert(this.deviceSequence)
+          alert(this.priceId)
+        api.pay('?priceId=' + this.priceId + '&machNo='+ this.deviceSequence).then(res=>{
+          let data = res.data.data
+            alert(res.data.status == '200' && data)
+          if (res.data.status == '200' && data){
+            console.log(url)
+            window.location.href = url
+          } else {
+            alert(res.data.description)
+          }
+
+        }).catch(err => {
+
+        })
+      
       }
     }
   }
