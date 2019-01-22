@@ -61,7 +61,7 @@
 		},
 		created() {
 			const self = this;
-			self.init(JSON.parse(localStorage.getItem('USER_INFO')) || {});
+			self.init(JSON.parse(localStorage.getItem('M_USER_INFO')) || {});
 		},
 		methods: {
 			init(data) {
@@ -73,10 +73,10 @@
 				self.sex = CommonUtils.getSex(self.identificationNumber)
 				self.age = CommonUtils.getAge(self.identificationNumber)
 				self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
-				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-				console.log(USER_INFO)
-				if (USER_INFO) {
-					self.weixin = USER_INFO.weixin
+				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+				console.log(M_USER_INFO)
+				if (M_USER_INFO) {
+					self.weixin = M_USER_INFO.weixin
 				} else {
 					self.alertMsg('验证失效，请重新认证')
 				}

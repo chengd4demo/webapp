@@ -35,8 +35,9 @@
 </template>
 
 <script>
-	import api from '../network'
+  import api from '../network'
   import CommonUtils from '@/util/common'
+  import md5 from 'js-md5'
   export default {
     data() {
 			return {
@@ -56,7 +57,7 @@
 		},
     created() {
       const self = this;
-      self.init(JSON.parse(localStorage.getItem('USER_INFO')) || {});
+      self.init(JSON.parse(localStorage.getItem('M_USER_INFO')) || {});
     },
     methods: {
 	    countDown() {
@@ -80,15 +81,28 @@
 		    self.openId=data.weixin
 	    },
 	    submitPwdBtn(){
-			alert();
 		   let toastTop = this.$f7.toast.create({})
 		   if (this.oldTradePwd !== '' && (this.oldTradePwd === this.tradePwd || this.oldTradePwd === this.tradePwd 
 			  || this.oldTradePwd === this.firstTraderPwd || this.oldTradePwd === this.firstTraderPwd)) {
 				this.alertMsg('旧密码与新密码相同,请重新输入')
 				return
 		   }
+		   if(this.firstTraderPwd !== this.tradePwd){
+			   this.alertMsg('两次密码不一致，请重新输入')
+			   return
+		   }
 		  if(!this.canInput && this.firstTraderPwd !== '' && this.phoneNumber !== '' && this.tradePwd !== '' || (this.isAlipay && this.oldTradePwd !== '') ) {
-			  api.updateTradePwd(this.$f7.form.convertToData('#set-password')).then(res => {
+			  let reParames = this.$f7.form.convertToData('#set-password');
+			  if(!this.isAlipay){
+				 reParames.tradePwd = md5(this.tradePwd)
+				 reParames.firstTraderPwd = md5(this.firstTraderPwd)
+			  } 
+			  else{
+				  reParames.oldTradePwd = md5(this.oldTradePwd)
+				  reParames.tradePwd = md5(this.tradePwd)
+				  reParames.firstTraderPwd = md5(this.firstTraderPwd)
+			  }
+			  api.updateTradePwd(reParames).then(res => {
 				let data = res.data
 			    if (data.status=="200") {
 				  this.alertMsg('设置成功')

@@ -48,10 +48,10 @@
       },
 			mounted() {
 				self = this;
-				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-				if (USER_INFO) {
-				   self.id = USER_INFO.id
-					 self.type = USER_INFO.userType
+				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+				if (M_USER_INFO) {
+				   self.id = M_USER_INFO.id
+					 self.type = M_USER_INFO.userType
 				}
 			},
       methods: {
@@ -156,10 +156,10 @@
 			},
 			init(){
 				self = this;
-				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-				if (USER_INFO) {
-					self.id = USER_INFO.id
-					self.type = USER_INFO.userType
+				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+				if (M_USER_INFO) {
+					self.id = M_USER_INFO.id
+					self.type = M_USER_INFO.userType
 				}
 			}
     }

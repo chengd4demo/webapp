@@ -56,7 +56,7 @@
     },
     created() {
       const self = this;
-      self.init(JSON.parse(localStorage.getItem('USER_INFO')) || {});
+      self.init(JSON.parse(localStorage.getItem('M_USER_INFO')) || {});
     },
     methods: {
       countDown() {

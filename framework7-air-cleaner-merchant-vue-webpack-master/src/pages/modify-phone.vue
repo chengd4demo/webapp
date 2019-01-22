@@ -112,8 +112,8 @@
       },
       checkedPhoneNumber(phoneNumber){
         //调用接口认证成功返回true
-        let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
-        if (!phoneNumber || phoneNumber !== USER_INFO.phoneNumber) {
+        let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+        if (!phoneNumber || phoneNumber !== M_USER_INFO.phoneNumber) {
           return false;
         }
         return true;
