@@ -1,6 +1,6 @@
 import axios from 'axios'
 // const DEV_BASE_URL = 'http://192.168.1.167:8769'
-const DEV_BASE_URL = ''
+ const DEV_BASE_URL = ''
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 // const PROD_BASE_URL = 'http://192.168.1.167:8769'
  const PROD_BASE_URL = ''
@@ -107,7 +107,14 @@ export default {
      */
     authorize() {
       return fetchPost('/customer-web-api/user-channel/wx/auth')
-    }
+    },
+    /**
+		 * 
+		 * 支付
+     */
+    pay(params) {
+      return fetchGet('/customer-web-api/pay-channel/pay'+params)
+    } 
 
 
 }
