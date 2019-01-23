@@ -62,10 +62,10 @@
         canInput:true,
         checkBox:false,
         admin:{
-          identificationNumber:'51010319740426136X',
+          identificationNumber:'',
           weixin:localStorage.getItem('weixin') || '',
-          verificationCode:'666666',
-          phoneNumber:'13926113495',
+          verificationCode:'',
+          phoneNumber:'',
         }
       }
     },
