@@ -62,10 +62,10 @@
         canInput:true,
         checkBox:false,
         admin:{
-          identificationNumber:'51010319740426136X',
+          identificationNumber:'',
           weixin:localStorage.getItem('weixin') || '',
-          verificationCode:'666666',
-          phoneNumber:'13926113495',
+          verificationCode:'',
+          phoneNumber:'',
         }
       }
     },
@@ -91,7 +91,7 @@
                  config.wxUserInfo.headimgurl = data.headimgurl
               }
            }).catch(err=>{
-
+						
            })
         }
         
@@ -131,6 +131,7 @@
 					nickName: config.wxUserInfo.nickname
         }).then(res => {
           let data = res.data.data;
+					console.log(data);
           if(res.data.status == '200' && res.data.data){
             localStorage.setItem('weixin',res.data.data.weixin)
 						this.$f7router.navigate('/home/')

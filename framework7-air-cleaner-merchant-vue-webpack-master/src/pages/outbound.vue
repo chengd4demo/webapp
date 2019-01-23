@@ -73,6 +73,7 @@
 </template>
 <script>
 	import api from "../network";
+	import CommonUtils from '@/util/common';
 	export default {
 		data() {
 			return {
@@ -117,7 +118,7 @@
 		},
 		methods: {
 				cancelBtn(args){
-					alert(args.id);
+					console.log(args.id);
 					const self = this;
 					const app = self.$f7;
 					const router = self.$f7router;

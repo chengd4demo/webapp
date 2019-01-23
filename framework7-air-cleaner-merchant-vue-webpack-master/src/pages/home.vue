@@ -155,15 +155,20 @@
 				const self = this;
 					api.queryUserInfo(weixin).then(res=>{
 						let data = res.data.data;
-						if(data){
+						if(res.data.status == '200' && data){
 							let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+							data.weixin = self.weixin
 							data.name = config.wxUserInfo.nickname
 							self.nickName = data.nickName || data.name
 							self.type = data.userType
-							if(config.wxUserInfo.headimgurl) data.headerUrl = config.wxUserInfo.headimgurl
+							data.headerUrl = config.wxUserInfo.headimgurl || M_USER_INFO.headerUrl
 							self.headUrl = config.wxUserInfo.headimgurl || M_USER_INFO.headerUrl
 							localStorage.setItem('M_USER_INFO',JSON.stringify(data))
 							self.queryAccount(self.weixin)
+						}else{
+							localStorage.removeItem('weixin')
+							localStorage.removeItem('M_USER_INFO')
+							location.reload()
 						}
 					}).catch(err => {
 						alert('系统繁忙')
