@@ -66,10 +66,8 @@
           alert(this.priceId)
         api.pay('?priceId=' + this.priceId + '&machNo='+ this.deviceSequence).then(res=>{
           let data = res.data.data
-            alert(res.data.status == '200' && data)
           if (res.data.status == '200' && data){
-            console.log(url)
-            window.location.href = url
+            window.location.href = data
           } else {
             alert(res.data.description)
           }

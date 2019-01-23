@@ -17,7 +17,8 @@ import SignPage from './pages/sign.vue';
 import PanelLeftPage from './pages/panel-left.vue';
 import PanelRightPage from './pages/panel-right.vue';
 import CenterPage from './pages/homepage/center.vue';
-import CommonUtils from '@/util/common'
+import CommonUtils from '@/util/common';
+import wx from 'weixin-js-sdk';
 
 
 export default [
@@ -27,10 +28,39 @@ export default [
     redirect: function (route, resolve, reject) {
       let weixin = localStorage.getItem('weixin')
       let userInfo = localStorage.getItem('USER_INFO')
-      let sceneStr = CommonUtils.getQueryString('scene_str');
+      let sceneStr = CommonUtils.getQueryString('scene_str')
+      let jsapiQuery = CommonUtils.getQueryString('jsapi')
       if(sceneStr) {
         resolve('/price/machno/'+sceneStr+'/devicesequence/'+sceneStr+'/')
-      } else {
+      } else if(jsapiQuery) {
+        wx.config({
+          debug: false,
+          appId: CommonUtils.getQueryString('appId'),
+          timestamp: CommonUtils.getQueryString('timeStamp'),
+          nonceStr: CommonUtils.getQueryString('nonceStr'),
+          signature: CommonUtils.getQueryString('signature'),
+          jsApiList: ['chooseWXPay'],
+        })
+        wx.ready(function(){
+          wx.chooseWXPay({
+            timestamp: CommonUtils.getQueryString('timeStamp'),
+            nonceStr: CommonUtils.getQueryString('nonceStr'),
+            package: CommonUtils.getQueryString('packages'),
+            signType: CommonUtils.getQueryString('signType'),
+            paySign: CommonUtils.getQueryString('paySign'),
+            success: function (res) {
+              alert("支付成功")
+              resolve('/msg/')
+            },
+            fail:function(res) {
+              alert("支付失败")
+            },
+            cancel:function(res) {
+              alert("支付取消,欢迎下次使用")
+            }
+          })
+        })
+      }else {
         if(userInfo !=null && weixin!= null) {
           resolve('/center/')
         } else {
