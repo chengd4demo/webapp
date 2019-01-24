@@ -3,6 +3,7 @@
 
   <f7-page class="no-navbar">
     <div class="center">提示</div>
+    <!--支付成功-->
     <div class="cancel" v-if="this.wxMsgType == 'success'">
       <div class="img-1">
         <img src="../img/success.svg">
@@ -28,8 +29,9 @@
           </tr>-->
         </table>
       </div>
-      <a href="#"><p class="button button-fill" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p></a>
+      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
     </div>
+    <!--支付失败-->
     <div class="other" v-else>
       <div class="img-1">
         <img src="../img/fail.svg">
@@ -45,29 +47,27 @@
           </tr>
         </table>
       </div>
+      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
+      <!--取消支付-->
       <div class="explain"  v-if="this.wxMsgType == 'cancel'">
-        <div class="message-success">对不起，支付失败</div>
+        <div class="message-success">取消支付成功</div>
         <table>
-          <tr>
-            <td style="text-align: center">请检查您的余额是否充足,或者网络是否已连接</td>
-          </tr>
           <tr>
             <td style="text-align: center">如需再次使用,请重新发起支付</td>
           </tr>
         </table>
       </div>
+      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
+      <!--支付异常-->
       <div class="explain"  v-if="this.wxMsgType == 'other'">
-        <div class="message-success">对不起，支付失败</div>
+        <div class="message-success">支付异常</div>
         <table>
           <tr>
-            <td style="text-align: center">请检查您的余额是否充足,或者网络是否已连接</td>
-          </tr>
-          <tr>
-            <td style="text-align: center">如需再次使用,请重新发起支付</td>
+            <td style="text-align: center">请继续支付</td>
           </tr>
         </table>
       </div>
-      <a href="/center/"><p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">返回(测试)</p></a>
+      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
     </div>
     
   </f7-page>
@@ -105,8 +105,16 @@
             }
           }
         }).catch(err => {
-           alert("获取支付信息结果失败")
+          this.alertMsg("获取支付信息结果失败")
         })
+      },
+      alertMsg(msg){
+        let toastTop = this.$f7.toast.create({
+          text: msg,
+          position: 'top',
+          closeTimeout: 1000,
+        })
+        toastTop.open();
       }
     }
   }
