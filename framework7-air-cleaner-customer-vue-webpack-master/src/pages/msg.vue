@@ -35,7 +35,7 @@
     <!--支付失败-->
     <!--<div class="cancel" v-else>
       <div class="img-1">
-        <img src="../img/success.svg">
+        <img src="../img/fail.svg">
       </div>
       <div class="explain">
         <div class="message-success">对不起，支付失败</div>
