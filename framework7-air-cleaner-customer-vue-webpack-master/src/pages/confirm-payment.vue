@@ -63,15 +63,20 @@
     methods:{
     
       pay() {
-          alert(this.priceId)
+          /*alert(this.priceId)*/
         api.pay('?priceId=' + this.priceId + '&machNo='+ this.deviceSequence).then(res=>{
+          const self = this;
+          const app = self.$f7;
+          app.dialog.preloader('加载中...');
           let data = res.data.data
           if (res.data.status == '200' && data){
-            window.location.href = data
+            setTimeout(function () {
+              app.dialog.close();
+              window.location.href = data
+            }, 3000);
           } else {
             alert(res.data.description)
           }
-
         }).catch(err => {
 
         })
@@ -136,4 +141,5 @@
     text-align: center;
     background: #E94E24;
   }
+
 </style>
