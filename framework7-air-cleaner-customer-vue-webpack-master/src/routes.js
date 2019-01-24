@@ -49,14 +49,13 @@ export default [
             signType: CommonUtils.getQueryString('signType'),
             paySign: CommonUtils.getQueryString('paySign'),
             success: function (res) {
-              alert("支付成功")
-              resolve('/msg/')
+              resolve('/msg/billingNumber' + billingNumber + '/type/' + "success")
             },
             fail:function(res) {
-              alert("支付失败")
+              resolve('/msg/billingNumber' + billingNumber + '/type/' + "fail")
             },
             cancel:function(res) {
-              alert("支付取消,欢迎下次使用")
+              resolve('/msg/billingNumber' + billingNumber + '/type/' + "cancel")
             }
           })
         })
@@ -106,7 +105,7 @@ export default [
     component:MonitorPage,
   },
   {
-    path:'/msg/',
+    path:'/msg/billingNumber/:billingNumber/type/:type',
     component:MsgPage,
   },
   {
