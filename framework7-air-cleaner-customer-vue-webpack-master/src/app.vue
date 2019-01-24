@@ -139,29 +139,3 @@ export default {
   }
 }
 </script>
-<style>
-  /*Android iOS 自定义加载*/
-  .md .preloader-inner .preloader-inner-half-circle {
-    border: 4px solid #E94E24;
-  }
-  .md .dialog-preloader .dialog-title, .md .dialog-progress .dialog-title, .md .dialog-preloader .dialog-inner, .md .dialog-progress .dialog-inner {
-    text-align: center;
-    color: #E94E24;
-  }
-  .ios .dialog-title {
-    font-size: 18px;
-    text-align: center;
-    font-weight: 600;
-    color: #E94E24;
-  }
-  .ios .preloader {
-    width: 20px;
-    height: 20px;
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20viewBox%3D%270%200%20120%20120%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20xmlns%3Axlink%3D%27http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%27%3E%3Cdefs%3E%3Cline%20id%3D%27l%27%20x1%3D%2760%27%20x2%3D%2760%27%20y1%3D%277%27%20y2%3D%2727%27%20stroke%3D%27%23E94E24%27%20stroke-width%3D%2711%27%20stroke-linecap%3D%27round%27%2F%3E%3C%2Fdefs%3E%3Cg%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(30%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(60%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(90%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(120%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.27%27%20transform%3D%27rotate(150%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.37%27%20transform%3D%27rotate(180%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.46%27%20transform%3D%27rotate(210%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.56%27%20transform%3D%27rotate(240%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.66%27%20transform%3D%27rotate(270%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.75%27%20transform%3D%27rotate(300%2060%2C60)%27%2F%3E%3Cuse%20xlink%3Ahref%3D%27%23l%27%20opacity%3D%27.85%27%20transform%3D%27rotate(330%2060%2C60)%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-    background-position: 50%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    -webkit-animation: ios-preloader-spin 1s steps(12, end) infinite;
-    animation: ios-preloader-spin 1s steps(12, end) infinite;
-  }
-</style>

@@ -3,8 +3,7 @@
 
   <f7-page class="no-navbar">
     <div class="center">提示</div>
-    <!--支付成功-->
-    <div class="cancel" v-if="">
+    <div class="cancel">
       <div class="img-1">
         <img src="../img/success.svg">
       </div>
@@ -29,27 +28,8 @@
           </tr>-->
         </table>
       </div>
-      <a href="/center/"><p class="button button-fill" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">设备监控(测试)</p></a>
-    </div>
-
-    <!--支付失败-->
-    <!--<div class="cancel" v-else>
-      <div class="img-1">
-        <img src="../img/fail.svg">
-      </div>
-      <div class="explain">
-        <div class="message-success">对不起，支付失败</div>
-        <table>
-          <tr>
-            <td style="text-align: center">请检查您的余额是否充足,或者网络是否已连接</td>
-          </tr>
-          <tr>
-            <td style="text-align: center">如需再次使用,请重新发起支付</td>
-          </tr>
-        </table>
-      </div>
       <a href="/center/"><p class="button button-fill" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">返回(测试)</p></a>
-    </div>-->
+    </div>
 
   </f7-page>
 </template>
@@ -61,7 +41,7 @@
         realPrice: config.confirmPayment.realPrice,
         deviceSequence: config.confirmPayment.deviceSequence,
         costTime: config.confirmPayment.costTime,
-        yhj:false,
+        yhj:false
       }
     },
     methods:{

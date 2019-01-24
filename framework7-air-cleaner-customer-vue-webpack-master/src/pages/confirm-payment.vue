@@ -63,17 +63,10 @@
     methods:{
     
       pay() {
-          /*alert(this.priceId)*/
         api.pay('?priceId=' + this.priceId + '&machNo='+ this.deviceSequence).then(res=>{
-          const self = this;
-          const app = self.$f7;
-          app.dialog.preloader('加载中...');
           let data = res.data.data
           if (res.data.status == '200' && data){
-            setTimeout(function () {
-              app.dialog.close();
-              window.location.href = data
-            }, 3000);
+            window.location.href = data
           } else {
             alert(res.data.description)
           }
@@ -141,5 +134,4 @@
     text-align: center;
     background: #E94E24;
   }
-
 </style>
