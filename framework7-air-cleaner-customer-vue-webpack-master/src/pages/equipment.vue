@@ -25,7 +25,8 @@
     </f7-page>
 </template>
 <script>
-import api from '../network'
+import api from '../network';
+import CommonUtils from '@/util/common';
   export default {
      data() {
       return {
@@ -34,7 +35,8 @@ import api from '../network'
         loadingMore:false,
         loadedEnd:false,
         showPreloader:true,
-        deviceMonitorList:[]
+        deviceMonitorList:[],
+				id:''
       }
     },
     created(){
@@ -46,10 +48,13 @@ import api from '../network'
         var self = this;
         var pageNum = num||1;
         var pageSize = 30;
-
+				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {};
+					if(USER_INFO){
+						self.id = USER_INFO.id
+					}
         api.queryDeviceMonitorPage({
           data:{
-            customerId:'default'
+            customerId:self.id
           },
           page:{
              page:pageNum,
