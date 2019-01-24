@@ -63,7 +63,6 @@
     methods:{
     
       pay() {
-          alert(this.priceId)
         api.pay('?priceId=' + this.priceId + '&machNo='+ this.deviceSequence).then(res=>{
           let data = res.data.data
           if (res.data.status == '200' && data){
@@ -71,7 +70,6 @@
           } else {
             alert(res.data.description)
           }
-
         }).catch(err => {
 
         })
