@@ -101,6 +101,7 @@ export default {
     queryObtainUserInfo(params) {
       return fetchPost('/customer-web-api/user-channel/wx/query/',params)
     },
+
     /**
 		 * 
 		 * 用户授权
@@ -108,13 +109,22 @@ export default {
     authorize() {
       return fetchPost('/customer-web-api/user-channel/wx/auth')
     },
+
     /**
 		 * 
 		 * 支付
      */
     pay(params) {
       return fetchGet('/customer-web-api/pay-channel/pay'+params)
-    } 
+    } ,
+
+    /**
+     * 
+     * 支付信息查询
+     */
+    queryWxMsg(parames) {
+      return fetchPost('/customer-web-api/pay-channel/wx/msg'+params)
+    }
 
 
 }
