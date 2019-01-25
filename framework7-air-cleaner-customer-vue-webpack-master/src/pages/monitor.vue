@@ -4,7 +4,7 @@
   <f7-page>
     <f7-navbar class="header-title" title="我的PM2.5" back-link="" style="background:#E94E24;"></f7-navbar>
     <div class="header-quality">
-      <div class="air-quality">55</div>
+      <div class="air-quality">{{pm25}}</div>
       <p class="air-condition">空气状况:良好</p>
       <p class="health-advice">健康建议:极少数敏感人群应减少户外运动</p>
     </div>
@@ -40,7 +40,8 @@
         deviceSequence:this.$f7route.params.devicesequence,
         costTime:'-',
         lastTime:'-',
-        deviceState:'-'
+        deviceState:'-',
+        pm25:0,
       }
     },
     created(){
@@ -55,6 +56,7 @@
           self.deviceState = data.deviceState;
           self.costTime = data.costTime;
           self.lastTime = data.lastTime;
+          self.pm25 = self.priceObj.pm25;
         }).catch(function(err){
          console.log(err+'sss')
         })

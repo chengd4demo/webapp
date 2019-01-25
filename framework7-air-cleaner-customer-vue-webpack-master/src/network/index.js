@@ -122,7 +122,7 @@ export default {
      * 
      * 支付信息查询
      */
-    queryWxMsg(parames) {
+    queryWxMsg(params) {
       return fetchPost('/customer-web-api/pay-channel/wx/msg'+params)
     }
 

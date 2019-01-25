@@ -49,13 +49,14 @@ export default [
             signType: CommonUtils.getQueryString('signType'),
             paySign: CommonUtils.getQueryString('paySign'),
             success: function (res) {
-              resolve('/msg/billingNumber' + billingNumber + '/type/' + "success")
+
+              resolve('/msg/billingNumber/' + CommonUtils.getQueryString('billingNumber') + '/type/' + "success")
             },
             fail:function(res) {
-              resolve('/msg/billingNumber' + billingNumber + '/type/' + "fail")
+              resolve('/msg/billingNumber/' + CommonUtils.getQueryString('billingNumber') + '/type/' + "fail")
             },
             cancel:function(res) {
-              resolve('/msg/billingNumber' + billingNumber + '/type/' + "cancel")
+              resolve('/msg/billingNumber/' + CommonUtils.getQueryString('billingNumber') + '/type/' + "cancel")
             }
           })
         })

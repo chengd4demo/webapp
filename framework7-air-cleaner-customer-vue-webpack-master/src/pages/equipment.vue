@@ -35,8 +35,7 @@ import CommonUtils from '@/util/common';
         loadingMore:false,
         loadedEnd:false,
         showPreloader:true,
-        deviceMonitorList:[],
-				id:''
+        deviceMonitorList:[]
       }
     },
     created(){
@@ -48,13 +47,9 @@ import CommonUtils from '@/util/common';
         var self = this;
         var pageNum = num||1;
         var pageSize = 30;
-				let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {};
-					if(USER_INFO){
-						self.id = USER_INFO.id
-					}
         api.queryDeviceMonitorPage({
           data:{
-            customerId:self.id
+            customerId:localStorage.getItem('weixin')
           },
           page:{
              page:pageNum,

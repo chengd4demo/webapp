@@ -12,7 +12,7 @@
         <dl>
           <dd>使用时间：{{item.usedate}}</dd>
           <dd>使用时长：{{item.costtime}}小时</dd>
-          <dd>计费金额：{{item.unitprice}}元</dd>
+          <dd>计费金额：{{item.realyprice}}元</dd>
           <dd><img src="../img/map.png" style="vertical-align: middle"><i>{{item.address}}</i></dd>
         </dl>
       </div>
@@ -70,7 +70,6 @@ import CommonUtils from '@/util/common';
         loadedEnd:false,
         showPreloader:true,
         recordList:[],
-				id:''
       }
     },
     created(){
@@ -82,13 +81,10 @@ import CommonUtils from '@/util/common';
         var self = this;
         var pageNum = num||1;
         var pageSize = 30;
-					let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {};
-					if(USER_INFO){
-						self.id = USER_INFO.id
-					}
         api.queryDeviceMonitorPage({
           data:{
-            customerId:self.id
+            customerId:localStorage.getItem('weixin'),
+            queryType:'record'
           },
           page:{
             page:pageNum,

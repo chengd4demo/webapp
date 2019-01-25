@@ -13,15 +13,15 @@
         <table>
           <tr>
             <td>设备序列号:</td>
-            <td><span class="span">{{deviceSequence}}</span></td>
+            <td><span class="span">{{machNo}}</span></td>
           </tr>
           <tr>
             <td>时长:</td>
-            <td><span class="span">{{costTime/60}}小时</span></td>
+            <td><span class="span">{{cashTime}}小时</span></td>
           </tr>
           <tr>
             <td>支付金额:</td>
-            <td><span class="span">{{realPrice}}元</span></td>
+            <td><span class="span">{{totalFee}}元</span></td>
           </tr>
           <!--<tr>
             <td>优惠卷:</td>
@@ -29,14 +29,14 @@
           </tr>-->
         </table>
       </div>
-      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
+      <a href="#"><p class="button button-fill" @click="close()" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p></a>
     </div>
     <!--支付失败-->
-    <div class="other" v-else>
+    <div class="other" v-if="wxMsgType=='fail' || wxMsgType=='cancel' || wxMsgType=='other'">
       <div class="img-1">
         <img src="../img/fail.svg">
       </div>
-      <div class="explain"  v-if="this.wxMsgType == 'fail'">
+      <div class="explain"  v-if="wxMsgType == 'fail'">
         <div class="message-success">对不起，支付失败</div>
         <table>
           <tr>
@@ -47,9 +47,8 @@
           </tr>
         </table>
       </div>
-      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
       <!--取消支付-->
-      <div class="explain"  v-if="this.wxMsgType == 'cancel'">
+      <div class="explain"  v-if="wxMsgType == 'cancel'">
         <div class="message-success">取消支付成功</div>
         <table>
           <tr>
@@ -57,23 +56,20 @@
           </tr>
         </table>
       </div>
-      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
       <!--支付异常-->
-      <div class="explain"  v-if="this.wxMsgType == 'other'">
+      <div class="explain"  v-if="wxMsgType == 'other'">
         <div class="message-success">支付异常</div>
         <table>
           <tr>
-            <td style="text-align: center">请继续支付</td>
+            <td style="text-align: center">支付请求失败,请重新扫码支付</td>
           </tr>
         </table>
       </div>
-      <p class="button button-fill close-popup" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p>
     </div>
-    
+
   </f7-page>
 </template>
 <script>
-  import config from '@/util/config'
   import api from '../network'
   export default {
     data(){
@@ -84,21 +80,29 @@
         totalFee:0,
         billingNumber: this.$f7route.params.billingNumber,
         type: this.$f7route.params.type,
-        wxMsgType:'other',
+        wxMsgType:'',
+        machNo:'',
+        cashTime:0
+
       }
+    },
+    created(){
+      this.queryMsg()
     },
     methods:{
       queryMsg() {
-        api.queryWxMsg('?billingNumber='+this.billingNumber +'&type' + this.type).then(res=>{
+        api.queryWxMsg('?billingNumber='+this.billingNumber +'&type=' + this.type).then(res=>{
           let data = res.data.data;
           if (res.data.status == '200' && data) {
             this.wxMsgType = data.wxMsgType
             if ('success' == this.wxMsgType) {
-              if (data.err_code == undefined) {
+              if (data.err_code == undefined || 'undefined' == data.err_code) {
                 this.transactionId = data.transaction_id
                 this.body = data.body
                 this.bankType = data.backType
                 this.totalFee = parseInt(data.total_fee)/100
+                this.machNo = data.device_info
+                this.cashTime = parseInt(data.cashTime) /60
               } else {
                 this.body=data.err_code_des
               }
@@ -115,6 +119,20 @@
           closeTimeout: 1000,
         })
         toastTop.open();
+      },
+      close() {
+        var userAgent = navigator.userAgent;
+        if (userAgent.indexOf("Firefox") != -1 || userAgent.indexOf("Chrome") != -1) {
+          window.location.href = "about:blank";
+        } else if (userAgent.indexOf('Android') > -1 || userAgent.indexOf('Linux') > -1) {
+          window.opener = null;
+          window.open('about:blank', '_self', '').close();
+        } else {
+          window.opener = null;
+          window.open("about:blank", "_self");
+          window.close();
+
+        }
       }
     }
   }
