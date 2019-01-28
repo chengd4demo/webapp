@@ -1,19 +1,26 @@
 <!-- center Page Template -->
 <template id="page-center">
-   
-    <f7-page class="no-navbar">
-      <!--头部logo-->
-         <div class="header">
-            <img class="header-img-1" src="../img/logo1.png">
-           <p>享.新.鲜</p>
-         </div>
-      <!--空气指数-->
-        <div class="mt">
-          <img id="mt-1" src="../img/pm2.5.png"/>
-          <i class="mt-2">{{pm25}}</i>
+
+  <f7-page class="no-navbar">
+    <!--头部logo-->
+    <div class="header">
+      <img class="header-img-1" src="../img/logo1.png">
+      <p>享.新.鲜</p>
+    </div>
+    <!--空气指数-->
+    <div class="particulate">
+      <div class="spinner-box">
+        <div class="circle-border">
+          <div class="circle-core"></div>
         </div>
-      <!--消费时间 价格-->
-      <div class="prices">
+      </div>
+      <div class="particulate-matter">
+        <h>PM 2.5</h>
+        <h3>{{pm25}}</h3>
+      </div>
+    </div>
+    <!--消费时间 价格-->
+    <div class="prices">
       <div v-for="(item, index) in priceList" :key="index" @click="onSelectPrice(index)">
         <a href="/confirm-payment/">
           <div class="price-item1" >
@@ -28,8 +35,8 @@
           </div>
         </a>
       </div>
-      </div>
-    </f7-page>
+    </div>
+  </f7-page>
 </template>
 <script>
   import api from '../network'
@@ -63,118 +70,208 @@
         })
       },
       onSelectPrice(index){
-         if(this.priceList.length!=0) {
-             config.confirmPayment.realPrice = this.priceList[index].realPrice;
-             config.confirmPayment.costTime = this.priceList[index].costTime;
-             config.confirmPayment.priceId = this.priceList[index].priceId;
-             config.confirmPayment.deviceSequence = this.deviceSequence;
-             config.confirmPayment.available = this.priceObj.available;
-             config.confirmPayment.onLine = this.priceObj.onLine;
-             config.confirmPayment.pm25 = this.priceObj.pm25;
-         }
+        if(this.priceList.length!=0) {
+          config.confirmPayment.realPrice = this.priceList[index].realPrice;
+          config.confirmPayment.costTime = this.priceList[index].costTime;
+          config.confirmPayment.priceId = this.priceList[index].priceId;
+          config.confirmPayment.deviceSequence = this.deviceSequence;
+          config.confirmPayment.available = this.priceObj.available;
+          config.confirmPayment.onLine = this.priceObj.onLine;
+          config.confirmPayment.pm25 = this.priceObj.pm25;
+        }
       }
     }
   }
 </script>
 <style type="text/css">
-.header{
-
-  width: 100%;
-  height: 200px;
-  text-align: center;
-  background: url("../img/bg-1.png");
-}
-.header-img-1{
-  width: 160px;
-  height: 70px;
-  margin-top: 25px;
-}
-.header p{
-  color: white;
-  margin-top: 8px;
-  font-size: 16px;
-  margin-left: 32px;
-  letter-spacing:30px;
-}
-.mt{
-  margin-top: -80px;
-  text-align: center;
-  margin-left: -20px;
-  position:relative;
-}
-#mt-1{
-  width: 120px;
-  height: 120px;
-  margin-top: 20px;
-  margin-left: 20px;
-  border-radius: 100px;
-
-}
-  .mt-2{
-    width: 50px;
-    height: 50px;
-    color: #ffe7ce;
-    margin-left: -86px;
-    margin-top: 105px;
-    position: absolute;
+  .header{
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    background: url("../img/bg-1.png");
   }
-.price-item1{
-  display: flex;
-  margin-top: 20px;
-}
-.prices{
-  background: transparent;
-  padding: 15px;
-}
-.price-time{
-  background: #f55f51;
-  padding: 10px;
-  color: #fff;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
-  width: 120px;
-  text-align: center;
-  font-size: 1.4em;
-  font-weight: bold;
-  box-shadow: 0 2px 0 #c93e34;
-}
-.price-value{
-  flex: 1;
-  background: #fff;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 2px 0 #a9afab;
-}
-.price,.del-price{
-  flex:1;
-  text-align: center;
-  font-size: 1.4em;
-  font-weight: bold;
-}
-.price em,.del-price em{
-  font-size: .8em;
-}
-.price{
-  border-right: 2px solid #ddd;
-  color: #ed4634;
-}
-.del-price{
-  color: #8c8c8c;
-  position: relative;
-}
-.del-price:after{
-  content: '';
-  position: absolute;
-  border-top: 4px solid #8C8C8C;
-  -webkit-transform: scaleY(.5);
-  transform: scaleY(.5);
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0;
-  top: auto;
-  bottom: calc(50% - 2px);
-  width: 30px;
-  left: calc(50% - 15px);
-}
+  .header-img-1{
+    width: 160px;
+    height: 70px;
+    margin-top: 25px;
+  }
+  .header p{
+    color: white;
+    margin-top: 8px;
+    font-size: 16px;
+    margin-left: 32px;
+    letter-spacing:30px;
+  }
+  .particulate{
+    margin-top: -60px;
+    text-align: center;
+    position:relative;
+  }
+  .particulate-matter{
+    width: 100px;
+    height: 30px;
+    margin: -90px auto;
+    position: relative;
+    color: white;
+  }
+  .particulate-matter h{
+    font-size: 30px;
+    font-family: initial;
+    font-weight: 100;
+  }
+  .particulate-matter h3{
+    font-size: 18px;
+    margin: auto;
+    font-family: initial;
+    font-weight: 100;
+  }
+  .price-item1{
+    display: flex;
+    margin-top: 20px;
+  }
+  .prices{
+    margin-top: 150px;
+    background: transparent;
+    padding: 15px;
+  }
+  .price-time{
+    background: #f55f51;
+    padding: 10px;
+    color: #fff;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    width: 120px;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    box-shadow: 0 2px 0 #c93e34;
+  }
+  .price-value{
+    flex: 1;
+    background: #fff;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 0 #a9afab;
+  }
+  .price,.del-price{
+    flex:1;
+    text-align: center;
+    font-size: 1.4em;
+    font-weight: bold;
+  }
+  .price em,.del-price em{
+    font-size: .8em;
+  }
+  .price{
+    border-right: 2px solid #ddd;
+    color: #ed4634;
+  }
+  .del-price{
+    color: #8c8c8c;
+    position: relative;
+  }
+  .del-price:after{
+    content: '';
+    position: absolute;
+    border-top: 4px solid #8C8C8C;
+    -webkit-transform: scaleY(.5);
+    transform: scaleY(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    top: auto;
+    bottom: calc(50% - 2px);
+    width: 30px;
+    left: calc(50% - 15px);
+  }
+  /*旋转*/
+  /* KEYFRAMES */
+
+  @keyframes spin {
+    from {
+      transform: rotate(0);
+    }
+    to{
+      transform: rotate(359deg);
+    }
+  }
+
+  @keyframes configure-clockwise {
+    0% {
+      transform: rotate(0);
+    }
+    25% {
+      transform: rotate(90deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    75% {
+      transform: rotate(270deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes configure-xclockwise {
+    0% {
+      transform: rotate(45deg);
+    }
+    25% {
+      transform: rotate(-45deg);
+    }
+    50% {
+      transform: rotate(-135deg);
+    }
+    75% {
+      transform: rotate(-225deg);
+    }
+    100% {
+      transform: rotate(-315deg);
+    }
+  }
+  @keyframes pulse {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: .25;
+      transform: scale(.75);
+    }
+  }
+  /* GRID STYLING */
+  * {
+    box-sizing: border-box;
+  }
+  .spinner-box {
+    width: 120px;
+    height: 120px;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    margin: auto;
+  }
+  /* SPINNING CIRCLE */
+  .circle-border {
+    width: 120px;
+    height: 120px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgb(63,249,220);
+    background: linear-gradient(0deg, #8BC34A 33%, rgb(123, 199, 233) 100%);
+    animation: spin .8s linear 0s infinite;
+  }
+  .circle-core {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(121, 85, 72, 0.17);
+    border-radius: 50%;
+  }
 </style>
