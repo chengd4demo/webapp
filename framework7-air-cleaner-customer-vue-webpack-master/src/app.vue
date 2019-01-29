@@ -164,4 +164,13 @@ export default {
     -webkit-animation: ios-preloader-spin 1s steps(12, end) infinite;
     animation: ios-preloader-spin 1s steps(12, end) infinite;
   }
+  .ios .navbar a.link {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    line-height: 44px;
+    height: 44px;
+    color: white;
+  }
 </style>
