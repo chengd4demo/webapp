@@ -2,8 +2,9 @@
 <template id="page-center">
 
   <f7-page>
-    <f7-navbar class="header-title" title="我的PM2.5" back-link="" style="background:#E94E24;"></f7-navbar>
-    <div class="header-quality">
+    <f7-navbar class="header-title" title="我的PM2.5" back-link="" style="background:rgba(255, 255, 255, 0.44);opacity: inherit;"></f7-navbar>
+    <div class="header-quality"></div>
+    <div class="quality">
       <div class="air-quality">{{pm25}}</div>
       <p class="air-condition">空气状况:良好</p>
       <p class="health-advice">健康建议:极少数敏感人群应减少户外运动</p>
@@ -69,19 +70,26 @@
 
 </script>
 <style type="text/css">
-.header-quality{
-  width: 100%;
-  height: 200px;
-  text-align: center;
-  background: url("../img/sl.jpg");
-}
+  .header-quality{
+    width: 100%;
+    height: 280px;
+    margin-top: -70px;
+    text-align: center;
+    position: absolute;
+    background: url("../img/sl.jpg");
+  }
+  .quality{
+    width: 100%;
+    height: 200px;
+    color: white;
+    text-align: center;
+    position: relative;
+  }
   .air-quality{
     font-size: 80px;
-    color: white;
   }
   .header-quality p{
     font-size: 14px;
-    color: white;
   }
   .running-state{
     margin-top: 20px;

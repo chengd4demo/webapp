@@ -57,7 +57,7 @@
             <div class="item-inner">
               <div class="item-title item-label person" style="width:37px;;">生日:</div>
               <div class="item-input-wrap" style="width: 100%;">
-                <input type="text" v-model = "birthday" disabled ='true'  placeholder="请选择日期">
+                <input type="text" v-model = "birthday" disabled ='true'  placeholder="">
               </div>
             </div>
           </li>
