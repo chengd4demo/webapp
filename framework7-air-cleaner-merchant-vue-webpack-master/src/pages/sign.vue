@@ -14,7 +14,7 @@
 			</div>
       <div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
 				<span style="width:70%;float: left;">
-					<input type="text" v-model="admin.verificationCode"  placeholder="输入验证码"  @keyup = "keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
+					<input type="number" v-model="admin.verificationCode"  placeholder="输入验证码"  @keyup = "keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"/>
 				</span>
         <span style="width: 30%; ">
 					<a href="#" id="code" @click="countDown" class="button button-fill" :class="{disabled: !this.canClick}"
