@@ -20,7 +20,7 @@
         </tr>
         <tr>
           <td>是否可用:</td>
-          <td><span class="span-2">{{available ? '可用':'不可用'}}</span></td>
+          <td><span class="span-2">{{onLine ? '可用':'不可用'}}</span></td>
         </tr>
         <tr>
           <td>PM2.5:</td>

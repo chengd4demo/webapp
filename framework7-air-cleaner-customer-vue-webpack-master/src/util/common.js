@@ -58,6 +58,29 @@ const CommonUtils = {
         var r = window.location.search.substr(1).match(reg);  
         if (r != null) return unescape(r[2]); return null;  
                 
+    },
+    getPm25Grade(pm25) {
+      var result = {}
+      if (0 <= pm25 && pm25<=50) {
+        result.pm25Val = '优'
+        result.pmMsg = '可多参加户外活动呼吸新鲜空气'
+      } else if (51 <= pm25 && pm25<=100) {
+        result.pm25Val = '良'
+        result.pmMsg = '除少数对某些污染物特别容易过敏的人群外，其他人群可以正常进行室外活动。'
+      } else if (101 <= pm25 && pm25<=150) {
+        result.pm25Val = '轻度污染'
+        result.pmMsg = '敏感人群需减少体力消耗较大的户外活动'
+      } else if (151 <= pm25 && pm25<=200) {
+        result.pm25Val = '中度污染'
+        result.pmMsg = '敏感人群应尽量减少外出，一般人群适当减少户外运动'
+      } else if (201 <= pm25 && pm25<=300) {
+        result.pm25Val = '重度污染'
+        result.pmMsg = '敏感人群应停止户外运动，一般人群尽量减少户外运动'
+      } else if(pm25 > 300) {
+        result.pm25Val = '严重污染'
+        result.pmMsg = '除有特殊需要的人群外，尽量不要留在室外'
+      }
+      return result;
     }
 }
 

@@ -6,8 +6,8 @@
     <div class="header-quality"></div>
     <div class="quality">
       <div class="air-quality">{{pm25}}</div>
-      <p class="air-condition">空气状况:良好</p>
-      <p class="health-advice">健康建议:极少数敏感人群应减少户外运动</p>
+      <p class="air-condition">空气状况:{{rank}}</p>
+      <p class="health-advice">健康建议:{{tips}}</p>
     </div>
     <div class="running-state">
       <table>
@@ -34,6 +34,7 @@
 </template>
 <script>
   import api from '../network'
+  import CommonUtils from '@/util/common'
   export default {
     data() {
       return {
@@ -43,6 +44,8 @@
         lastTime:'-',
         deviceState:'-',
         pm25:0,
+        rank:'',
+        tips:''
       }
     },
     created(){
@@ -53,11 +56,14 @@
       queryDeviceMonitor(param){
         var self = this;
         api.queryDeviceMonitor(param).then(function(res){
-          var data = res.data.data;
+          let data = res.data.data
           self.deviceState = data.deviceState;
           self.costTime = data.costTime;
           self.lastTime = data.lastTime;
-          self.pm25 = self.priceObj.pm25;
+          self.pm25 = data.pm25;
+          let tipsInfo = CommonUtils.getPm25Grade(self.pm25)
+          self.rank = tipsInfo.pm25Val
+          self.tips = tipsInfo.pmMsg
         }).catch(function(err){
          console.log(err+'sss')
         })
