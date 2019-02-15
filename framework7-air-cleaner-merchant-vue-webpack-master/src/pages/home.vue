@@ -138,7 +138,6 @@
 						let data = res.data.data;
 						self.amount = data.totalAcmount
 						self.availableAmount = data.availableAmount
-						console.log(data.availableAmount)
 						let num = 0;
 						var t = setInterval(function(){
 						   num++;
