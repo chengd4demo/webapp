@@ -138,12 +138,15 @@
 						let data = res.data.data;
 						self.amount = data.totalAcmount
 						self.availableAmount = data.availableAmount
+						console.log(data.availableAmount)
 						let num = 0;
 						var t = setInterval(function(){
 						   num++;
 							self.amount = num
-						   if(num==self.availableAmount){
+						   if(self.amount>=self.availableAmount){
 								clearInterval(t);
+						   }else{
+							   self.amount = num 
 						   }       
 						},1);
 					}
