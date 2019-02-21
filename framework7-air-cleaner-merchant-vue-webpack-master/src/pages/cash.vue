@@ -42,22 +42,52 @@
 		},
 		methods:{
 			openPassword() {
-				const self = this;
-				const app = self.$f7;
-				const router = self.$f7router;
-				console.log(123);
+				let self = this;
+				let app = self.$f7;
+				let router = self.$f7router;
+				console.log('cash');
 				app.params.dialog.PreloaderTitle = '加载中...'
 				app.params.dialog.buttonCancel = '<span style="color:black">取消</span>'
 				app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
+				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO'))
+				
+				if(M_USER_INFO.alipay == false){
+					self.alertMsg("未设置提现密码，请设置提现密码！")
+					setTimeout(function(){
+						self.$f7router.navigate('/set-password/')
+					},2000)
+					return
+				}
 				app.dialog.password('','请输入提现密码', (password) => {
-					if (password!=='' && password.length!==0){
-						password = md5(password)
-					//调用接口根据接口返回的状态提示
-					} else {
-						self.alertMsg('请输入提现密码')
+					let weixin = M_USER_INFO.weixin
+					let identificationNumber = M_USER_INFO.identificationNumber
+					if(weixin==null){
+						self.alertMsg("登录失效，请重新验证！")
+						setTimeout(function(){
+							self.$f7router.navigate('/sign/')
+						},2000)
+						return
 					}
-				});
-			},
+					if (password!=='' && password.length!==0){
+						password =md5(password)
+							api.applyForAccountOutbound({
+								"password":password,
+								"amount":this.amount,
+								"weixin":weixin,
+								"identificationNumber":identificationNumber
+							}).then(res =>{
+									let data = res.data.data;
+										if(res.data.description === 'success') {
+											self.alertMsg('提现申请已提交!')
+									}else{
+											self.alertMsg('提现申请失败,请重新提交！')
+									}
+								})
+							} else {
+								self.alertMsg('请输入提现密码!')
+							}
+							})
+					},
 			keyDown(){
 					if (this.amount!==""&&this.amount!=="0") {
 						this.canInput = false

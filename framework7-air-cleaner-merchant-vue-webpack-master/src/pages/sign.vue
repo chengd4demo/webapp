@@ -125,16 +125,16 @@
           verificationCode: this.admin.verificationCode,
           weixin:this.admin.weixin || config.wxUserInfo.openid,
           identificationNumber:this.admin.identificationNumber,
-					headerUrl:config.wxUserInfo.headimgurl,
+		  headerUrl:config.wxUserInfo.headimgurl,
           sex:config.wxUserInfo.sex,
-					address:config.wxUserInfo.country + ' ' + config.wxUserInfo.province + ' ' + config.wxUserInfo.city,
-					nickName: config.wxUserInfo.nickname
+		  address:config.wxUserInfo.country + ' ' + config.wxUserInfo.province + ' ' + config.wxUserInfo.city,
+		  nickName: config.wxUserInfo.nickname
         }).then(res => {
           let data = res.data.data;
 					console.log(data);
           if(res.data.status == '200' && res.data.data){
             localStorage.setItem('weixin',res.data.data.weixin)
-						this.$f7router.navigate('/home/')
+			this.$f7router.navigate('/home/')
           }
         }).catch(err =>{
           this.alertMsg('服务器繁忙')
