@@ -73,7 +73,7 @@
             setTimeout(function () {
               app.dialog.close();
               window.location.href = data
-            }, 3000);
+            }, 1000);
           } else {
             this.alertMsg(res.data.description)
           }

@@ -29,7 +29,7 @@
           </tr>-->
         </table>
       </div>
-      <a href="#"><p class="button button-fill" @click="close()" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p></a>
+      <!--<a href="#"><p class="button button-fill" @click="close()" style="margin-top: 50px; margin-left: 5%; width:90%;background:#e94e24;">关闭</p></a>-->
     </div>
     <!--支付失败-->
     <div class="other" v-if="wxMsgType=='fail' || wxMsgType=='cancel' || wxMsgType=='other'">
