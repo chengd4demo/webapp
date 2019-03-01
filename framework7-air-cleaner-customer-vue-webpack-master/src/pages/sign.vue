@@ -165,9 +165,9 @@
 						localStorage.setItem('weixin',res.data.data.weixin)
 						this.$f7router.navigate('/center/')
 					} else {
-						if (res.data.status == 'EP500') {
-							this.alertMsg('服务器繁忙')
-						} else if(res.data.status == '1013'){
+            if (res.data.status == 'EP500') {
+              this.alertMsg('服务器繁忙')
+            } else if(res.data.status == '1013'){
               this.alertMsg('手机号码或验证码有误,请重新输入')
             }else{
               this.alertMsg(res.data.description)
