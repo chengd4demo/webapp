@@ -45,6 +45,7 @@
   .mv-3 dl dd img{
     width: 13px;
     height: 13px;
+    margin-bottom: 3px;
   }
   .mv-3 dl dd i{
     margin-left: 5px;
