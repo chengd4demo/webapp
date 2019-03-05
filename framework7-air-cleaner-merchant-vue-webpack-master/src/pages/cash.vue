@@ -33,6 +33,7 @@
 	import md5 from 'js-md5'
 	export default {
 		data(){
+			console.log(777);
 			return {
 				availableAmount:this.$f7route.params.availableAmount | 0,
 				totalAcmount:this.$f7route.params.totalAcmount | 0,
@@ -50,13 +51,8 @@
 				app.params.dialog.buttonCancel = '<span style="color:black">取消</span>'
 				app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
 				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO'))
-				
 				if(M_USER_INFO.alipay == false){
-					self.alertMsg("未设置提现密码，请设置提现密码！")
-					setTimeout(function(){
-						self.$f7router.navigate('/set-password/')
-					},2000)
-					return
+					self.$f7router.navigate('/set-password/')
 				}
 				app.dialog.password('','请输入提现密码', (password) => {
 					let weixin = M_USER_INFO.weixin
@@ -66,7 +62,6 @@
 						setTimeout(function(){
 							self.$f7router.navigate('/sign/')
 						},2000)
-						return
 					}
 					if (password!=='' && password.length!==0){
 						password =md5(password)
@@ -74,13 +69,23 @@
 								"password":password,
 								"amount":this.amount,
 								"weixin":weixin,
+								"name":M_USER_INFO.nickName,
+								"userType":M_USER_INFO.userType,
 								"identificationNumber":identificationNumber
 							}).then(res =>{
 									let data = res.data.data;
-										if(res.data.description === 'success') {
+									if(res.data.status === '200') {
 											self.alertMsg('提现申请已提交!')
+											window.setTimeout(()=>{
+											  this.$f7router.navigate('/outbound/')
+											},2000)
 									}else{
-											self.alertMsg('提现申请失败,请重新提交！')
+											if (res.data.status ==='EP500') {
+												self.alertMsg('提现申请失败,请重新提交！')
+											} else {
+												self.alertMsg(res.data.description)
+											}
+											
 									}
 								})
 							} else {
@@ -98,7 +103,7 @@
 			alertMsg(msg) {
 				let toastTop = this.$f7.toast.create({
 					text: msg,
-					position: 'top',
+					position: 'center',
 					closeTimeout: 1000,
 				})
 				toastTop.open();

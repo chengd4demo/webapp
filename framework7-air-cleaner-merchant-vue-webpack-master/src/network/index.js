@@ -164,6 +164,6 @@ export default {
 			* 申请提现
 			*/
 		 applyForAccountOutbound(params){
-			 return fetchPost('/merchant-web-api/account-channel/applyForAccountOutbound/'+params)
+			 return fetchPost('/merchant-web-api/account-channel/applyForAccountOutbound/',params)
 		 }
 }

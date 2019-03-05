@@ -42,10 +42,15 @@ const confirmPayment = {
 		pm25:110
 }
 
+const cashAmount = {
+	cashAvailableAmount:0.00,
+	cashTotalAcmount:0.00
+}
 export default {
 	refresh,
 	loadmore,
 	wxConfig,
 	confirmPayment,
-	wxUserInfo
+	wxUserInfo,
+	cashAmount
 }

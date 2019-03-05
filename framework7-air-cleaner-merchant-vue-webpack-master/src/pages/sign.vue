@@ -125,19 +125,23 @@
           verificationCode: this.admin.verificationCode,
           weixin:this.admin.weixin || config.wxUserInfo.openid,
           identificationNumber:this.admin.identificationNumber,
-		  headerUrl:config.wxUserInfo.headimgurl,
+					headerUrl:config.wxUserInfo.headimgurl,
           sex:config.wxUserInfo.sex,
-		  address:config.wxUserInfo.country + ' ' + config.wxUserInfo.province + ' ' + config.wxUserInfo.city,
-		  nickName: config.wxUserInfo.nickname
+					address:config.wxUserInfo.country + ' ' + config.wxUserInfo.province + ' ' + config.wxUserInfo.city,
+					nickName: config.wxUserInfo.nickname
         }).then(res => {
           let data = res.data.data;
-					console.log(data);
           if(res.data.status == '200' && res.data.data){
-            localStorage.setItem('weixin',res.data.data.weixin)
-			this.$f7router.navigate('/home/')
-          }
+						if(data.identificationNumber == this.admin.identificationNumber && data.phoneNumber == this.admin.phoneNumber){
+							localStorage.setItem('weixin',res.data.data.weixin)
+							this.$f7router.navigate('/home/')
+						}
+          }else{
+						alert('手机号或身份唯一识别码错误!')
+						return
+					}
         }).catch(err =>{
-          this.alertMsg('服务器繁忙')
+						this.alertMsg('服务器繁忙!')
         })
       },
       keyDown(){

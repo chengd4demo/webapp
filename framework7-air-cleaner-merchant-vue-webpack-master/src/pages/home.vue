@@ -86,7 +86,7 @@
 							</div>
 						</div>
 					</a></li>
-				<li class="media-item"><a href="#" class="item-link">
+				<li class="media-item"><a href="/dynamic-route/blog/:blogId/post/:postId/" class="item-link">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">
@@ -115,6 +115,7 @@
 			}
 		},
 		mounted() {
+			console.log('123')
 			const self = this
 			let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
 			if (weixin) {
@@ -138,12 +139,15 @@
 						let data = res.data.data;
 						self.amount = data.totalAcmount
 						self.availableAmount = data.availableAmount
+						config.cashAmount.cashTotalAcmount =data.totalAcmount
+						config.cashAmount.cashAvailableAmount = data.availableAmount
 						let num = 0;
 						var t = setInterval(function(){
 						   num++;
 							self.amount = num
 						   if(self.amount>=self.availableAmount){
 								clearInterval(t);
+								self.amount =self.availableAmount;
 						   }else{
 							   self.amount = num 
 						   }       

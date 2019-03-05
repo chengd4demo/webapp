@@ -38,6 +38,7 @@
   import api from '../network'
   import CommonUtils from '@/util/common'
   import md5 from 'js-md5'
+  import config from '@/util/config'
   export default {
     data() {
 			return {
@@ -103,15 +104,23 @@
 				  reParames.firstTraderPwd = md5(this.firstTraderPwd)
 			  }
 			  api.updateTradePwd(reParames).then(res => {
+				const router = this.$f7router;
+				console.log(config.cashAmount.cashAvailableAmount)
+				console.log(config.cashAmount.cashTotalAcmount)
 				let data = res.data
 			    if (data.status=="200") {
 				  this.alertMsg('设置成功')
-				  window.setTimeout(()=>{
-				  this.$f7router.navigate('/home/')
-				  },1000)
-			    } else if(data.status=="1016" || data.status=="1017" || data.status=="1018") {
-				  this.alertMsg(data.description)
-			    } else {
+				  if(router.history[router.history.length-2].indexOf('/cash/availableAmount/') != -1){
+					  window.setTimeout(()=>{
+					  router.back()
+					  },1000)
+				  }else{
+					window.setTimeout(()=>{
+					router.navigate('/home/')
+					},1000)
+					  location.reload()
+				  }
+			    }else {
 					this.alertMsg('设置失败')
 				}
 			  }).catch(err =>{
