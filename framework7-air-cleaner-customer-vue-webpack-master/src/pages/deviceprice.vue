@@ -36,6 +36,35 @@
         </a>
       </div>
     </div>
+    <!--异常显示-->
+    <div class="device-state" id="noOnlineId" style="display: none;margin-top: 0px">
+      <table>
+        <tr>
+          <td>设备序列号:</td>
+          <td><span class="span-1">{{deviceSequence}}</span></td>
+        </tr>
+        <tr>
+        <td>是否在线:</td>
+        <td><span class="span-2">{{onLine ? '在线':'不在线'}}</span></td>
+      </tr>
+        <tr>
+          <td>是否可用:</td>
+          <td><span class="span-2">{{onLine ? '可用':'不可用'}}</span></td>
+        </tr>
+      </table>
+    </div>
+      <div class="device-Msg" id="noDeviceId" style="display: none;text-align: right;margin-left: 20%;margin-right: 20%;">
+      <table>
+        <tr>
+          <td>设备序列号:</td>
+          <td><span class="span-3">{{deviceSequence}}</span></td>
+        </tr>
+        <tr>
+          <td>提示:</td>
+          <td style="text-align: left;"><span class="span-4">{{msg}}</span></td>
+        </tr>
+      </table>
+    </div>
   </f7-page>
 </template>
 <script>
@@ -45,9 +74,11 @@
     data(){
       return {
         machNo: this.$f7route.params.machno,
+        msg:'',
+        onLine:0,
         deviceSequence:this.$f7route.params.devicesequence,
         priceList:[],
-        pm25:0,
+        pm25:500,
         priceObj:{}
       }
     },
@@ -59,14 +90,34 @@
       queryPriceList(params){
         const self = this;
         api.queryDeviceStatus(params).then(function(res){
-          let data = res.data.data.price;
-          self.priceObj = res.data.data;
-          self.pm25 = self.priceObj.pm25;
-          data.forEach(function(value, index, array){
-            self.priceList.push(value);
-          });
+          if(res.data.status == '200') {
+            let data = res.data.data.price;
+            self.priceObj = res.data.data;
+            self.pm25 = self.priceObj.pm25;
+            data.forEach(function(value, index, array){
+              self.priceList.push(value);
+            });
+          } else {
+            if(res.data.status == '1013')  {
+               console.log(1013)
+              self.msg = res.data.description
+              self.$$('#noDeviceId').css({
+                'display': 'block',
+              })
+
+            } else if(res.data.status == '1012'){
+             let onLine = res.data.data.onLine;
+             if(onLine == 0) {
+               console.log('onLine:' + onLine)
+               self.$$('#noOnlineId').css({
+                 'display': 'block',
+               })
+               self.onLine = onLine;
+             }
+            }
+          }
         }).catch(function(err){
-          console.log(err+'sss')
+          self.alertMsg('服务繁忙')
         })
       },
       onSelectPrice(index){
@@ -79,7 +130,15 @@
           config.confirmPayment.onLine = this.priceObj.onLine;
           config.confirmPayment.pm25 = this.priceObj.pm25;
         }
-      }
+      },
+      alertMsg(msg){
+        let toastTop = this.$f7.toast.create({
+          text: msg,
+          position: 'top',
+          closeTimeout: 1000,
+        })
+        toastTop.open();
+      },
     }
   }
 </script>
@@ -274,4 +333,56 @@
     background-color: rgba(121, 85, 72, 0.17);
     border-radius: 50%;
   }
+  .device-state{
+    position: relative;
+  }
+  .device-state table{
+    margin: auto;
+  }
+  .device-state table tr td{
+    padding-top: 10px;
+  }
+  .device-state table tr td:nth-child(1){
+    text-align: right;
+  }
+  .device-state table tr td:nth-child(2){
+    text-align: left;
+  }
+  .span-1{
+    margin-left: 10px;
+  }
+  .span-2{
+    width: 30px;
+    height: 10px;
+    color: white;
+    margin-left: 10px;
+    padding: 2px 5px;
+    background: #D0D0D0;
+  }
+  .device-Msg{
+    margin-top: 50%;
+    position: relative;
+  }
+  .device-Msg table{
+    margin: auto;
+  }
+  .device-Msg table tr td{
+    padding-top: 10px;
+  }
+  .device-Msg table tr td:nth-child(1){
+    text-align: right;
+  }
+  .device-Msg table tr td:nth-child(2){
+    text-align: left;
+  }
+  .span-3{
+    margin-left: 10px;
+  }
+  .span-4{
+    width: 30px;
+    height: 10px;
+    color: black;
+    background: #D0D0D0;
+  }
+
 </style>

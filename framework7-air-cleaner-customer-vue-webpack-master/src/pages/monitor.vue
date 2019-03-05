@@ -17,7 +17,7 @@
         </tr>
         <tr>
           <td>设备运行状态:</td>
-          <td><span class="span">正常</span></td>
+          <td><span class="span">{{deviceState}}</span></td>
         </tr>
         <tr>
           <td>设备运行时长:</td>
