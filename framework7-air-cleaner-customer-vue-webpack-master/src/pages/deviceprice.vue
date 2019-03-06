@@ -97,6 +97,11 @@
             data.forEach(function(value, index, array){
               self.priceList.push(value);
             });
+            if(self.pm25 == 0){
+              self.pm25 = 500
+            }else{
+              return pm25;
+            }
           } else {
             if(res.data.status == '1013')  {
                console.log(1013)
