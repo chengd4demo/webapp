@@ -17,7 +17,7 @@
         </tr>
         <tr>
           <td>设备运行状态:</td>
-          <td><span class="span">正常</span></td>
+          <td><span class="span">{{onLine}}</span></td>
         </tr>
         <tr>
           <td>设备运行时长:</td>
@@ -29,7 +29,7 @@
         </tr>
       </table>
     </div>
-    <p style="margin-top: 50px;"><a :href="getPriceHref()" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">加时</a></p>
+    <p style="margin-top: 50px;"><a :href="getPriceHref()"  class="button button-fill " :class="{disabled: this.onLine != '正常'}"   style="width:90%;margin:0 auto;background:#e94e24;">加时</a></p>
   </f7-page>
 </template>
 <script>
@@ -43,9 +43,10 @@
         costTime:'-',
         lastTime:'-',
         deviceState:'-',
+        onLine:'-',
         pm25:0,
-        rank:'',
-        tips:''
+        rank:'-',
+        tips:'-'
       }
     },
     created(){
@@ -57,13 +58,18 @@
         var self = this;
         api.queryDeviceMonitor(param).then(function(res){
           let data = res.data.data
-          self.deviceState = data.deviceState;
-          self.costTime = data.costTime;
-          self.lastTime = data.lastTime;
-          self.pm25 = data.pm25;
-          let tipsInfo = CommonUtils.getPm25Grade(self.pm25)
-          self.rank = tipsInfo.pm25Val
-          self.tips = tipsInfo.pmMsg
+          if(data != null) {
+            self.deviceState = data.deviceState;
+            self.costTime = data.costTime;
+            self.lastTime = data.lastTime;
+            self.pm25 = data.pm25;
+            let tipsInfo = CommonUtils.getPm25Grade(self.pm25)
+            self.rank = tipsInfo.pm25Val
+            self.tips = tipsInfo.pmMsg
+            self.onLine = '正常'
+          } else {
+            self.onLine = '不在线'
+          }
         }).catch(function(err){
          console.log(err+'sss')
         })
@@ -76,6 +82,12 @@
 
 </script>
 <style type="text/css">
+  .disabled {
+    background-color: #ddd;
+    border-color: #ddd;
+    color: #57a3f3;
+    cursor: not-allowed;
+  }
   .header-quality{
     width: 100%;
     height: 280px;
