@@ -78,7 +78,7 @@
         onLine:0,
         deviceSequence:this.$f7route.params.devicesequence,
         priceList:[],
-        pm25:500,
+        pm25:300,
         priceObj:{}
       }
     },
@@ -97,11 +97,6 @@
             data.forEach(function(value, index, array){
               self.priceList.push(value);
             });
-            if(self.pm25 == 0){
-              self.pm25 = 500
-            }else{
-              return pm25;
-            }
           } else {
             if(res.data.status == '1013')  {
                console.log(1013)
@@ -365,7 +360,6 @@
     background: #D0D0D0;
   }
   .device-Msg{
-    margin-top: 50%;
     position: relative;
   }
   .device-Msg table{
@@ -379,9 +373,6 @@
   }
   .device-Msg table tr td:nth-child(2){
     text-align: left;
-  }
-  .span-3{
-    margin-left: 10px;
   }
   .span-4{
     width: 30px;
