@@ -64,8 +64,8 @@
 				smsCode: '',
 				canInput: true,
 				checkBox: false,
-				smsType:'sign',
 				admin: {
+					inVerificationCode: '',
 					identificationNumber: '',
 					weixin: localStorage.getItem('weixin') || '',
 					verificationCode: '',
@@ -103,17 +103,11 @@
 		},
 		methods: {
 			countDown() {
-				api.sendSms({
-					phoneNumber:phoneNumber,
-					smsType:smsType,
-				}).then(res => {
-					let data = res.data.data
-					if (res.data.status == '200') {
-						this.smsCode = data.sign
-					}
-				}).catch(err => {
-					this.alertMsg('服务器繁忙!')
-				})
+				if (this.admin.phoneNumber == '' || this.admin.phoneNumber == 'null') {
+					this.alertMsg('手机号码为空，验证码发送失败!')
+					return
+				}
+				this.querySmsCode(this.admin.phoneNumber)
 				if (!this.canClick) return
 				this.canClick = false
 				this.content = this.totalTime + 's后重新发送'
@@ -132,10 +126,6 @@
 				if (config.wxUserInfo.openid) {
 					this.admin.weixin = config.wxUserInfo.openid
 				}
-				if (this.admin.phoneNumber === "" || this.admin.verificationCode == "" || this.admin.weixin == "" || this.admin.identificationNumber ==
-					"") {
-					return
-				}
 				api.login({
 					phoneNumber: this.admin.phoneNumber,
 					verificationCode: this.admin.verificationCode,
@@ -144,32 +134,40 @@
 					headerUrl: config.wxUserInfo.headimgurl,
 					sex: config.wxUserInfo.sex,
 					address: config.wxUserInfo.country + ' ' + config.wxUserInfo.province + ' ' + config.wxUserInfo.city,
-					nickName: config.wxUserInfo.nickname
+					nickName: config.wxUserInfo.nickname,
+					inVerificationCode: this.smsCode,
 				}).then(res => {
 					let data = res.data.data;
 					if (res.data.status == '200' && res.data.data) {
-						if (data.identificationNumber == this.admin.identificationNumber && data.phoneNumber == this.admin.phoneNumber && this.smsCode == this.admin.verificationCode) {
-							localStorage.setItem('weixin', res.data.data.weixin)
-							this.$f7router.navigate('/home/')
-						}
+						localStorage.setItem('weixin', res.data.data.weixin)
+						this.$f7router.navigate('/home/')
 					} else {
-						if (res.data.status == 'EP500') {
-						  this.alertMsg('服务器繁忙!')
-						}else if(res.data.status == '1013'){
-						  this.alertMsg('手机号码或身份唯一识别码有误,请重新输入!')
-						}else if(res.data.status == '1014'){
-						  this.alertMsg('验证码输入有误!')
-						}
-						else{
-						  this.alertMsg(res.data.description)
-						}
+						this.alertMsg('登录失败!')
 					}
 				}).catch(err => {
 					this.alertMsg('服务器繁忙!')
 				})
 			},
+			querySmsCode(phoneNumber) {
+				let parames = phoneNumber + '?smsType=sign'
+				api.sendSms(parames).then(res => {
+					if (res.data.status == '200' && res.data.data) {
+						this.smsCode = res.data.data
+						this.alertMsg('发送短信发送成功')
+					} else {
+						if (res.data.status == 'EP500') {
+							this.alertMsg('服务器繁忙!')
+						} else if (res.data.status == '1013' || res.data.status == '1014' || res.data.status == '1015') {
+							this.alertMsg(res.data.description)
+						}
+					}
+				}).catch(err => {
+					this.alertMsg('发送短信失败')
+				})
+			},
 			keyDown() {
 				if (this.admin.phoneNumber !== "" && this.admin.verificationCode !== "" && this.admin.identificationNumber !== "" &&
+					this.smsCode !== "" &&
 					this.checkBox) {
 					this.canInput = false
 					//滚动到顶部
