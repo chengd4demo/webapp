@@ -98,6 +98,7 @@
 				checkBox:false,
 				admin: {
 					weixin:localStorage.getItem('weixin'),
+          inVerificationCode:'',
 					verificationCode:'',
 					phoneNumber:'',
 				}
@@ -133,7 +134,18 @@
     },
 		methods: {
 			countDown() {
+        if(this.admin.phoneNumber.length ==0 ){
+          this.alertMsg('请输入手机号码')
+          return
+        } else if(this.admin.phoneNumber.length <11 ) {
+          this.alertMsg('请输入正确的手机号码')
+          return
+        }
+        //滚动到顶部
+        window.scrollTo(0, 0);
 				if (!this.canClick) return
+        //获取验证短信
+        this.querySmsCode(this.admin.phoneNumber)
 				this.canClick = false
 				this.content = this.totalTime + 's后重新发送'
 				let clock = window.setInterval(() => {
@@ -154,6 +166,7 @@
 				api.login({
 					phoneNumber: this.admin.phoneNumber,
 					verificationCode: this.admin.verificationCode,
+          inVerificationCode: this.smsCode,
 					weixin:this.admin.weixin || config.wxUserInfo.openid,
 					headerUrl:config.wxUserInfo.headimgurl,
 					sex:config.wxUserInfo.sex,
@@ -167,9 +180,7 @@
 					} else {
             if (res.data.status == 'EP500') {
               this.alertMsg('服务器繁忙')
-            } else if(res.data.status == '1013'){
-              this.alertMsg('手机号码或验证码有误,请重新输入')
-            }else{
+            } else if(res.data.status == '1013'|| res.data.status == '1014' || res.data.status == '1015'){
               this.alertMsg(res.data.description)
             }
 					}
@@ -177,8 +188,21 @@
 					this.alertMsg('服务器繁忙')
 				})
 			},
+      querySmsCode(phoneNumber){
+			  let parames = phoneNumber + '?smsType=sign'
+			  api.sendSms(parames).then(res => {
+          if (res.data.status == '200' && res.data.data){
+            this.smsCode = res.data.data
+            this.alertMsg('发送短信发送成功')
+          } else {
+              this.alertMsg('服务器繁忙!')
+          }
+        }).catch(err => {
+          this.alertMsg('发送短信失败')
+        })
+      },
 			keyDown(){
-				if (this.admin.phoneNumber !=="" && this.admin.verificationCode!=="" && this.checkBox && this.admin.phoneNumber.length >10 && this.admin.verificationCode.length > 5) {
+				if (this.admin.phoneNumber !=="" && this.admin.verificationCode!=="" && this.checkBox && this.admin.phoneNumber.length >10 && this.admin.verificationCode.length > 5 && this.smsCode !=="") {
 					this.canInput = false
 					//滚动到顶部
 					window.scrollTo(0, 0);

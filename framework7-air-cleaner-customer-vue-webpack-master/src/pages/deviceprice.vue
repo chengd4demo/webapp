@@ -97,9 +97,12 @@
             data.forEach(function(value, index, array){
               self.priceList.push(value);
             });
+            if(self.pm25 == 0){
+              self.pm25 = 300
+            }
           } else {
             if(res.data.status == '1013')  {
-               console.log(1013)
+               // console.log(1013)
               self.msg = res.data.description
               self.$$('#noDeviceId').css({
                 'display': 'block',
@@ -108,7 +111,7 @@
             } else if(res.data.status == '1012'){
              let onLine = res.data.data.onLine;
              if(onLine == 0) {
-               console.log('onLine:' + onLine)
+               // console.log('onLine:' + onLine)
                self.$$('#noOnlineId').css({
                  'display': 'block',
                })
@@ -222,6 +225,7 @@
   }
   .price em,.del-price em{
     font-size: .8em;
+    margin-right: 2px;
   }
   .price{
     border-right: 2px solid #ddd;
@@ -370,6 +374,7 @@
     width: 30px;
     height: 10px;
     color: black;
+    padding: 2px 5px;
     background: #D0D0D0;
   }
 

@@ -92,7 +92,7 @@ export default {
      *
      */
     sendSms(params){
-        return fetchGet('/customer-web-api/msg-channel/sendSms/'+params)
+        return fetchGet('/customer-web-api/common-channel/sendSms/'+params)
     },
     /**
      *
