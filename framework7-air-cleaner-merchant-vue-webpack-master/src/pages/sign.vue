@@ -64,6 +64,7 @@
 				smsCode: '',
 				canInput: true,
 				checkBox: false,
+				smsType:'sign',
 				admin: {
 					identificationNumber: '',
 					weixin: localStorage.getItem('weixin') || '',
@@ -99,11 +100,20 @@
 
 				})
 			}
-
-
 		},
 		methods: {
 			countDown() {
+				api.sendSms({
+					phoneNumber:phoneNumber,
+					smsType:smsType,
+				}).then(res => {
+					let data = res.data.data
+					if (res.data.status == '200') {
+						this.smsCode = data.sign
+					}
+				}).catch(err => {
+					this.alertMsg('服务器繁忙!')
+				})
 				if (!this.canClick) return
 				this.canClick = false
 				this.content = this.totalTime + 's后重新发送'
@@ -138,16 +148,24 @@
 				}).then(res => {
 					let data = res.data.data;
 					if (res.data.status == '200' && res.data.data) {
-						if (data.identificationNumber == this.admin.identificationNumber && data.phoneNumber == this.admin.phoneNumber) {
+						if (data.identificationNumber == this.admin.identificationNumber && data.phoneNumber == this.admin.phoneNumber && this.smsCode == this.admin.verificationCode) {
 							localStorage.setItem('weixin', res.data.data.weixin)
 							this.$f7router.navigate('/home/')
 						}
 					} else {
-						this.alertMsg('手机号或身份唯一识别码错误!')
-						return
+						if (res.data.status == 'EP500') {
+						  this.alertMsg('服务器繁忙!')
+						}else if(res.data.status == '1013'){
+						  this.alertMsg('手机号码或身份唯一识别码有误,请重新输入!')
+						}else if(res.data.status == '1014'){
+						  this.alertMsg('验证码输入有误!')
+						}
+						else{
+						  this.alertMsg(res.data.description)
+						}
 					}
 				}).catch(err => {
-					this.alertMsg('服务器繁忙！')
+					this.alertMsg('服务器繁忙!')
 				})
 			},
 			keyDown() {

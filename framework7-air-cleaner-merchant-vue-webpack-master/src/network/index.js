@@ -94,7 +94,7 @@ export default {
      *
      */
     sendSms(params){
-        return fetchGet('/merchant-web-api/msg-channel/sendSms/'+params)
+        return fetchGet('/merchant-web-api/common-channel/sendSms/'+params)
     },
 		/**
 		 * 投资商下商家列表
