@@ -21,7 +21,7 @@
 								<dd>¥<span>{{item.amount}}元</span><span style="float: right;margin-right:10px">{{item.createdate}}</span></dd>
 								<dd>
 									<span style="color:#FFFFFF; padding: 1px 9px; background-color:#2094ff; border-radius: 4px 4px ;">{{item.state}}</span>
-									<span style="float: right;">
+									<span style="float: right;" v-if="item.showbutton">
 										<input @click="cancelBtn({id:item.id}) " class="open-confirm" type="button" style="padding-left: 1px; background-color: #FFFFFF;padding: 0px 10px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
 										 value="取消" />
 									</span>
@@ -38,6 +38,7 @@
 								<dd>¥<span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
 								<dd>
 									<span  style="color:#FFFFFF; padding: 1px 9px; background-color:#d43030; border-radius: 4px 4px ;">{{item.state}}</span>
+									<span style="margin-left: 10px; color: #9e9e9e;">提现金额超过24小时未领取!</span>
 								</dd>
 							</dl>
 						</div>
@@ -59,10 +60,9 @@
 					<div class="dm-2">
 						<div class="dm-3" v-for="(item, index) in completedList" :key="index">
 							<dl>
-								<dd>¥<span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd>
-									<span  style="color:#FFFFFF; padding: 1px 9px; background-color:#43cf7c; border-radius: 4px 4px ;">{{item.state}}</span>
-								</dd>
+								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
+								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
+								<dd><span>代扣税金:{{item.amount*0.05}}元</span><span  style="color:#FFFFFF;margin-left: 215px;padding: 1px 9px; background-color:#43cf7c; border-radius: 4px 4px ;">{{item.state}}</span></dd>	
 							</dl>
 						</div>
 					</div>
@@ -127,9 +127,16 @@
 					app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
 					app.dialog.confirm('','确定取消？', (confirm) =>{
 								api.cleanAccountOutbound(args.id).then(function(res){
-									self.onRefresh();
-									self.alertMsg('取消成功！');
+									let data = res.data.data;
+									if(res.data.status === '200'){
+										self.onRefresh();
+										self.alertMsg('取消成功！');
+									}else{
+										self.onRefresh();
+										self.alertMsg(res.data.description);
+									}
 								}).catch(err=>{
+									self.alertMsg('服务器连接失败!');
 								})
 							});
 					},
@@ -191,7 +198,9 @@
 						self.completedList = []
 					}
 					self.getAccountOutBoundPages(self.params)
-					done();
+					if(done!=undefined){
+						done();
+					}
 					this.loadedEnd = false
 					self.showPreloader = true
 				}, 1000)

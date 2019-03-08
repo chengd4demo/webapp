@@ -86,7 +86,7 @@
 							</div>
 						</div>
 					</a></li>
-				<li class="media-item"><a href="/dynamic-route/blog/:blogId/post/:postId/" class="item-link">
+				<li class="media-item"><a href="#" class="item-link">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">
@@ -147,7 +147,7 @@
 							self.amount = num
 						   if(self.amount>=self.availableAmount){
 								clearInterval(t);
-								self.amount =self.availableAmount;
+								self.amount =Number(self.availableAmount.toString().match(/^\d+(?:\.\d{0,2})?/))  ;
 						   }else{
 							   self.amount = num 
 						   }       

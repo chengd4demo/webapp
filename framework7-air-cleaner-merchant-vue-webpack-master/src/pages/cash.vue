@@ -20,7 +20,7 @@
 			<div style="width:95%;background: #EEEDED;margin: 0px auto;text-indent: 5px;">
 				<p>注:</p>
 				<p>1.提现申请提交后，当前余额账户将被冻结，暂无法做别的操作</p>
-				<p>2.单次提现金额最大200元，提现成功后，将有微信红包方式发送到您的微信号上，请注意查收</p>
+				<p>2.单次提现金额最大200元，提现成功后，将由微信红包方式发送到您的微信号上，请注意查收</p>
 				<p>3.红包发送24小时内务必领取，超过24小时后，红包会自动返回到商户，用户需要再次提交申请</p>
 			</div>
 		</div>
@@ -33,7 +33,6 @@
 	import md5 from 'js-md5'
 	export default {
 		data(){
-			console.log(777);
 			return {
 				availableAmount:this.$f7route.params.availableAmount | 0,
 				totalAcmount:this.$f7route.params.totalAcmount | 0,
@@ -52,7 +51,9 @@
 				app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
 				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO'))
 				if(M_USER_INFO.alipay == false){
+					window.scrollTo(0, 0);
 					self.$f7router.navigate('/set-password/')
+					return
 				}
 				app.dialog.password('','请输入提现密码', (password) => {
 					let weixin = M_USER_INFO.weixin
@@ -96,6 +97,7 @@
 			keyDown(){
 					if (this.amount!==""&&this.amount!=="0") {
 						this.canInput = false
+						window.scrollTo(0, 0);
 				} else {
 					this.canInput = true;
 				}

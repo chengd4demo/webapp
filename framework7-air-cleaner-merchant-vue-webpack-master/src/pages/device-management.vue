@@ -46,24 +46,25 @@
 				self.init();
         self.getDeviceMonitors();
       },
-			mounted() {
-				self = this;
-				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
-				if (M_USER_INFO) {
-				   self.id = M_USER_INFO.id
-					 self.type = M_USER_INFO.userType
-				}
-			},
+		mounted() {
+			self = this;
+			let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+			if (M_USER_INFO) {
+			   self.id = M_USER_INFO.id
+				 self.type = M_USER_INFO.userType
+			}
+		},
       methods: {
         getDeviceMonitors(num){
           var self = this;
           var pageNum = num||1;
           var pageSize = 30;
 					if (self.beforRout.foo == 'trader') {	//判断路由跳转
-					
+				
 							api.queryDeviceMonitorPage({
 								data:{
-									traderId:self.traderId
+									traderId:self.traderId,
+									investorId:self.id,
 								},
 								page:{
 									 page:pageNum,
@@ -99,6 +100,7 @@
 								}
 							}
 						} else if(self.type == "IR") {
+							
 							data = {
 								data:{
 									investorId:self.id
@@ -108,6 +110,7 @@
 									limit:pageSize
 								}
 							}
+							console.log(JSON.stringify(data))
 						} else if(self.type == "CY") {
 							data = {
 								data:{
@@ -132,8 +135,8 @@
 							return;
 						}
 						self.loading = false
+						self.loadingMore = false
 					}).catch(function(err){
-						console.log(err+'sss')
 					})
 				}
       },
@@ -149,6 +152,7 @@
 				}, 1000)
 			},
 			onInfiniteScroll() {
+				console.log(this.loadingMore || this.loadedEnd)
 				if (this.loadingMore || this.loadedEnd) return
 				this.pageNum++
 				this.getDeviceMonitors(this.pageNum)
