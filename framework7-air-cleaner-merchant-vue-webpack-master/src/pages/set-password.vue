@@ -53,6 +53,7 @@
 				oldTradePwd:'',
 				firstTraderPwd:'',
 				userType:'',
+				smsCode:'',
 				isAlipay:true
 			}
 		},
@@ -62,6 +63,15 @@
     },
     methods: {
 	    countDown() {
+			window.scrollTo(0, 0);
+			if(this.phoneNumber.length ==0 ){
+			  this.alertMsg('请输入手机号码')
+			  return
+			} else if(this.phoneNumber.length !=0 && this.phoneNumber.length<11) {
+			  this.alertMsg('请输入正确的手机号码')
+			  return
+			}
+			this.querySmsCode(this.phoneNumber)
 			if (!this.canClick) return
 			this.canClick = false
 			this.content = this.totalTime + 's后重新发送'
@@ -103,12 +113,12 @@
 				  reParames.tradePwd = md5(this.tradePwd)
 				  reParames.firstTraderPwd = md5(this.firstTraderPwd)
 			  }
-			  api.updateTradePwd(reParames).then(res => {
+				api.updateTradePwd(reParames).then(res => {
 				const router = this.$f7router;
 				console.log(config.cashAmount.cashAvailableAmount)
 				console.log(config.cashAmount.cashTotalAcmount)
 				let data = res.data
-			    if (data.status=="200") {
+				  if (data.status=="200") {
 				  this.alertMsg('设置成功')
 				  if(router.history[router.history.length-2].indexOf('/cash/availableAmount/') != -1){
 					  window.setTimeout(()=>{
@@ -120,12 +130,12 @@
 					},1000)
 					  location.reload()
 				  }
-			    }else {
+				  }else {
 					this.alertMsg('设置失败')
 				}
-			  }).catch(err =>{
-			    this.alertMsg('服务器繁忙')
-			  })
+				}).catch(err =>{
+				  this.alertMsg('服务器繁忙')
+				})
 		  }
 	    },
 	    alertMsg(msg){
@@ -137,13 +147,57 @@
 		  toastTop.open();
 	    },
 		keyDown(){
-			if (this.phoneNumber === '' || this.tradePwd === ''  || this.firstTraderPwd ==='' || (this.isAlipay && this.oldTradePwd === '')) {
+			if (this.phoneNumber === '' || this.tradePwd === ''  || this.firstTraderPwd ==='' || (this.isAlipay && this.oldTradePwd === '') ||(this.verificationCode === '' && this.smsCode === '')) {
 					this.canInput = true
 			} else {
-				this.canInput = false;
+				console.log(this.canInput)
+				if(this.smsCode.length!=0 && this.verificationCode.length == 6 &&  this.phoneNumber.length==11) 
+				this.checkValidVerificationCode()
 				//滚动到顶部
 				window.scrollTo(0, 0);
 			}
+		},
+		checkValidVerificationCode (){
+			if (this.smsCode!=this.verificationCode) {
+				this.alertMsg("输入验证码错误,请重新输入")
+				return
+			}
+			api.checkValidVerificationCode({
+					phoneNumber:this.phoneNumber,
+				  inVerificationCode:this.verificationCode,
+					verificationCode:this.smsCode
+				}).then(res => {
+						let data = res.data
+						if (data.status != '200'){
+								if (data.status == 'EP500') {
+									this.alertMsg("服务繁忙")
+								} else {
+									this.alertMsg(data.description)
+								}
+								return
+						} else {
+								 this.canInput = false;
+						}
+				}).catch(err => {
+						this.alertMsg("服务繁忙")
+				})
+		},
+		querySmsCode(phoneNumber) {
+			let parames = phoneNumber + '?smsType=changeApply'
+			api.sendSms(parames).then(res => {
+				if (res.data.status == '200' && res.data.data) {
+					this.smsCode = res.data.data
+					this.alertMsg('短信发送成功')
+				} else {
+					if (res.data.status == 'EP500') {
+						this.alertMsg('服务器繁忙!')
+					} else if (res.data.status == '1013' || res.data.status == '1014' || res.data.status == '1015') {
+						this.alertMsg(res.data.description)
+					}
+				}
+			}).catch(err => {
+				this.alertMsg('发送短信失败')
+			})
 		}
 	}
   }
