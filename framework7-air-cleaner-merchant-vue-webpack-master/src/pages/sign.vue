@@ -102,11 +102,15 @@
 			}
 		},
 		methods: {
-			countDown() {
-				if (this.admin.phoneNumber == '' || this.admin.phoneNumber == 'null') {
-					this.alertMsg('手机号码为空，验证码发送失败!')
-					return
-				}
+				countDown() {
+					window.scrollTo(0, 0);
+					if(this.admin.phoneNumber.length ==0 ){
+					  this.alertMsg('请输入手机号码')
+					  return
+					} else if(this.admin.phoneNumber.length !=0 && this.admin.phoneNumber.length<11) {
+					  this.alertMsg('请输入正确的手机号码')
+					  return
+					}
 				this.querySmsCode(this.admin.phoneNumber)
 				if (!this.canClick) return
 				this.canClick = false
@@ -142,7 +146,7 @@
 						localStorage.setItem('weixin', res.data.data.weixin)
 						this.$f7router.navigate('/home/')
 					} else {
-						this.alertMsg('登录失败!')
+						this.alertMsg(res.data.description)
 					}
 				}).catch(err => {
 					this.alertMsg('服务器繁忙!')
@@ -153,7 +157,7 @@
 				api.sendSms(parames).then(res => {
 					if (res.data.status == '200' && res.data.data) {
 						this.smsCode = res.data.data
-						this.alertMsg('发送短信发送成功')
+						this.alertMsg('短信发送成功')
 					} else {
 						if (res.data.status == 'EP500') {
 							this.alertMsg('服务器繁忙!')
@@ -167,8 +171,7 @@
 			},
 			keyDown() {
 				if (this.admin.phoneNumber !== "" && this.admin.verificationCode !== "" && this.admin.identificationNumber !== "" &&
-					this.smsCode !== "" &&
-					this.checkBox) {
+					this.smsCode !== "" && this.checkBox) {
 					this.canInput = false
 					//滚动到顶部
 					window.scrollTo(0, 0);

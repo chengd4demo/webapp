@@ -19,7 +19,7 @@
 				</span>
       </div>
       <div style="width: 100%; margin-top: 20px;">
-        <a :href="getAffirmHref()" @click = "checkedPhoneNumber()" class="button button-fill"  :class="{disabled: this.canInput}"
+        <a :href="getAffirmHref()" class="button button-fill"  :class="{disabled: this.canInput}"
            style="width:90%;margin:0 auto;background:#e94e24;height: 44px; line-height:44px;">下一步</a>
       </div>
     </form>
@@ -52,6 +52,15 @@
     },
     methods: {
       countDown() {
+				window.scrollTo(0, 0);
+				if(this.phoneNumber.length ==0 ){
+				  this.alertMsg('请输入手机号码')
+				  return
+				} else if(this.phoneNumber.length !=0 && this.phoneNumber.length<11) {
+				  this.alertMsg('请输入正确的手机号码')
+				  return
+				}
+			  this.querySmsCode(this.phoneNumber)
         if (!this.canClick) return
         this.canClickDate = new Date()
         this.canClick = false
@@ -91,27 +100,16 @@
             this.alertMsg('请输入绑定的手机号码')
             return
           }
-          if (this.smsCode !== this.verificationCode) {
-            this.alertMsg('输入验证码错误,请重新输入')
-            return
-          } else {
-            let nowDate = new Date();
-            let min =  parseInt(nowDate - this.canClickDate) / 1000 / 60;
-            if(1< min) {
-              this.alertMsg('验证码超时,请重新获取')
-              return
-            } else {
-              this.canInput = false;
-            }
-          }
           //滚动到顶部
           window.scrollTo(0, 0);
+					if(this.verificationCode.length == 6 &&  this.phoneNumber.length==11) {
+						this.checkValidVerificationCode()
+					}
         } else {
           this.canInput = true;
         }
       },
       checkedPhoneNumber(phoneNumber){
-        //调用接口认证成功返回true
         let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
         if (!phoneNumber || phoneNumber !== M_USER_INFO.phoneNumber) {
           return false;
@@ -120,7 +118,49 @@
       },
       getAffirmHref() {
         return '/affirm-phone/verificationCode/' + this.verificationCode + '/phoneNumber/' + this.phoneNumber + '/';
-      }
+      },
+			checkValidVerificationCode (){
+				if (this.smsCode!=this.verificationCode) {
+					this.alertMsg("输入验证码错误,请重新输入")
+					return
+				}
+				api.checkValidVerificationCode({
+						phoneNumber:this.phoneNumber,
+					  inVerificationCode:this.verificationCode,
+						verificationCode:this.smsCode
+					}).then(res => {
+							let data = res.data
+							if (data.status != '200'){
+									if (data.status == 'EP500') {
+										this.alertMsg("服务繁忙")
+									} else {
+										this.alertMsg(data.description)
+									}
+									return
+							} else {
+									 this.canInput = false
+							}
+					}).catch(err => {
+							this.alertMsg("服务繁忙")
+					})
+			},
+			querySmsCode(phoneNumber) {
+				let parames = phoneNumber + '?smsType=chagePhone'
+				api.sendSms(parames).then(res => {
+					if (res.data.status == '200' && res.data.data) {
+						this.smsCode = res.data.data
+						this.alertMsg('短信发送成功')
+					} else {
+						if (res.data.status == 'EP500') {
+							this.alertMsg('服务器繁忙!')
+						} else if (res.data.status == '1013' || res.data.status == '1014' || res.data.status == '1015') {
+							this.alertMsg(res.data.description)
+						}
+					}
+				}).catch(err => {
+					this.alertMsg('发送短信失败')
+				})
+			}
     }
   }
 

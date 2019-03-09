@@ -152,5 +152,12 @@ export default {
 			*/
 		 applyForAccountOutbound(params){
 			 return fetchPost('/merchant-web-api/account-channel/applyForAccountOutbound/',params)
+		 },
+		 /**
+		  * 
+		  * 验证码校验
+		  */
+		 checkValidVerificationCode(params){
+			 return fetchPost('/merchant-web-api/common-channel/checked/validVerificationCode',params)
 		 }
 }
