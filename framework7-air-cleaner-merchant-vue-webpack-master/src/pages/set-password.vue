@@ -150,7 +150,6 @@
 			if (this.phoneNumber === '' || this.tradePwd === ''  || this.firstTraderPwd ==='' || (this.isAlipay && this.oldTradePwd === '') ||(this.verificationCode === '' && this.smsCode === '')) {
 					this.canInput = true
 			} else {
-				console.log(this.canInput)
 				if(this.smsCode.length!=0 && this.verificationCode.length == 6 &&  this.phoneNumber.length==11) 
 				this.checkValidVerificationCode()
 				//滚动到顶部

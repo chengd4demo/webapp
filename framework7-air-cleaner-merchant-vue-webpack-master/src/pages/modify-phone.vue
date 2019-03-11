@@ -100,10 +100,10 @@
             this.alertMsg('请输入绑定的手机号码')
             return
           }
-          //滚动到顶部
-          window.scrollTo(0, 0);
-					if(this.verificationCode.length == 6 &&  this.phoneNumber.length==11) {
+					if(this.smsCode.length!=0 && this.verificationCode.length == 6 &&  this.phoneNumber.length==11) {
 						this.checkValidVerificationCode()
+						//滚动到顶部
+						window.scrollTo(0, 0);
 					}
         } else {
           this.canInput = true;
