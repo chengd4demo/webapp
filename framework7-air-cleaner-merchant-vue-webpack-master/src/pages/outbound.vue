@@ -18,27 +18,28 @@
 					<div class="dm-2">
 						<div class="dm-3" v-for="(item, index) in requestList" :key="index">
 							<dl>
-								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span>
+								<dd>¥<span>{{item.amount}}元</span><span style="float: right;margin-right:10px">{{item.createdate}}</span></dd>
+								<dd>
+									<span style="color:#FFFFFF; padding: 1px 9px; background-color:#2094ff; border-radius: 4px 4px ;">{{item.state}}</span>
 									<span style="float: right;" v-if="item.showbutton">
 										<input @click="cancelBtn({id:item.id}) " class="open-confirm" type="button" style="padding-left: 1px; background-color: #FFFFFF;padding: 0px 10px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
 										 value="取消" />
 									</span>
-								 </dd>
-								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元</span><span  style="color:#FFFFFF;margin-left: 215px;padding: 1px 9px; background-color:#2094ff; border-radius: 4px 4px ;">{{item.state}}</span>
-								</dd>	
+								</dd>
 							</dl>
 						</div>
 					</div>
 				</div>
+
 				<div class="tab" id="tab2">
 					<div class="dm-2">
 						<div class="dm-3" v-for="(item, index) in uncollectedList" :key="index">
 							<dl>
-								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
-								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元<span style="margin-left: 10px; color: #9e9e9e;">提现金额超过24小时未领取!</span><span  style="color:#FFFFFF;margin-left: 55px;padding: 1px 9px; background-color:#d43030; border-radius: 4px 4px ;">{{item.state}}</span></span>
-								</dd>	
+								<dd>¥<span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
+								<dd>
+									<span  style="color:#FFFFFF; padding: 1px 9px; background-color:#d43030; border-radius: 4px 4px ;">{{item.state}}</span>
+									<span style="margin-left: 10px; color: #9e9e9e;">提现金额超过24小时未领取!</span>
+								</dd>
 							</dl>
 						</div>
 					</div>
@@ -47,9 +48,10 @@
 					<div class="dm-2">
 						<div class="dm-3" v-for="(item, index) in cancelledList" :key="index">
 							<dl>
-								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
-								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元</span><span  style="color:#FFFFFF;margin-left: 215px;padding: 1px 9px; background-color:#a6a6a6; border-radius: 4px 4px ;">{{item.state}}</span></dd>	
+								<dd>¥<span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
+								<dd>
+									<span  style="color:#FFFFFF; padding: 1px 9px; background-color:#a6a6a6; border-radius: 4px 4px ;">{{item.state}}</span>
+								</dd>
 							</dl>
 						</div>
 					</div>
@@ -60,7 +62,7 @@
 							<dl>
 								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
 								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
-								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元</span><span  style="color:#FFFFFF;margin-left: 215px;padding: 1px 9px; background-color:#43cf7c; border-radius: 4px 4px ;">{{item.state}}</span></dd>	
+								<dd><span>代扣税金:{{item.amount*0.05}}元</span><span  style="color:#FFFFFF;margin-left: 215px;padding: 1px 9px; background-color:#43cf7c; border-radius: 4px 4px ;">{{item.state}}</span></dd>	
 							</dl>
 						</div>
 					</div>
@@ -78,7 +80,7 @@
 				pageNum: 1,
 				loading: false,
 				weixin:this.$f7route.params.weixin,
-				amount:0.00,
+				amount:'',
 				createdate:'',
 				id: '',
 				beforRout: this.$f7route.query,
@@ -113,13 +115,6 @@
 				self.id = M_USER_INFO.id
 				self.params.data.weixin = M_USER_INFO.weixin
 			}
-		},
-		filters:{
-			withholdingAmount : function(value) {
-				value = parseFloat(value*5/100).toFixed(3);
-				return value.substr(0,value.length-1)
-			}
-			
 		},
 		methods: {
 				cancelBtn(args){
