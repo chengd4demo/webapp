@@ -36,8 +36,7 @@
 						<div class="dm-3" v-for="(item, index) in uncollectedList" :key="index">
 							<dl>
 								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
-								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元<span style="margin-left: 10px; color: #9e9e9e;">提现金额超过24小时未领取!</span><span  style="color:#FFFFFF;margin-left: 55px;padding: 1px 9px; background-color:#d43030; border-radius: 4px 4px ;">{{item.state}}</span></span>
+								<dd><span>返还到账:{{item.amount}}元<span style="margin-left: 10px; color: #9e9e9e;">提现金额超过24小时未领取!</span><span  style="color:#FFFFFF;margin-left: 50px;padding: 1px 9px; background-color:#d43030; border-radius: 4px 4px ;">{{item.state}}</span></span>
 								</dd>	
 							</dl>
 						</div>
