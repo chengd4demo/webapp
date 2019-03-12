@@ -21,7 +21,8 @@
 				<p>注:</p>
 				<p>1.提现申请提交后，当前余额账户将被冻结，暂无法做别的操作</p>
 				<p>2.单次提现金额最大200元，提现成功后，将由微信红包方式发送到您的微信号上，请注意查收</p>
-				<p>3.红包发送24小时内务必领取，超过24小时后，红包会自动返回到商户，用户需要再次提交申请</p>
+				<p>3.红包发送24小时内务必领取，超过24小时后，红包会自动返回到当前帐户，用户需要再次提交申请</p>
+				<p>4.提现将按照国家规定产生代扣税金</p>
 			</div>
 		</div>
 		<p><a href="#" @click="openPassword()" class="button button-fill" :class="{disabled: this.canInput}" style="width:90%;margin:0 auto;background:#e94e24;height: 40px;line-height: 40px;">提&nbsp;交</a></p>
@@ -61,6 +62,7 @@
 					if(weixin==null){
 						self.alertMsg("登录失效，请重新验证！")
 						setTimeout(function(){
+							window.scrollTo(0, 0);
 							self.$f7router.navigate('/sign/')
 						},2000)
 					}
@@ -74,6 +76,7 @@
 								"userType":M_USER_INFO.userType,
 								"identificationNumber":identificationNumber
 							}).then(res =>{
+									window.scrollTo(0, 0);
 									let data = res.data.data;
 									if(res.data.status === '200') {
 											self.alertMsg('提现申请已提交!')
@@ -90,6 +93,7 @@
 									}
 								})
 							} else {
+								window.scrollTo(0, 0);
 								self.alertMsg('请输入提现密码!')
 							}
 							})
