@@ -98,7 +98,6 @@
 					</a></li>
 			</ul>
 		</f7-list>
-		<!--<f7-button class="button button-round" big fill raised  color="red">退出</f7-button>-->
 	</f7-page>
 </template>
 <script>
