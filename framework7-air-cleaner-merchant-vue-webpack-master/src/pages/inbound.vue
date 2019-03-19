@@ -32,6 +32,7 @@
 					loadingMore: false,
 					loadedEnd: false,
 					showPreloader: true,
+					userType:'',
 					inboundsList:[]
 				}
 			},
@@ -48,10 +49,12 @@
 					console.log(M_USER_INFO);
 					if(M_USER_INFO){
 						self.weixin = M_USER_INFO.weixin
+						self.userType = M_USER_INFO.userType
 					}
 					api.queryAccountInbound({
 						data:{
-							weixin:self.weixin
+							weixin:self.weixin,
+							userType:self.userType,
 						},
 						page:{
 							page:pageNum,
