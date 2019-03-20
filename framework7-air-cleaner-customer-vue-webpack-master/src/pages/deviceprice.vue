@@ -45,7 +45,7 @@
         </tr>
         <tr>
         <td>是否在线:</td>
-        <td><span class="device-span" style="background: #D0D0D0;width: 30px;height: 10px;margin-left: 10px;padding: 2px 5px;color: ">{{onLine ? '在线':'不在线'}}</span></td>
+        <td><span class="device-span" style="background: #D0D0D0;width: 30px;height: 10px;margin-left: 10px;padding: 2px 5px;">{{onLine ? '在线':'不在线'}}</span></td>
       </tr>
         <tr>
           <td>是否可用:</td>
