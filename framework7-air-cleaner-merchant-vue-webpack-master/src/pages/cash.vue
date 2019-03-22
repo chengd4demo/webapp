@@ -14,15 +14,15 @@
 
 		<div class="demok3_lable" style="text-indent: 10px;max-height:25px;font-size: 17px;">提现金额:</div>
 		<div class="demok3_input"><input type="number" v-model="amount" name="amount" @keyup = "keyDown()"
-		 oninput="this.value=this.value.replace(/[^0-9]/g,''); if(this.value<1){this.value='';}else if(this.value>200){this.value='';}"
-		 style="border:1px solid #e0e0e0; height:25px; margin-left:10px;" placeholder="请输入提现金额,最大200元"  /></div>
+			onkeyup= "if(! /^\d+(\.\d{0,2})?$/.test(this.value)||this.value>200||this.value==0){this.value='';}"
+			style="border:1px solid #e0e0e0; height:25px; margin-left:10px;" placeholder="请输入提现金额,最大200元"  /></div>
 		<div style="width:100%;margin:10px auto;float:left;">
 			<div style="width:95%;background: #EEEDED;margin: 0px auto;text-indent: 5px;">
 				<p>注:</p>
-				<p>1.提现申请提交后，当前余额账户将被冻结，暂无法做别的操作</p>
-				<p>2.单次提现金额最大200元，提现成功后，将由微信红包方式发送到您的微信号上，请注意查收</p>
-				<p>3.红包发送24小时内务必领取，超过24小时后，红包会自动返回到当前帐户，用户需要再次提交申请</p>
-				<p>4.提现将按照国家规定产生代扣税金</p>
+				<p>1.提现申请提交后，当前余额账户将被冻结，暂无法做别的操作!</p>
+				<p>2.单次提现金额最小2元，最大200元。提现成功后，将由微信红包方式发送到您的微信号上，请注意查收!</p>
+				<p>3.红包发送24小时内务必领取，超过24小时后，红包会自动返回到当前帐户，用户需要再次提交申请!</p>
+				<p>4.提现将按照国家规定产生代扣税金!</p>
 			</div>
 		</div>
 		<p><a href="#" @click="openPassword()" class="button button-fill" :class="{disabled: this.canInput}" style="width:90%;margin:0 auto;background:#e94e24;height: 40px;line-height: 40px;">提&nbsp;交</a></p>
@@ -35,13 +35,35 @@
 	export default {
 		data(){
 			return {
-				availableAmount:this.$f7route.params.availableAmount | 0,
-				totalAcmount:this.$f7route.params.totalAcmount | 0,
+				availableAmount:0.00,
+				totalAcmount:0.00,
 				canInput:true,
 				amount:''
 			}
 		},
+		created() {
+			const self = this;
+			self.init();
+		},
 		methods:{
+			init(){
+				const self = this
+				let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
+				if (weixin) {
+					self.weixin = weixin
+					api.queryAccount(weixin).then(res =>{
+						if(res.data.description === 'success') {
+							let data = res.data.data;
+							self.totalAcmount = data.totalAcmount
+							self.availableAmount = data.availableAmount
+						}
+					}).catch(err => {
+					})
+				} else{
+					alertMsg('网络连接超时')
+					return
+				}
+			},
 			openPassword() {
 				let self = this;
 				let app = self.$f7;

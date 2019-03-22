@@ -114,14 +114,13 @@
 			}
 		},
 		mounted() {
-			console.log('123')
 			const self = this
 			let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
 			if (weixin) {
 				self.weixin = weixin
 				self.init()
 			} else{
-				alert('网络连接超时')
+				alertMsg('网络连接超时')
 				return
 			}
 		},
