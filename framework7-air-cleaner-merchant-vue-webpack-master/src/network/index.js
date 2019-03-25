@@ -1,8 +1,8 @@
 import axios from 'axios'
-// const DEV_BASE_URL = 'http://192.168.1.167:8769'
+ // const DEV_BASE_URL = 'http://192.168.1.167:8769'
 const DEV_BASE_URL = ''
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
-// const PROD_BASE_URL = 'http://192.168.1.167:8769'
+ // const PROD_BASE_URL = 'http://192.168.1.167:8769'
 const PROD_BASE_URL = ''
 axios.defaults.baseURL = process.env.NODE_ENV === 'production' ? PROD_BASE_URL : DEV_BASE_URL
 // 返回状态判断  要根据后台给的判定字段
@@ -51,12 +51,6 @@ export default {
     */
     login(params){
         return fetchPost('/merchant-web-api/user-channel/login',params)
-    },
-   /**
-    * 支付选择
-    */
-    queryDeviceStatus(params){
-        return fetchGet('/merchant-web-api/device-channel/login/'+params)
     },
     /**
      * 用户信息
@@ -159,5 +153,19 @@ export default {
 		  */
 		 checkValidVerificationCode(params){
 			 return fetchPost('/merchant-web-api/common-channel/checked/validVerificationCode',params)
-		 }
+		 },
+		 /**
+		   *
+		   * 首页设备状态分页查询
+		   */
+		  queryDeviceStatusCountPage(params) {
+			return fetchPost('/merchant-web-api/device-channel/queryDeviceCounts',params)
+		  },
+		  /**
+		   *
+		   * 设备状态查询
+		   */
+		  queryDeviceUsedStatus(params) {
+			return fetchGet('/merchant-web-api/device-channel/queryTurnState/'+params)
+		  }
 }

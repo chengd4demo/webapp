@@ -58,7 +58,13 @@ const CommonUtils = {
         var r = window.location.search.substr(1).match(reg);  
         if (r != null) return unescape(r[2]); return null;  
                 
-    }
+    },
+   sleep(delay) {
+     var start = (new Date()).getTime();
+     while ((new Date()).getTime() - start < delay) {
+       continue;
+     }
+   }
 }
 
 export default CommonUtils
