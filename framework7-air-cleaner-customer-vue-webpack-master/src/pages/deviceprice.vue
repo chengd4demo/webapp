@@ -248,9 +248,8 @@
     width: 30px;
     left: calc(50% - 15px);
   }
-  /*旋转*/
-  /* KEYFRAMES */
 
+  /*旋转*/
   @keyframes spin {
     from {
       transform: rotate(0);
