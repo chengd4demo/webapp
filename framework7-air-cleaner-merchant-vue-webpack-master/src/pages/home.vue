@@ -50,14 +50,14 @@
 		<!--说明--上-->
 		<div class="explainUp">
 		  <span>今日设备使用概况</span>
-		  <span>不在线</span>
+		  <span>未使用</span>
 		  <span><img src="../img/deviceState1.svg"></span>
-		  <span>在线</span>
+		  <span>使用中</span>
 		  <span><img src="../img/deviceState.svg"></span>
 		</div>
 		<!--轮播-->
-		<f7-swiper>
-		  <f7-swiper-slide id="slideId">
+		<f7-swiper style="width: 98%;">
+		  <f7-swiper-slide id="slideId" style="width: 100%;">
 		    <div  class="col-25" :id="item.machno" style="width:24%;float: left;border: 1px solid #C5C5C5;margin-top: -1px;margin-left: -1px;" v-if="index<12" v-for="(item, index) in deviceStatusList" :key="index">
 		      <div style="float: left;height: 25px">
 		        <img  src="../img/deviceState1.svg" style="width: 25px;margin-top: -10px">
@@ -119,7 +119,7 @@
 							<div class="item-inner">
 								<div class="item-title-row">
 									<div class="item-title"><img src="../img/message.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;信息</div>
-									<div class="item-after"><span class="badge color-red">5</span></div>
+									<!-- <div class="item-after"><span class="badge color-red">5</span></div> -->
 								</div>
 							</div>
 						</div>
@@ -412,7 +412,7 @@
   .swiper-container{
     min-height: 20%;
     text-align: center;
-    padding-left: 2.3%;
+    padding-left: 2%;
   }
   .ks-swiper-gallery-top{
     height: 30%;

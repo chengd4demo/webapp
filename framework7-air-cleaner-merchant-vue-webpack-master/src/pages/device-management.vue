@@ -17,7 +17,7 @@
           <dd>使用时间：<span>{{item.usedate}}</span></dd>
           <dd>使用时长：<span>{{item.costtime}}小时</span></dd>
           <dd>剩余时长：<span>{{item.lasttime}}小时</span></dd>
-          <dd>计费金额：<span>{{item.unitprice}}元</span></dd>
+          <dd>计费金额：<span>{{item.realyprice}}元</span></dd>
         </dl>
       </div>
     </div>

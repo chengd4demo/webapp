@@ -19,7 +19,7 @@
 						<div class="dm-3" v-for="(item, index) in requestList" :key="index">
 							<dl>
 								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span>
+								<dd><span>实际到账:{{item.amount | relAmount}}元</span>
 									<span style="float: right;" v-if="item.showbutton">
 										<input @click="cancelBtn({id:item.id}) " class="open-confirm" type="button" style="background-color: #FFFFFF;padding: 0px 10px 0px 1px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
 										 value="取消" />
@@ -54,7 +54,7 @@
 						<div class="dm-3" v-for="(item, index) in cancelledList" :key="index">
 							<dl>
 								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
+								<dd><span>实际到账:{{item.amount | relAmount}}元</span><dd>
 								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元</span>
 								<div style="float: right;">
 									<span  style="color:#FFFFFF;padding: 1px 7px;margin-right: 10px;background-color:#a6a6a6; border-radius: 4px 4px ;">{{item.state}}</span>
@@ -69,7 +69,7 @@
 						<div class="dm-3" v-for="(item, index) in completedList" :key="index">
 							<dl>
 								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
-								<dd><span>实际到账:{{item.amount-(item.amount*0.05)}}元</span><dd>
+								<dd><span>实际到账:{{item.amount | relAmount}}元</span><dd>
 								<dd><span>代扣税金:{{item.amount | withholdingAmount}}元</span>
 								<div style="float: right;">
 									<span  style="color:#FFFFFF;padding: 1px 7px;margin-right: 10px;background-color:#43cf7c; border-radius: 4px 4px ;">{{item.state}}</span>
@@ -131,6 +131,10 @@
 		filters:{
 			withholdingAmount : function(value) {
 				value = parseFloat(value*5/100).toFixed(3);
+				return value.substr(0,value.length-1)
+			},
+			relAmount : function(value) {
+				value = parseFloat(value-value*5/100).toFixed(3);
 				return value.substr(0,value.length-1)
 			}
 			

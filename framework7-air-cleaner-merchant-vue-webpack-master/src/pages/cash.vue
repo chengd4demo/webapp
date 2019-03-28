@@ -35,8 +35,8 @@
 	export default {
 		data(){
 			return {
-				availableAmount:0.00,
-				totalAcmount:0.00,
+				availableAmount:0,
+				totalAcmount:0,
 				canInput:true,
 				amount:''
 			}
@@ -54,8 +54,8 @@
 					api.queryAccount(weixin).then(res =>{
 						if(res.data.description === 'success') {
 							let data = res.data.data;
-							self.totalAcmount = data.totalAcmount
-							self.availableAmount = data.availableAmount
+							self.totalAcmount = Number(data.totalAcmount.toString().match(/^\d+(?:\.\d{0,2})?/))
+							self.availableAmount = Number(data.availableAmount.toString().match(/^\d+(?:\.\d{0,2})?/))
 						}
 					}).catch(err => {
 					})
