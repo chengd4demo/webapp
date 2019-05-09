@@ -111,8 +111,16 @@
 								}
 
 							}
+<<<<<<< HEAD
 						})
 					} else {
+=======
+							})
+					},
+			keyDown(){
+					if (this.amount!==""&&this.amount!=="0" && this.amount <= "200") {
+						this.canInput = false
+>>>>>>> f0c8cde354a0b29017dd541f1e30769c1514c260
 						window.scrollTo(0, 0);
 						self.alertMsg('请输入提现密码!')
 					}
