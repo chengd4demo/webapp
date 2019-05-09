@@ -1,27 +1,23 @@
 <template>
-  <f7-page ptr 
-  infinite 
-  infinite:infinite-distance="50" 
-  :infinite-preloader="showPreloader" 
-  @ptr:refresh="onRefresh" 
-  @infinite="onInfiniteScroll">
-    <f7-navbar title="设备列表" back-link="" style="background:#e94e24;"></f7-navbar>
-    <div class="dm-2">
-      <div class="dm-3"  v-for="(item, index) in deviceMonitorList" :key="index">
-        <dl>
-          <dd>商家名称：<span>{{item.tradername}}</span>
-					<span v-if="item.devicestate == '正在使用'" style="color: #00d449;float: right;margin-right: 10px;">{{item.devicestate}}</span>
-					<span v-else style="color: #D2190B;float: right;margin-right: 10px;">{{item.devicestate}}</span>
+	<f7-page ptr infinite infinite:infinite-distance="50" :infinite-preloader="showPreloader" @ptr:refresh="onRefresh"
+	 @infinite="onInfiniteScroll">
+		<f7-navbar title="设备列表" back-link="" style="background:#e94e24;"></f7-navbar>
+		<div class="dm-2">
+			<div class="dm-3" v-for="(item, index) in deviceMonitorList" :key="index">
+				<dl>
+					<dd>商家名称：<span>{{item.tradername}}</span>
+						<span v-if="item.devicestate == '正在使用'" style="color: #00d449;float: right;margin-right: 10px;">{{item.devicestate}}</span>
+						<span v-else style="color: #D2190B;float: right;margin-right: 10px;">{{item.devicestate}}</span>
 					</dd>
-          <dd>设备编号：{{item.machno}}</dd>
-          <dd>使用时间：<span>{{item.usedate}}</span></dd>
-          <dd>使用时长：<span>{{item.costtime}}小时</span></dd>
-          <dd>剩余时长：<span>{{item.lasttime}}小时</span></dd>
-          <dd>计费金额：<span>{{item.realyprice}}元</span></dd>
-        </dl>
-      </div>
-    </div>
-  </f7-page>
+					<dd>设备编号：{{item.machno}}</dd>
+					<dd>使用时间：<span>{{item.usedate}}</span></dd>
+					<dd>使用时长：<span>{{item.costtime}}小时</span></dd>
+					<dd>剩余时长：<span>{{item.lasttime}}小时</span></dd>
+					<dd>计费金额：<span>{{item.realyprice}}元</span></dd>
+				</dl>
+			</div>
+		</div>
+	</f7-page>
 </template>
 
 <script>
@@ -99,7 +95,7 @@
 									limit:pageSize
 								}
 							}
-						} else if(self.type == "IR") {
+						} else if(self.type == "IR" || self.type == 'DL' || self.type == 'ZD') {
 							
 							data = {
 								data:{
@@ -139,7 +135,7 @@
 					}).catch(function(err){
 					})
 				}
-      },
+		},
 			onRefresh(event, done) {
 				var self = this
 				setTimeout(() => {
@@ -171,22 +167,24 @@
 </script>
 
 <style type="text/css">
-  dd{
-    font-size: 12px;
-    line-height: 25px;
-  }
-  dl{
-    margin-left: -40px;
-  }
-  .dm-2{
-    width: 100%;
-    margin:10px auto;
-  }
-  .dm-3{
-    width: 90%;
-    margin: 0px auto;
-    text-indent: 10px;
-    background: #EEEDED
-  }
+	dd {
+		font-size: 12px;
+		line-height: 25px;
+	}
 
+	dl {
+		margin-left: -40px;
+	}
+
+	.dm-2 {
+		width: 100%;
+		margin: 10px auto;
+	}
+
+	.dm-3 {
+		width: 90%;
+		margin: 0px auto;
+		text-indent: 10px;
+		background: #EEEDED
+	}
 </style>

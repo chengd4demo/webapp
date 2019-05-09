@@ -18,15 +18,15 @@
 					</span>
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;" v-if="isAlipay">
-					<input type="password" v-model="oldTradePwd" name="oldTradePwd" @keyup="keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" placeholder="输入旧提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
+					<input type="password" v-model="oldTradePwd" name="oldTradePwd" @keyup="keyDown()" @input="checkPwdLen(oldTradePwd,'oldTradePwd')" placeholder="输入旧提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
 					 required validate />
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-					<input type="password" v-model="firstTraderPwd" @keyup="keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" placeholder="输入新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
+					<input type="password" v-model="firstTraderPwd" @keyup="keyDown()" @input="checkPwdLen(firstTraderPwd,'firstTraderPwd')" placeholder="输入新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
 					 required validate />
 				</div>
 				<div style="height: 44px; line-height: 44px; width: 100%; background: #fff;border-bottom: 1px solid #ccc;">
-					<input type="password" v-model="tradePwd" name="tradePwd" @keyup="keyDown()" oninput="if(value.length>6)value=value.slice(0,6)" placeholder="确认新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
+					<input type="password" v-model="tradePwd" name="tradePwd" @keyup="keyDown()" @input="checkPwdLen(tradePwd,'tradePwd')" placeholder="确认新提现密码" style="height: 44px; line-height: 44px;  text-indent: 10px;width: 100%;"
 					 required validate />
 				</div>
 			<p class="submit-p"><a @click="submitPwdBtn()" :class="{disabled: this.canInput}" class="button button-fill" style="width:90%;margin:0 auto;background:#e94e24;">提交</a></p>
@@ -197,6 +197,19 @@
 			}).catch(err => {
 				this.alertMsg('发送短信失败')
 			})
+		},
+		checkPwdLen(password,intype){
+			if(password.length>6){
+			this.alertMsg('提现密码最多6位')
+			if (intype == 'tradePwd') {
+				this.tradePwd=password.slice(0,6)
+			}
+			if (intype == 'firstTraderPwd')
+				this.firstTraderPwd=password.slice(0,6)
+			}
+			if(intype == 'oldTradePwd'){
+				this.oldTradePwd=password.slice(0,6)
+			}
 		}
 	}
   }
