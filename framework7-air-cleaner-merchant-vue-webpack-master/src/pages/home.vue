@@ -323,11 +323,24 @@
 			        limit:12
 			      }
 			    }
-			  } else if(type == 'IR' || type == 'DL' || type == 'ZD') {
+			  } else if(type == 'IR') {
 			    return  {
 			      data:{
 			        traderId:'',
 			        investorId:self.userId,
+					agnetId:'',
+			        companyId:''
+			      },
+			      page:{
+			        page:self.pageNum,
+			        limit:12
+			      }
+			    }
+			  }  else if(type == 'DL' || type == 'ZD') {
+			    return  {
+			      data:{
+			        traderId:'',
+			        investorId:'',
 					agnetId:self.userId,
 			        companyId:''
 			      },

@@ -13,9 +13,9 @@
         <dd>使用时长：<span>{{item.costTime}}小时</span></dd>
         <dd>计费金额：<span>{{item.unitPrice}}元</span></dd>
 		<dd>分润金额：<span>{{item.amount}}元</span></dd>
-		<dd v-if="item.type !='商户'">耗材扣除：<span>{{item.costTime | materialCost}}</span></dd>
+		<dd v-if="item.type =='投资商'">耗材扣除：<span>{{item.costTime | materialCost}}</span></dd>
         <dd>商户类型：<span>{{item.type}}</span></dd>
-        <dd v-if="item.type !='商户'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
+        <dd v-if="item.type =='投资商'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
       </dl>
     </div>
   </div>
