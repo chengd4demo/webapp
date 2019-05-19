@@ -16,6 +16,9 @@
 		<dd v-if="item.type =='投资商'">耗材扣除：<span>{{item.costTime | materialCost}}</span></dd>
         <dd>商户类型：<span>{{item.type}}</span></dd>
         <dd v-if="item.type =='投资商'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
+		<dd v-else-if="item.type =='代理'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
+		<dd v-else-if="item.type =='区域总代理'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
+		<dd v-else-if="item.type =='运营商'"><img src="../img/map.png"><span>{{item.address}}</span></dd>
       </dl>
     </div>
   </div>

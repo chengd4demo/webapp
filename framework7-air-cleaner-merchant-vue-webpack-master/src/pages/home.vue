@@ -78,7 +78,7 @@
 
 		<f7-list media-list class="no-margin-v" style="margin-top:1px">
 			<ul>
-				<li class="media-item" icon="home"><a href="/trader-management/" class="item-link" v-if="type==='IR' || type==='CR'">
+				<li class="media-item" icon="home"><a href="/trader-management/" class="item-link" v-if="type==='IR' || type==='CY' || type==='DL'  || type==='ZD'">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">

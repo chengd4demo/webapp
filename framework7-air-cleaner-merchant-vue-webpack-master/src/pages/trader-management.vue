@@ -21,7 +21,7 @@
 									<div class="item-subtitle item-title" style="margin-left:-55px">{{item.name}}</div>
 								</div>
 								<div class="item-subtitle" style="margin-left:-55px"><span>共{{item.count}}台</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>运行{{item.usecount}}台</span></div>
-								<div class="item-subtitle" style="margin-top:10px;margin-left:-120px;max-width:150% !important;"><img src="../img/map.png"
+								<div class="item-subtitle" style="margin-top:20px;margin-left:-120px;max-width:150% !important;"><img src="../img/map.png"
 									 style="max-width: 15px;max-height: 15px;vertical-align: middle" />
 									<span>{{item.address}}</span></div>
 							</div>
@@ -44,7 +44,8 @@
 				loadedEnd: false,
 				showPreloader: true,
 				deviceMonitorList: [],
-				id:''
+				id:'',
+				reqParames:{}
 			}
 		},
 		created() {
@@ -59,16 +60,9 @@
 				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {};
 				if(M_USER_INFO){
 					self.id = M_USER_INFO.id
+					self.reqParames = self.getRequestParame(M_USER_INFO.userType)
 				}
-				api.queryInvestorForTrader({
-					data: {
-						investorId: self.id
-					},
-					page: {
-						page: pageNum,
-						limit: pageSize
-					}
-				}).then(function(res) {
+				api.queryInvestorForTrader(self.reqParames).then(function(res) {
 					var data = res.data.data;
 					data.forEach(function(value, index, array) {
 						self.deviceMonitorList.push(value)
@@ -105,6 +99,51 @@
 				this.pageNum++
 				this.getDeviceMonitors(this.pageNum)
 				this.loadingMore = true
+			},
+			getRequestParame(type) {
+				let self = this
+				if (type == 'IR') {
+					return {
+						data: {
+							investorId: self.id
+						},
+						page: {
+							page: self.pageNum,
+							limit: 30
+						}
+					}
+				} else if(type == 'CY') {
+					return {
+						data: {
+							companyId: self.id
+						},
+						page: {
+							page: self.pageNum,
+							limit: 30
+						}
+					}
+				} else if(type == 'DL' || type == 'ZD') {
+					return {
+						data: {
+							agentId: self.id
+						},
+						page: {
+							page: self.pageNum,
+							limit: 30
+						}
+					}
+				} else {
+					return {
+						data: {
+							none: ''
+						},
+						page: {
+							page: self.pageNum,
+							limit: 30
+						}
+					}
+				}
+				
 			}
 		}
 	}

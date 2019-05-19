@@ -56,17 +56,48 @@
           var pageNum = num||1;
           var pageSize = 30;
 					if (self.beforRout.foo == 'trader') {	//判断路由跳转
-				
-							api.queryDeviceMonitorPage({
-								data:{
-									traderId:self.traderId,
-									investorId:self.id,
-								},
-								page:{
-									 page:pageNum,
-									 limit:pageSize
+							let reqParame = {}
+							if (self.type == 'IR') {
+								reqParame = {
+									data:{
+										traderId:self.traderId,
+										investorId:self.id,
+										companyId:'',
+										agentId:''
+									},
+									page:{
+										 page:pageNum,
+										 limit:pageSize
+									}
 								}
-							}).then(function(res){
+							} else if (self.type == 'CY') {
+								reqParame = {
+									data:{
+										traderId:self.traderId,
+										investorId:'',
+										companyId:self.id,
+										agentId:''
+									},
+									page:{
+										 page:pageNum,
+										 limit:pageSize
+									}
+								}
+							} else if (self.type == 'DL' || self.type=='ZD') {
+								reqParame = {
+									data:{
+										traderId:self.traderId,
+										investorId:'',
+										companyId:'',
+										agentId:self.id
+									},
+									page:{
+										 page:pageNum,
+										 limit:pageSize
+									}
+								}
+							}
+							api.queryDeviceMonitorPage(reqParame).then(function(res){
 							var data = res.data.data;
 							data.forEach(function(value, index, array){
 								self.deviceMonitorList.push(value)
@@ -88,29 +119,50 @@
 						if (self.type == "TR") {
 							data = {
 								data:{
-									traderId:self.id
+									traderId:self.id,
+									investorId:'',
+									companyId:'',
+									agentId:''
 								},
 								page:{
 									page:pageNum,
 									limit:pageSize
 								}
 							}
-						} else if(self.type == "IR" || self.type == 'DL' || self.type == 'ZD') {
-							
+						} else if(self.type == "IR" ) {
 							data = {
 								data:{
-									investorId:self.id
+									traderId:'',
+									investorId:self.id,
+									companyId:'',
+									agentId:''
 								},
 								page:{
 									page:pageNum,
 									limit:pageSize
 								}
 							}
-							console.log(JSON.stringify(data))
+						} else if(self.type == 'DL' || self.type == 'ZD') {
+							data = {
+								data:{
+									traderId:'',
+									investorId:'',
+									companyId:'',
+									agentId:self.id
+								},
+								page:{
+									page:pageNum,
+									limit:pageSize
+								}
+							}
+						
 						} else if(self.type == "CY") {
 							data = {
 								data:{
-									companyId:self.id
+									traderId:'',
+									investorId:'',
+									companyId:self.id,
+									agentId:''
 								},
 								page:{
 									page:pageNum,
