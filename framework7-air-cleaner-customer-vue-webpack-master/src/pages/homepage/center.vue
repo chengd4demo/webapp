@@ -109,6 +109,7 @@
 <script>
 import api from '../../network'
 import config from '@/util/config'
+import CommonUtils from '@/util/common'
 export default {
 	data(){
 		return {
@@ -118,7 +119,7 @@ export default {
 	},
 	mounted() {
     self = this
-    let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
+    let weixin = CommonUtils.localStorage.getItem('weixin') || config.wxUserInfo.openid
     if (weixin) {
       self.resarchUserInfo(weixin)
     } else{
@@ -131,20 +132,20 @@ export default {
         api.queryUserInfo(weixin).then(res=>{
           let data = res.data.data;
           if(data){
-            let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+            let USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('USER_INFO')) || {}
             this.nickName = data.name || data.nickName
             if(config.wxUserInfo.headimgurl) data.headerUrl = config.wxUserInfo.headimgurl
             this.headUrl = config.wxUserInfo.headimgurl || USER_INFO.headerUrl
             data.headerUrl =  config.wxUserInfo.headimgurl || USER_INFO.headerUrl
-            localStorage.setItem('USER_INFO',JSON.stringify(data))
+            CommonUtils.localStorage.setItem('USER_INFO',JSON.stringify(data))
           }
         }).catch(err => {
           alert('系统繁忙')
         })
     },
     loginOut(){
-      localStorage.removeItem('USER_INFO')
-      localStorage.removeItem('weixin')
+      CommonUtils.localStorage.removeItem('USER_INFO')
+      CommonUtils.localStorage.removeItem('weixin')
       self.$f7router.navigate('/sign/')
     }
   }

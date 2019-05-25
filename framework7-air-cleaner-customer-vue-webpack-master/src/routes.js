@@ -26,8 +26,8 @@ export default [
     path: '/',
     component: HomePage,
     redirect: function (route, resolve, reject) {
-      let weixin = localStorage.getItem('weixin')
-      let userInfo = localStorage.getItem('USER_INFO')
+      let weixin = CommonUtils.localStorage.getItem('weixin')
+      let userInfo = CommonUtils.localStorage.getItem('USER_INFO')
       let sceneStr = CommonUtils.getQueryString('scene_str')
       let jsapiQuery = CommonUtils.getQueryString('jsapi')
       if(sceneStr) {
@@ -61,7 +61,7 @@ export default [
           })
         })
       }else {
-        if(userInfo !=null && weixin!= null) {
+        if(userInfo !=null && weixin!= null && weixin!='undefined') {
           resolve('/center/')
         } else {
           resolve('/sign/')

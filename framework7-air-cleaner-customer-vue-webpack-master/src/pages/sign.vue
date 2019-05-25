@@ -86,7 +86,7 @@
 <script>
 	import api from '../network'
 	import CommonUtils from '@/util/common'
-    import config from '@/util/config'
+  import config from '@/util/config'
 	export default {
 		data() {
 			return {
@@ -97,7 +97,7 @@
 				canInput:true,
 				checkBox:false,
 				admin: {
-					weixin:localStorage.getItem('weixin'),
+					weixin:CommonUtils.localStorage.getItem('weixin'),
           inVerificationCode:'',
 					verificationCode:'',
 					phoneNumber:'',
@@ -115,21 +115,24 @@
           }).catch(err=>{
             alert('获取授权失败')
           })
-        } else { //获取用户微信信息
-           api.queryObtainUserInfo({code:code}).then(res=>{
-              let data = res.data.data
-              if(res.data.status == '200') {
-                 config.wxUserInfo.openid = data.openid
-                 config.wxUserInfo.nickname = data.nickname
-                 config.wxUserInfo.sex = data.sex
-                 config.wxUserInfo.province = data.province
-                 config.wxUserInfo.city = data.city
-                 config.wxUserInfo.country = data.country
-                 config.wxUserInfo.headimgurl = data.headimgurl
-              }
-           }).catch(err=>{
+				} else { //获取用户微信信息
+					 if(config.wxUserInfo.openid=='') {
+							api.queryObtainUserInfo({code:code}).then(res=>{
+										let data = res.data.data
+										if(res.data.status == '200') {
+											config.wxUserInfo.openid = data.openid
+											config.wxUserInfo.nickname = data.nickname
+											config.wxUserInfo.sex = data.sex
+											config.wxUserInfo.province = data.province
+											config.wxUserInfo.city = data.city
+											config.wxUserInfo.country = data.country
+											config.wxUserInfo.headimgurl = data.headimgurl
+										}
+								}).catch(err=>{
 
-           })
+								})
+					 }
+          
         }
     },
 		methods: {
@@ -175,7 +178,7 @@
 				}).then(res => {
 					let data = res.data.data;
 					if (res.data.status == '200' && res.data.data){
-						localStorage.setItem('weixin',res.data.data.weixin)
+						CommonUtils.localStorage.setItem('weixin',res.data.data.weixin)
 						this.$f7router.navigate('/center/')
 					} else {
             if (res.data.status == 'EP500') {

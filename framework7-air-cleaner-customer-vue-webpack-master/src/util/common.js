@@ -1,4 +1,4 @@
-
+import cookie from '@/util/cookie'
 const CommonUtils = {
     getAge(identityCard) {
         var len = (identityCard + "").length;
@@ -81,6 +81,19 @@ const CommonUtils = {
         result.pmMsg = '除有特殊需要的人群外，尽量不要留在室外'
       }
       return result;
+    },
+    localStorage:{
+        getItem(key) {
+            return window.localStorage.getItem(key) == null ? (cookie.get(key) == 'undefined' ? null :  cookie.get(key)) : window.localStorage.getItem(key)
+          }, 
+          setItem(key,value){
+              window.localStorage.setItem(key,value)
+              cookie.set(key,value,30)
+          },
+          removeItem(key) {
+              window.localStorage.removeItem(key)
+              cookie.clearCookie(key)
+          }
     }
 }
 
