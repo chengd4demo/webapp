@@ -93,6 +93,15 @@
             </div>
           </div>
         </a></li>
+        <li class="media-item"><a href="#" class="item-link" @click="loginOut()">
+          <div class="item-content">
+            <div class="item-inner">
+              <div class="item-title-row">
+                <div class="item-title"><img src="../../img/loginout.svg" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;退出当前账户</div>
+              </div>
+            </div>
+          </div>
+        </a></li>
       </ul>
     </f7-list>
 	</f7-page>
@@ -132,6 +141,11 @@ export default {
         }).catch(err => {
           alert('系统繁忙')
         })
+    },
+    loginOut(){
+      localStorage.removeItem('USER_INFO')
+      localStorage.removeItem('weixin')
+      self.$f7router.navigate('/sign/')
     }
   }
 
