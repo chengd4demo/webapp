@@ -18,10 +18,10 @@
 					<div class="dm-2">
 						<div class="dm-3" v-for="(item, index) in requestList" :key="index">
 							<dl>
-								<dd><span>{{item.amount}}元</span><span style="float: right;;margin-right:10px">{{item.createdate}}</span></dd>
+								<dd><span>{{item.amount}}元</span><span style="float: right;margin-right:10px">{{item.createdate}}</span></dd>
 								<dd><span>实际到账:{{item.amount | relAmount}}元</span>
 									<span style="float: right;" v-if="item.showbutton">
-										<input @click="cancelBtn({id:item.id}) " class="open-confirm" type="button" style="background-color: #FFFFFF;padding: 0px 10px 0px 1px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
+										<input @click="cancelBtn({id:item.id}) " class="open-confirm" type="button" style="background-color: #FFFFFF;padding: -1px 10px 0px 1px; margin-right: 10px;border:1px solid #38373d; border-radius: 4px 4px ;"
 										 value="取消" />
 									</span>
 								 </dd>

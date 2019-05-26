@@ -38,7 +38,7 @@
 
 <script>
   import api from "../network";
-
+  import CommonUtils from '@/util/common'
   export default{
     data() {
       return {
@@ -56,7 +56,7 @@
     },
     created() {
       const self = this;
-      self.init(JSON.parse(localStorage.getItem('M_USER_INFO')) || {});
+      self.init(JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {});
     },
     methods: {
       countDown() {

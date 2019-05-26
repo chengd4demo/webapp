@@ -67,7 +67,7 @@
 				admin: {
 					inVerificationCode: '',
 					identificationNumber: '',
-					weixin: localStorage.getItem('weixin') || '',
+					weixin: CommonUtils.localStorage.getItem('weixin') || '',
 					verificationCode: '',
 					phoneNumber: '',
 				}
@@ -83,6 +83,7 @@
 					this.alertMsg('获取授权失败')
 				})
 			} else { //获取用户微信信息
+			 if(config.wxUserInfo.openid=='') {
 				api.queryObtainUserInfo({
 					code: code
 				}).then(res => {
@@ -99,6 +100,7 @@
 				}).catch(err => {
 
 				})
+			 }
 			}
 		},
 		methods: {
@@ -143,7 +145,7 @@
 				}).then(res => {
 					let data = res.data.data;
 					if (res.data.status == '200' && res.data.data) {
-						localStorage.setItem('weixin', res.data.data.weixin)
+						CommonUtils.localStorage.setItem('weixin', res.data.data.weixin)
 						this.$f7router.navigate('/home/')
 					} else {
 						this.alertMsg(res.data.description)

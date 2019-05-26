@@ -59,7 +59,7 @@
 		},
     created() {
       const self = this;
-      self.init(JSON.parse(localStorage.getItem('M_USER_INFO')) || {});
+      self.init(JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {});
     },
     methods: {
 	    countDown() {

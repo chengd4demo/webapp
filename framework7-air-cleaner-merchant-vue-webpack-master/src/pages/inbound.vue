@@ -48,7 +48,7 @@
 					var self = this;
 					var pageNum = num||1;
 					var pageSize = 30;
-					let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {};
+					let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {};
 					console.log(M_USER_INFO);
 					if(M_USER_INFO){
 						self.weixin = M_USER_INFO.weixin

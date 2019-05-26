@@ -47,7 +47,7 @@
 		methods: {
 			init() {
 				const self = this
-				let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
+				let weixin = CommonUtils.localStorage.getItem('weixin') || config.wxUserInfo.openid
 				if (weixin) {
 					self.weixin = weixin
 					api.queryAccount(weixin).then(res => {
@@ -70,7 +70,7 @@
 				app.params.dialog.PreloaderTitle = '加载中...'
 				app.params.dialog.buttonCancel = '<span style="color:black">取消</span>'
 				app.params.dialog.buttonOk = '<span style="color:black">确定</span>'
-				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO'))
+				let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO'))
 				if (M_USER_INFO.alipay == false) {
 					window.scrollTo(0, 0);
 					self.$f7router.navigate('/set-password/')

@@ -19,16 +19,16 @@ import AutoSignPage from './pages/sign.vue';
 
 import PanelLeftPage from './pages/panel-left.vue';
 import PanelRightPage from './pages/panel-right.vue';
-
+import CommonUtils from '@/util/common';
 export default [
   {
     path: '/',
     component: AutoSignPage,
     redirect: function (route, resolve, reject) {
-      let weixin = localStorage.getItem('weixin')
-      let userInfo = localStorage.getItem('M_USER_INFO')
+      let weixin = CommonUtils.localStorage.getItem('weixin')
+      let userInfo = CommonUtils.localStorage.getItem('M_USER_INFO')
       console.log()
-      if(userInfo !=null && weixin!= null) {
+      if(userInfo !=null && weixin!= null && weixin!='undefined') {
         resolve('/home/')
       } else {
         resolve('/sign/')

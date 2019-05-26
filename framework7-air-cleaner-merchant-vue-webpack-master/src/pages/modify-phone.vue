@@ -36,7 +36,7 @@
 
 <script>
   import api from "../network";
-
+  import CommonUtils from '@/util/common';
   export default {
     data() {
       return {
@@ -110,7 +110,7 @@
         }
       },
       checkedPhoneNumber(phoneNumber){
-        let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+        let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {}
         if (!phoneNumber || phoneNumber !== M_USER_INFO.phoneNumber) {
           return false;
         }

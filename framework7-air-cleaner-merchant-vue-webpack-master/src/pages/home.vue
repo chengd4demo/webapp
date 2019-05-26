@@ -124,6 +124,15 @@
 							</div>
 						</div>
 					</a></li>
+					<li class="media-item"><a href="#" class="item-link" @click="loginOut()">
+					  <div class="item-content">
+						<div class="item-inner">
+						  <div class="item-title-row">
+							<div class="item-title"><img src="../img/loginout.svg" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;退出当前账户</div>
+						  </div>
+						</div>
+					  </div>
+					</a></li>
 			</ul>
 		</f7-list>
 	</f7-page>
@@ -154,7 +163,7 @@
     },
 		mounted(){
 			self = this;
-			let weixin = localStorage.getItem('weixin') || config.wxUserInfo.openid
+			let weixin = CommonUtils.localStorage.getItem('weixin') || config.wxUserInfo.openid
 			if (weixin) {
 			  self.weixin = weixin
 			  self.init()
@@ -221,7 +230,7 @@
 			  api.queryUserInfo(weixin).then(res=>{
 			    let data = res.data.data;
 			    if(res.data.status == '200' && data){
-			      let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+			      let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {}
 			      data.weixin = self.weixin
 			      data.name = config.wxUserInfo.nickname
 			      self.nickName = data.nickName || data.name
@@ -229,14 +238,14 @@
 			      self.userId = data.id
 			      data.headerUrl = config.wxUserInfo.headimgurl || M_USER_INFO.headerUrl
 			      self.headUrl = config.wxUserInfo.headimgurl || M_USER_INFO.headerUrl
-			      localStorage.setItem('M_USER_INFO',JSON.stringify(data))
+			      CommonUtils.localStorage.setItem('M_USER_INFO',JSON.stringify(data))
 			      self.queryAccount(self.weixin)
 			      self.reqParames = self.getDeviceStateCountReqParames(self.type)  //获取设备使用状况请求参数
 			      self.queryDeviceStateCountPage(self.reqParames) //获取设备设用状况
 			      setTimeout(() => {self.changeImage()},1500) //更新设备运行状态
 			    }else{
-			      localStorage.removeItem('weixin')
-			      localStorage.removeItem('M_USER_INFO')
+			      CommonUtils.localStorage.removeItem('weixin')
+			      CommonUtils.localStorage.removeItem('M_USER_INFO')
 			      location.reload()
 			    }
 			  }).catch(err => {
@@ -362,6 +371,11 @@
 			      }
 			    }
 			  }  
+			},
+			loginOut(){
+			  CommonUtils.localStorage.removeItem('M_USER_INFO')
+			  CommonUtils.localStorage.removeItem('weixin')
+			  self.$f7router.navigate('/sign/')
 			}
 		}
   }

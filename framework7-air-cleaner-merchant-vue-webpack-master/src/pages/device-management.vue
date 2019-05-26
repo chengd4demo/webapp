@@ -22,6 +22,7 @@
 
 <script>
 	import api from "../network";
+	import CommonUtils from '@/util/common';
   export default {
        data() {
         return {
@@ -44,7 +45,7 @@
       },
 		mounted() {
 			self = this;
-			let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+			let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {}
 			if (M_USER_INFO) {
 			   self.id = M_USER_INFO.id
 				 self.type = M_USER_INFO.userType
@@ -208,7 +209,7 @@
 			},
 			init(){
 				self = this;
-				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+				let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {}
 				if (M_USER_INFO) {
 					self.id = M_USER_INFO.id
 					self.type = M_USER_INFO.userType

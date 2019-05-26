@@ -57,7 +57,7 @@
 				var self = this;
 				var pageNum = num || 1;
 				var pageSize = 30;
-				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {};
+				let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {};
 				if(M_USER_INFO){
 					self.id = M_USER_INFO.id
 					self.reqParames = self.getRequestParame(M_USER_INFO.userType)
