@@ -84,7 +84,7 @@ import CommonUtils from '@/util/common';
         var pageSize = 30;
         api.queryDeviceMonitorPage({
           data:{
-            customerId:localStorage.getItem('weixin'),
+            customerId:CommonUtils.localStorage.getItem('weixin'),
             queryType:'record'
           },
           page:{

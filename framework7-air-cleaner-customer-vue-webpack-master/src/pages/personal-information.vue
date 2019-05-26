@@ -97,7 +97,7 @@
 		},
     created() {
       const self = this;
-      self.init(JSON.parse(localStorage.getItem('USER_INFO')) || {});
+      self.init(JSON.parse(CommonUtils.localStorage.getItem('USER_INFO')) || {});
     },
     methods: {
       init(data){
@@ -109,7 +109,7 @@
           self.sex = data.sex||CommonUtils.getSex(self.identificationNumber)
           self.age = CommonUtils.getAge(self.identificationNumber)
           self.birthday =  CommonUtils.getBirthDay(self.identificationNumber)
-          let USER_INFO = JSON.parse(localStorage.getItem('USER_INFO')) || {}
+          let USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('USER_INFO')) || {}
           console.log(USER_INFO)
           if (USER_INFO) {
             self.weixin = USER_INFO.weixin
