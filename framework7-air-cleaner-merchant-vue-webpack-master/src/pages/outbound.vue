@@ -122,7 +122,7 @@
 		},
 		mounted() {
 			self = this;
-			let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+			let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {}
 			if (M_USER_INFO) {
 				self.id = M_USER_INFO.id
 				self.params.data.weixin = M_USER_INFO.weixin
@@ -236,7 +236,7 @@
 			},
 			init() {
 				self = this;
-				let M_USER_INFO = JSON.parse(localStorage.getItem('M_USER_INFO')) || {}
+				let M_USER_INFO = JSON.parse(CommonUtils.localStorage.getItem('M_USER_INFO')) || {}
 				if (M_USER_INFO) {
 					self.id = M_USER_INFO.id
 				}

@@ -96,7 +96,7 @@
 							</div>
 						</div>
 					</a></li>
-				<li class="media-item"><a href="#" class="item-link">
+				<!--<li class="media-item"><a href="#" class="item-link">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">
@@ -104,7 +104,7 @@
 								</div>
 							</div>
 						</div>
-					</a></li>
+					</a></li>-->
 				<li class="media-item"><a href="/safety/" class="item-link">
 						<div class="item-content">
 							<div class="item-inner">
@@ -114,16 +114,16 @@
 							</div>
 						</div>
 					</a></li>
-				<li class="media-item"><a href="#" class="item-link">
+				<!--<li class="media-item"><a href="#" class="item-link">
 						<div class="item-content">
 							<div class="item-inner">
 								<div class="item-title-row">
 									<div class="item-title"><img src="../img/message.png" style="max-width: 15px;max-height: 15px;vertical-align: middle" />&nbsp;信息</div>
-									<!-- <div class="item-after"><span class="badge color-red">5</span></div> -->
+									 <div class="item-after"><span class="badge color-red">5</span></div> 
 								</div>
 							</div>
 						</div>
-					</a></li>
+					</a></li>-->
 					<li class="media-item"><a href="#" class="item-link" @click="loginOut()">
 					  <div class="item-content">
 						<div class="item-inner">
